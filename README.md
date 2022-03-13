@@ -1,2 +1,4 @@
-# wave-studio-js
-Web-based digital audio workstation. (final project name pending)
+# node-studio
+Web-based digital audio workstation.
+
+Very very early stages of this project, pls come back later
