@@ -1,0 +1,26 @@
+{
+  "name": "node-studio",
+  "version": "1.0.0-dev",
+  "author": "JackDotJS",
+  "description": "Node-based digital audio workstation.",
+  "license": "GPL-3.0-or-later",
+  "homepage": "https://discord.gg/s5nQBxFPp2",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JackDotJS/node-studio"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {
+    "adm-zip": "^0.4.13",
+    "jaro-winkler": "^0.2.8",
+    "node-fetch": "^2.6.1",
+    "string-similarity": "^3.0.0"
+  },
+  "devDependencies": {
+    "electron": "^17.1.2",
+    "eslint": "^7.27.0"
+  }
+}
