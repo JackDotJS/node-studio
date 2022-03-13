@@ -11,7 +11,8 @@
   },
   "main": "index.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "npx electron-packager . --out=./build"
   },
   "dependencies": {
     "adm-zip": "^0.4.13",
@@ -21,6 +22,7 @@
   },
   "devDependencies": {
     "electron": "^17.1.2",
+    "electron-packager": "^15.4.0",
     "eslint": "^7.27.0"
   }
 }
