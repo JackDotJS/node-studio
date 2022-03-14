@@ -24,12 +24,34 @@
 <body>
 
   <div id="toolbar" class="module">
+    <div id="project">
+      <span id="projectTitle"></span>
+      <span id="playbackTime"></span>
+    </div>
     <canvas id="spectrum"></canvas>
     <canvas id="waveform"></canvas>
   </div>
 
   <div id="timeline" class="module">
-    <div id="trackData"></div>
+    <div id="trackHeaders">
+      <div class="trackHeader selected">
+        <div>
+          <input type="text" class="trackName" value="Track 1" maxlength="32" placeholder="Track Name">
+          <input type="button" class="trackMute">
+          <input type="button" class="trackSolo">
+          <input type="button" class="trackToggleFX">
+        </div>
+        <div>
+          <span>VOL</span>
+          <input type="range" class="trackVolume" min="0" max="100" value="100">
+          <span>PAN</span>
+          <input type="range" class="trackPan" min="0" max="100" value="50">
+        </div>
+      </div>
+    </div>
+    <div id="trackSequencer">
+      <div class="trackSequence"></div>
+    </div>
   </div>
 
   <div id="instrument" class="module"></div>

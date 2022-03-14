@@ -1,7 +1,8 @@
 :root {
   --primary: #111;
-  --secondary: #3C1072;
-  --accent: #FF7522;
+  --secondary: #FF7522;
+  --accent: #EEE;
+  --select: #441F08;
   --piano-white: #EEE;
   --piano-white-hover: #AAA;
   --piano-white-outline: rgba(0, 0, 0, 0.2);
