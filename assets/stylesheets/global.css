@@ -1,0 +1,11 @@
+:root {
+  --primary: #111;
+  --secondary: #3C1072;
+  --accent: #FF7522;
+  --piano-white: #EEE;
+  --piano-white-hover: #AAA;
+  --piano-white-outline: rgba(0, 0, 0, 0.2);
+  --piano-black: #333;
+  --piano-black-hover: #111;
+  --piano-black-outline: rgba(0, 0, 0, 0.2);
+}
