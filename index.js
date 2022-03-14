@@ -1,12 +1,15 @@
 const path = require(`path`);
 const { app, BrowserWindow } = require(`electron`);
 
+// should fix color reproduction
+app.commandLine.appendSwitch(`force-color-profile`, `srgb`);
+
 app.on(`ready`, () => {
   const window = new BrowserWindow({
-    width: 800,
-    height: 600,
-    minWidth: 640,
-    minHeight: 480,
+    width: 1000,
+    height: 800,
+    minWidth: 950,
+    minHeight: 720,
     center: true,
     show: false,
     webPreferences: {
