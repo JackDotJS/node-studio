@@ -27,7 +27,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
   memory.masterVolume.gain.minValue = 0.00;
   memory.masterVolume.gain.maxValue = 0.00;
 
-  memory.masterAnalyser.fftSize = 128; // WARN: frequencyBinCount will always be half of this value!!!
+  memory.masterAnalyser.fftSize = 256; // WARN: frequencyBinCount will always be half of this value!!!
   memory.masterAnalyser.smoothingTimeConstant = 0.0;
 
   let dbtest = false;
@@ -133,18 +133,18 @@ document.addEventListener(`DOMContentLoaded`, () => {
     keyContainer.scrollLeft += e.deltaY;
   });
 
-  const debugOutput = document.getElementById(`contextData`);
+  // const debugOutput = document.getElementById(`contextData`);
 
-  setInterval(() => {
-    debugOutput.innerHTML = [
-      `baselatency: ${memory.audioCTX.baseLatency}`,
-      `outputLatency: ${memory.audioCTX.outputLatency}`,
-      `currentTime: ${memory.audioCTX.currentTime}`,
-      `listener: ${memory.audioCTX.listener}`,
-      `sampleRate: ${memory.audioCTX.sampleRate}`,
-      `state: ${memory.audioCTX.state}`
-    ].join(`<br>`);
-  }, 250);
+  // setInterval(() => {
+  //   debugOutput.innerHTML = [
+  //     `baselatency: ${memory.audioCTX.baseLatency}`,
+  //     `outputLatency: ${memory.audioCTX.outputLatency}`,
+  //     `currentTime: ${memory.audioCTX.currentTime}`,
+  //     `listener: ${memory.audioCTX.listener}`,
+  //     `sampleRate: ${memory.audioCTX.sampleRate}`,
+  //     `state: ${memory.audioCTX.state}`
+  //   ].join(`<br>`);
+  // }, 250);
 
   const ablength = memory.masterAnalyser.frequencyBinCount;
   const spectrumData = new Float32Array(ablength);
@@ -154,7 +154,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
 
   // fix stupid canvas size bullshittery
   spectrumCTX.canvas.width = spectrum.offsetWidth;
-  spectrumCTX.canvas.height = spectrum.height;
+  spectrumCTX.canvas.height = spectrum.offsetHeight;
 
   const drawSpectrum = () => {
     requestAnimationFrame(drawSpectrum);
@@ -171,11 +171,11 @@ document.addEventListener(`DOMContentLoaded`, () => {
     for (let i = 0; i < (spectrum.width / width); i++) {
       // values for float data (i want to cry)
       const dbValue = spectrumData[Math.round(i * spectrumData.length / (spectrum.offsetWidth / width))];
-      const mappedDb = (dbValue - (memory.masterAnalyser.minDecibels)) * (spectrum.height / 2) / (memory.masterAnalyser.maxDecibels - memory.masterAnalyser.minDecibels) + (spectrum.height / 2);
+      const mappedDb = (dbValue - (memory.masterAnalyser.minDecibels)) * (spectrum.offsetHeight / 2) / (memory.masterAnalyser.maxDecibels - memory.masterAnalyser.minDecibels) + (spectrum.height / 2);
 
       // values for byte data
       // const dbValue = spectrumData[Math.round(i * spectrumData.length / (spectrum.offsetWidth / width))];
-      // const mappedDb = dbValue * (spectrum.height / 2) / 255;
+      // const mappedDb = dbValue * (spectrum.offsetHeight / 2) / 255;
 
       const height = Math.max(1, mappedDb);
 
@@ -197,7 +197,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
   const waveformCTX = waveform.getContext(`2d`);
 
   waveformCTX.canvas.width = waveform.offsetWidth;
-  waveformCTX.canvas.height = waveform.height;
+  waveformCTX.canvas.height = waveform.offsetHeight;
 
   const drawWaveform = () => {
     requestAnimationFrame(drawWaveform);
@@ -210,18 +210,17 @@ document.addEventListener(`DOMContentLoaded`, () => {
 
     let x = 0;
 
+    waveformCTX.beginPath();
+    waveformCTX.lineWidth = 1;
+    waveformCTX.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue(`--accent`);
+
     for (let i = 0; i < (waveform.width / width); i++) {
-      waveformCTX.fillStyle = getComputedStyle(document.documentElement).getPropertyValue(`--accent`);
 
-      waveformCTX.fillRect(
-        x, 
-        (waveform.height / 2) + waveformData[Math.round(i * waveformData.length / (waveform.offsetWidth / width))] * waveform.height - 1,
-        width, 
-        1,
-      );
-
+      waveformCTX.lineTo(x, (waveform.offsetHeight / 2) + waveformData[Math.round(i * waveformData.length / (waveform.offsetWidth / width))] * waveform.offsetHeight);
       x += width;
     }
+
+    waveformCTX.stroke();
   };
 
   drawSpectrum();
