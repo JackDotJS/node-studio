@@ -10,8 +10,8 @@ app.on(`ready`, () => {
     height: 800,
     minWidth: 950,
     minHeight: 720,
-    center: true,
     show: false,
+    autoHideMenuBar: true,
     webPreferences: {
       preload: path.join(__dirname, `assets/scripts/preload.js`),
       contextIsolation: true,
