@@ -1,8 +1,8 @@
 :root {
-  --primary: #111;
-  --secondary: #FF7522;
-  --accent: #EEE;
-  --select: #441F08;
+  --primary: #0C0D0F;
+  --secondary: #4D5154;
+  --accent: #E5F6FF;
+  --select: #171E26;
   --piano-white: #EEE;
   --piano-white-hover: #AAA;
   --piano-white-outline: rgba(0, 0, 0, 0.2);
@@ -10,3 +10,17 @@
   --piano-black-hover: #111;
   --piano-black-outline: rgba(0, 0, 0, 0.2);
 }
+
+/*
+
+track colors:
+- red
+- magenta
+- blue
+- cyan
+- green
+- yellow
+
+
+
+*/

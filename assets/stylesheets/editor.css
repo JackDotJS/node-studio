@@ -66,7 +66,7 @@ input[type=button].large {
 input[type=button] {
   width: 3em;
   height: 2em;
-  background-color: var(--secondary);
+  background-color: var(--accent);
   border-radius: 0.5em;
   border: none;
 }
@@ -136,6 +136,7 @@ input[type=button] {
 .trackHeader > div > * {
   line-height: 1em;
   margin-left: 0.5em;
+  color: var(--accent);
 }
 
 .trackHeader > div > *:first-child{
@@ -146,7 +147,7 @@ input[type=button] {
   flex-grow: 2;
   background-color: transparent;
   color: var(--accent);
-  border-color: transparent transparent var(--secondary);
+  border-color: transparent transparent var(--accent);
   border-style: solid;
 }
 
@@ -197,13 +198,13 @@ input[type=range]::-webkit-slider-thumb {
   height: 1em;
   width: 2em;
   cursor: grab;
-  background-color: #fff;
+  background-color: var(--accent);
   border-radius: 1em;
 }
 
 input[type=range]::-webkit-slider-runnable-track {
   cursor: pointer;
-  background: var(--secondary);
+  background: var(--primary);
   width: 1em;
   height: 1em;
   border-radius: 1em;
