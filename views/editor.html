@@ -13,20 +13,24 @@
 
   <!-- stylesheets -->
 
-  <link rel="stylesheet" href="../assets/stylesheets/global.css" />
-  <link rel="stylesheet" href="../assets/stylesheets/editor.css" />
+  <link rel="stylesheet" href="../assets/stylesheets/core.css" />
 
   <!-- scripts -->
 
-  <script src="../assets/scripts/editor.js"></script>
+  <script type="module" src="../assets/scripts/editor.mjs"></script>
 </head>
 
 <body>
 
   <div id="toolbar" class="module">
     <div id="project">
-      <span id="projectTitle"></span>
-      <span id="playbackTime"></span>
+      <div>
+        <span id="projectTitle"></span>
+      </div>
+      <div>
+        <span id="playbackTime"></span>
+        <span id="memUsage"></span>
+      </div>
     </div>
     <canvas id="spectrum"></canvas>
     <canvas id="waveform"></canvas>
@@ -36,10 +40,11 @@
     <div id="trackHeaders">
       <div class="trackHeader selected">
         <div>
-          <input type="text" class="trackName" value="Track 1" maxlength="32" placeholder="Track Name">
+          <input type="text" class="trackName" value="Track 1" maxlength="32" placeholder="Untitled Track">
           <input type="button" class="trackMute">
           <input type="button" class="trackSolo">
-          <input type="button" class="trackToggleFX">
+          <input type="button" class="trackFX">
+          <input type="button" class="trackNodes">
         </div>
         <div>
           <span>VOL</span>
