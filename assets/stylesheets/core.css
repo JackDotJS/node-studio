@@ -1,0 +1,23 @@
+@import "nord_theme.css";
+@import "module_generic.css";
+@import "module_header.css";
+@import "module_track_editor.css";
+@import "module_keyboard.css";
+
+:root {
+  --m-0: var(--nord0);
+  --m-1: var(--nord3);
+  --m-2: var(--nord1);
+  --ma: var(--nord4);
+  --ma-hover: var(--nord6);
+  --ma-select: var(--nord9);
+  --piano-white: var(--nord4);
+  --piano-white-hover: var(--nord6);
+  --piano-black: var(--nord0);
+  --piano-black-hover: var(--nord1);
+
+  --primary: #0C0D0F;
+  --secondary: #4D5154;
+  --accent: #E5F6FF;
+  --select: #171E26;
+}

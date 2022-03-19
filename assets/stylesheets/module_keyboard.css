@@ -1,0 +1,84 @@
+#keyboard {
+  display: flex;
+  height: 14em;
+}
+
+.kbwheel {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  padding: 0.5em;
+}
+
+.kbwheel span {
+  margin: 0;
+  height: 100%;
+  writing-mode: vertical-lr;
+  text-orientation: upright;
+  letter-spacing: -0.3em;
+  /* letter-spacing: 0.2em; */
+}
+
+.kbwheel input {
+  writing-mode: vertical-lr;
+  height: 100%;
+  width: 2em;
+  margin: 0;
+  transform: rotate(90deg);
+  transform-origin: left;
+}
+
+#keys {
+  display: flex;
+  height: 100%;
+  flex-grow: 1;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  user-select: none;
+}
+
+#keys .white, #keys .black {
+  display: block;
+  border-width: 1px;
+  border-style: none solid solid solid;
+  border-color: var(--m-0);
+  border-radius: 0em 0em 0.33em 0.33em;
+  user-select: none;
+  cursor: pointer;
+}
+
+#keys .white {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  padding: 0.5em;
+  min-width: 2.5em;
+  flex-grow: 1;
+  flex-basis: 1px;
+  height: 100%;
+  background-color: var(--piano-white);
+  color: var(--m-0);
+  font-weight: bolder;
+}
+
+#keys .white:hover {
+  background-color: var(--piano-white-hover);
+}
+
+#keys .black {
+  height: 55%;
+  min-width: 2em;
+  margin-left: -1em;
+  margin-right: -1em;
+  border-width: 2px;
+  z-index: 1;
+  background-color: var(--piano-black);
+}
+
+#keys .black:hover {
+  background-color: var(--piano-black-hover);
+}
+
+#keys:active .white:hover, #keys:active .black:hover {
+  background-color: var(--ma-select);
+}
