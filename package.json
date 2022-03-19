@@ -3,7 +3,7 @@
   "version": "1.0.0-dev",
   "author": "JackDotJS",
   "description": "Node-based digital audio workstation.",
-  "license": "GPL-3.0-or-later",
+  "license": "MIT",
   "homepage": "https://discord.gg/s5nQBxFPp2",
   "repository": {
     "type": "git",
