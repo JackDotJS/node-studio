@@ -2,6 +2,14 @@
   "parserOptions": {
     "ecmaVersion": 2018
   },
+  "overrides": [
+    {
+      "files": [ "*.mjs" ],
+      "parserOptions": {
+        "sourceType": "module"
+      }
+    }
+  ],
   "env": {
     "es6": true,
     "node": true,
