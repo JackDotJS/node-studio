@@ -6,13 +6,11 @@ export function loadGraph(memory) {
   const waveform = document.getElementById(`waveform`);
   const waveformCTX = waveform.getContext(`2d`);
 
-  // fix stupid canvas size bullshittery
-  spectrumCTX.canvas.width = spectrum.offsetWidth;
-  spectrumCTX.canvas.height = spectrum.offsetHeight;
-  waveformCTX.canvas.width = waveform.offsetWidth;
-  waveformCTX.canvas.height = waveform.offsetHeight;
-
   const drawSpectrumGraph = () => {
+    // fix stupid canvas size bullshittery
+    spectrumCTX.canvas.width = spectrum.offsetWidth;
+    spectrumCTX.canvas.height = spectrum.offsetHeight;
+
     spectrumCTX.clearRect(0, 0, spectrum.width, spectrum.height);
 
     const data = new Float32Array(size);
@@ -51,6 +49,10 @@ export function loadGraph(memory) {
   };
 
   const drawWaveformGraph = () => {
+    // fix stupid canvas size bullshittery
+    waveformCTX.canvas.width = waveform.offsetWidth;
+    waveformCTX.canvas.height = waveform.offsetHeight;
+
     waveformCTX.clearRect(0, 0, waveform.width, waveform.height);
 
     const data = new Float32Array(size);
