@@ -1,0 +1,12 @@
+#toolbar > * {
+  background-color: transparent;
+  height: 1rem;
+  line-height: 1rem;
+}
+
+#toolbar > *:not(:first-child, :last-child) {
+  border-right-color: var(--ma);
+  border-right-style: solid;
+  border-right-width: 2px;
+  padding-right: 0.5rem;
+}

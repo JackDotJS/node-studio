@@ -8,23 +8,23 @@ html, body {
 }
 
 *::-webkit-scrollbar {
-  width: 1em;
-  height: 1em;
+  width: 1rem;
+  height: 1rem;
   background-color: transparent;
 }
 
 *::-webkit-scrollbar-thumb {
-  box-shadow: inset 0 0 1em 1em var(--ma);
-  border: solid 0.25em transparent;
-  border-radius: 2em;
+  box-shadow: inset 0 0 1rem 1rem var(--ma);
+  border: solid 0.25rem transparent;
+  border-radius: 2rem;
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  box-shadow: inset 0 0 1em 1em var(--ma-hover);
+  box-shadow: inset 0 0 1rem 1rem var(--ma-hover);
 }
 
 *::-webkit-scrollbar-thumb:active {
-  box-shadow: inset 0 0 1em 1em var(--ma-select);
+  box-shadow: inset 0 0 1rem 1rem var(--ma-select);
 }
 
 *::-webkit-scrollbar-corner {
@@ -33,7 +33,7 @@ html, body {
 
 body {
   display: flex;
-  padding: 0.25em;
+  padding: 0.25rem;
   margin: 0;
   flex-direction: column;
   background-color: var(--m-0);
@@ -42,33 +42,37 @@ body {
 
 .module {
   display: flex;
-  padding: 0.5em;
-  margin: 0.25em;
-  border-radius: 0.25em;
+  padding: 0.5rem;
+  margin: 0.25rem;
+  border-radius: 0.25rem;
   background-color: var(--m-1);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .module > * {
-  -border-radius: 0.25em;
-  margin-left: 0.5em;
+  -border-radius: 0.25rem;
+  margin-left: 0.5rem;
   background-color: var(--m-0);
 }
 
-.module > *:first-of-type {
+.module > *:first-child {
   margin-left: 0;
 }
 
 input[type=button].large {
-  width: 4em;
-  height: 3em;
+  width: 3rem;
+  height: 3rem;
+  font-size: 1.5rem;
+  border-radius: 5rem;
 }
 
 input[type=button] {
-  width: 3em;
-  height: 2em;
+  width: 2.5rem;
+  height: 2rem;
   background-color: var(--ma);
-  border-radius: 0.25em;
+  color: var(--m-0);
+  font-size: 1.25rem;
+  border-radius: 0.25rem;
   border: none;
 }
 
@@ -88,11 +92,11 @@ input[type=range] {
 
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  height: 1em;
-  width: 2em;
+  height: 1rem;
+  width: 2rem;
   cursor: grab;
   background-color: var(--ma);
-  border-radius: 1em;
+  border-radius: 1rem;
 }
 
 input[type=range]::-webkit-slider-thumb:hover {
@@ -101,12 +105,18 @@ input[type=range]::-webkit-slider-thumb:hover {
 
 input[type=range]::-webkit-slider-thumb:active {
   background-color: var(--ma-select);
+  cursor: grabbing;
 }
 
 input[type=range]::-webkit-slider-runnable-track {
   cursor: pointer;
   background: var(--m-0);
-  width: 1em;
-  height: 1em;
-  border-radius: 1em;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 1rem;
+}
+
+.spacer {
+  opacity: 0;
+  flex-grow: 2;
 }

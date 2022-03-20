@@ -1,13 +1,13 @@
 #keyboard {
   display: flex;
-  height: 14em;
+  height: 10rem;
 }
 
 .kbwheel {
   display: flex;
   justify-content: space-between;
   height: 100%;
-  padding: 0.5em;
+  padding: 0.5rem;
 }
 
 .kbwheel span {
@@ -15,14 +15,14 @@
   height: 100%;
   writing-mode: vertical-lr;
   text-orientation: upright;
-  letter-spacing: -0.3em;
-  /* letter-spacing: 0.2em; */
+  letter-spacing: -0.3rem;
+  /* letter-spacing: 0.2rem; */
 }
 
 .kbwheel input {
   writing-mode: vertical-lr;
   height: 100%;
-  width: 2em;
+  width: 2rem;
   margin: 0;
   transform: rotate(90deg);
   transform-origin: left;
@@ -42,7 +42,7 @@
   border-width: 1px;
   border-style: none solid solid solid;
   border-color: var(--m-0);
-  border-radius: 0em 0em 0.33em 0.33em;
+  border-radius: 0rem 0rem 0.33rem 0.33rem;
   user-select: none;
   cursor: pointer;
 }
@@ -51,10 +51,10 @@
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
-  padding: 0.5em;
-  min-width: 2.5em;
+  padding: 0.5rem;
+  min-width: 2rem;
   flex-grow: 1;
-  flex-basis: 1px;
+  flex-basis: 0px;
   height: 100%;
   background-color: var(--piano-white);
   color: var(--m-0);
@@ -67,9 +67,9 @@
 
 #keys .black {
   height: 55%;
-  min-width: 2em;
-  margin-left: -1em;
-  margin-right: -1em;
+  /*
+  width is calculated by piano.mjs
+  */
   border-width: 2px;
   z-index: 1;
   background-color: var(--piano-black);

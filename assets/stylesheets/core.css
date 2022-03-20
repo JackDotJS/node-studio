@@ -3,6 +3,7 @@
 @import "module_header.css";
 @import "module_track_editor.css";
 @import "module_keyboard.css";
+@import "module_toolbar.css";
 
 :root {
   --m-0: var(--nord0);
@@ -11,13 +12,15 @@
   --ma: var(--nord4);
   --ma-hover: var(--nord6);
   --ma-select: var(--nord9);
+
+  --track-col-1: var(--nord11);
+  --track-col-2: var(--nord12);
+  --track-col-3: var(--nord13);
+  --track-col-4: var(--nord14);
+  --track-col-5: var(--nord15);
+
   --piano-white: var(--nord4);
   --piano-white-hover: var(--nord6);
   --piano-black: var(--nord0);
   --piano-black-hover: var(--nord1);
-
-  --primary: #0C0D0F;
-  --secondary: #4D5154;
-  --accent: #E5F6FF;
-  --select: #171E26;
 }

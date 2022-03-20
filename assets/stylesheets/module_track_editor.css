@@ -1,74 +1,101 @@
+:root {
+  --track-height: 4.5rem;
+}
+
 #timeline {
   flex-grow: 1000;
   overflow: hidden;
 }
 
-#trackData {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  background-color: var(--primary);
-}
-
 #trackHeaders, #trackSequencer {
   display: flex;
+  flex-direction: column;
   height: 100%;
-  background-size: calc(5em + 1px) calc(5em + 1px);
+  background-size: calc(var(--track-height) + 1px) calc(var(--track-height) + 1px);
   background-image: linear-gradient(to top, var(--m-1) 1px, transparent 1px);
 }
 
+.trackHeader, .trackSequence {
+  background-color: var(--m-0);
+  width: 100%;
+  min-height: var(--track-height);
+  height: var(--track-height);
+}
+
 #trackHeaders {
-  min-width: 16em;
+  min-width: 25rem;
   overflow-y: hidden;
 }
 
-#trackSequencer {
-  flex-grow: 1000;
-  overflow-x: scroll;
-  overflow-y: auto;
-}
-
-#trackSequencer:after {
-  content: '';
-  display: block;
-  min-width: 200%;
-}
-
 .trackHeader {
-  background-color: var(--m-0);
+  cursor: grab;
   display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 5em;
-  padding: 0.5em;
+  padding: 0.5rem;
+  margin-bottom: 1px;
   justify-content: space-between;
 }
 
-.trackHeader.selected {
+.trackHeader > div:last-child {
+  flex-grow: 1;
+}
+
+.trackHeader:active {
+  cursor: grabbing;
+}
+
+.trackHeader.selected, .trackSequence.selected {
   background-color: var(--m-2);
 }
 
 .trackHeader > div {
   display: flex;
+  flex-direction: column; 
+  justify-content: space-between;
 }
 
-.trackHeader > div > * {
-  line-height: 1em;
-  margin-left: 0.5em;
-  color: var(--ma);
+.trackHeader > div > div {
+  display: flex;
 }
 
-.trackHeader > div > input[type=range] {
+.trackHeader > div > div > * {
+  line-height: 1rem;
+  margin-left: 0.5rem;
+}
+
+.trackHeader > div > div > span, .trackHeader > div > div > input[type=text] {
+  font-size: 1rem;
+}
+
+.trackHeader > div > div > input[type=range] {
   flex-grow: 1;
+  width: 1rem;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-right: 0;
 }
 
-.trackHeader > div > *:first-child{
+.trackHeader > div > div > *:first-child{
   margin-left: 0;
+}
+
+#trackCreate {
+  align-items: center;
+  justify-content: center;
+}
+
+.trackDrag {
+  margin: 0.5rem;
+  margin-right: 1rem;
+  padding: 0.5rem;
+  background-image: radial-gradient(var(--ma) 30%, transparent 20%);
+  background-size: 0.25rem 0.25rem;
 }
 
 .trackName {
   flex-grow: 2;
-  border-radius: 0.25em;
+  width: 1rem;
+  border-radius: 0.25rem;
+  padding: 0;
   background-color: transparent;
   color: var(--ma);
   border-color: transparent transparent var(--ma);
@@ -89,4 +116,16 @@
   border-color: var(--ma);
   outline: none;
   color: var(--m-0);
+}
+
+#trackSequencer {
+  flex-grow: 1000;
+  overflow-x: scroll;
+  overflow-y: auto;
+}
+
+#trackSequencer:after {
+  content: '';
+  display: block;
+  min-width: 200%;
 }
