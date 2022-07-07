@@ -1,5 +1,5 @@
 const path = require(`path`);
-const { app, BrowserWindow } = require(`electron`);
+const { app, BrowserWindow, nativeImage } = require(`electron`);
 
 // should fix color reproduction
 app.commandLine.appendSwitch(`force-color-profile`, `srgb`);
@@ -17,16 +17,21 @@ app.on(`ready`, () => {
       contextIsolation: true,
       enableRemoteModule: false,
       nodeIntegration: false // this should be false by default, but better safe than sorry
-    }
+    },
+    icon: nativeImage.createFromPath(path.join(__dirname, `./assets/images/node1.png`))
   });
 
-  window.loadFile(`views/editor.html`);
+  window.loadFile(`assets/editor.html`);
 
-  window.webContents.on(`did-finish-load`, function() {
+  window.once(`ready-to-show`, () => {
     window.show();
   });
 });
 
 app.on(`window-all-closed`, () => {
-  app.quit();
+  // end program when all windows are closed
+  // except macOS because its ✨ not like other girls ✨ or something
+  if (process.platform !== `darwin`) {
+    app.quit();
+  }
 });
