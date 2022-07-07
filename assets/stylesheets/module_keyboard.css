@@ -37,12 +37,20 @@
   user-select: none;
 }
 
+#keys :first-child {
+  border-left-width: 2px !important; 
+}
+
+#keys :last-child {
+  border-right-width: 2px !important; 
+}
+
 #keys .white, #keys .black {
   display: block;
-  border-width: 1px;
-  border-style: none solid solid solid;
+  border-width: 2px 1px 1px;
+  border-style: solid;
   border-color: var(--m-0);
-  border-radius: 0rem 0rem 0.33rem 0.33rem;
+  border-radius: 0rem 0rem 0.4rem 0.4rem;
   user-select: none;
   cursor: pointer;
 }
