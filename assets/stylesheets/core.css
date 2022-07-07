@@ -1,4 +1,4 @@
-@import "nord_theme.css";
+@import "theme.css";
 @import "module_generic.css";
 @import "module_header.css";
 @import "module_track_editor.css";
@@ -6,21 +6,21 @@
 @import "module_toolbar.css";
 
 :root {
-  --m-0: var(--nord0);
-  --m-1: var(--nord3);
-  --m-2: var(--nord1);
-  --ma: var(--nord4);
-  --ma-hover: var(--nord6);
-  --ma-select: var(--nord9);
+  --m-0: var(--dark0);
+  --m-1: var(--dark3);
+  --m-2: var(--dark1);
+  --ma: var(--mid1);
+  --ma-hover: var(--mid3);
+  --ma-select: var(--light1);
 
-  --track-col-1: var(--nord11);
-  --track-col-2: var(--nord12);
-  --track-col-3: var(--nord13);
-  --track-col-4: var(--nord14);
-  --track-col-5: var(--nord15);
+  --track-col-1: var(--blue);
+  --track-col-2: var(--purple);
+  --track-col-3: var(--red);
+  --track-col-4: var(--orange);
+  --track-col-5: var(--yellow);
 
-  --piano-white: var(--nord4);
-  --piano-white-hover: var(--nord6);
-  --piano-black: var(--nord0);
-  --piano-black-hover: var(--nord1);
+  --piano-white: var(--mid1);
+  --piano-white-hover: var(--mid3);
+  --piano-black: var(--dark0);
+  --piano-black-hover: var(--dark1);
 }
