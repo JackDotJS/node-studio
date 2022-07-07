@@ -22,14 +22,18 @@
 
 <body>
   <div id="menubar" class="module">
-    <input type="button" id="newProject" value="➕">
-    <input type="button" id="openProject" value="📂">
-    <input type="button" id="saveProject" value="💾">
+    <input type="button" id="mbFile" value="File">
+    <input type="button" id="mbEdit" value="Edit">
+    <!-- <input type="button" id="mbNodes" value="Nodes"> -->
+    <input type="button" id="mbTrack" value="Track">
+    <input type="button" id="mbHelp" value="Help">
     <input type="button" id="undo" value="↪️">
     <input type="button" id="redo" value="↩️">
     <div class="spacer"></div>
-    <input type="button" id="settings" value="⚙️">
-    <input type="button" id="about" value="❓">
+  </div>
+
+  <div id="context">
+    
   </div>
 
   <div id="header" class="module">
@@ -61,14 +65,13 @@
             <input type="text" class="trackName" value="Instrument 1" maxlength="32" placeholder="Untitled Instrument">
             <input type="button" class="trackMute" value="🔇">
             <input type="button" class="trackSolo" value="S">
-            <input type="button" class="trackFX" value="✨">
             <input type="button" class="trackNodes" value="🔌">
           </div>
           <div>
             <span>VOL</span>
-            <input type="range" class="trackVolume" min="0" max="100" value="100">
+            <div id="trackVolume" class="slider" min="0" max="100" value="100"></div>
             <span>PAN</span>
-            <input type="range" class="trackPan" min="0" max="100" value="50">
+            <div id="trackPan" class="slider" min="0" max="100" value="50"></div>
           </div>
         </div>
       </div>
