@@ -62,11 +62,7 @@
   margin-left: 0.5rem;
 }
 
-.trackHeader > div > div > span, .trackHeader > div > div > input[type=text] {
-  font-size: 1rem;
-}
-
-.trackHeader > div > div > input[type=range] {
+.trackHeader > div > div > div {
   flex-grow: 1;
   width: 1rem;
   margin-top: 0;
@@ -94,28 +90,6 @@
 .trackName {
   flex-grow: 2;
   width: 1rem;
-  border-radius: 0.25rem;
-  padding: 0;
-  background-color: transparent;
-  color: var(--ma);
-  border-color: transparent transparent var(--ma);
-  border-style: solid;
-}
-
-.trackName:hover {
-  color: var(--ma-hover);
-  border-color: transparent transparent var(--ma-hover);
-}
-
-.trackName::-webkit-input-placeholder {
-  color: var(--ma);
-}
-
-.trackName:focus {
-  background-color: var(--ma);
-  border-color: var(--ma);
-  outline: none;
-  color: var(--m-0);
 }
 
 #trackSequencer {
