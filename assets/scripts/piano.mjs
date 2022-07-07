@@ -86,17 +86,22 @@ function generateKeys(memory, container) {
 // scale black keys with correct margins
 function scaleUpdate(container) {
   const observer = new ResizeObserver(() => {
-    const wkey = container.querySelector(`.white`);
+    const wkey = container.querySelector(`#keys .white`);
 
-    // search through stylesheets to find the rule for the black keys
-    // im wondering if it'd be easier and/or faster to just add/modify the style attribute for each element directly
+    /**
+     * search through stylesheets to find the rule for the black keys
+     * 
+     * we modify the stylesheets directly because, despite requiring much more code,
+     * it's still significantly more performant than modifying the style attributes
+     * for each individual element.
+     */
     for (const sheet of document.styleSheets) {
       (function searchRuleList(sheet) {
         for (const ruleList of sheet.cssRules) {
           if (ruleList instanceof CSSImportRule) {
             searchRuleList(ruleList.styleSheet);
           } else if (ruleList instanceof CSSStyleRule && ruleList.selectorText === `#keys .black`) {
-            const width = Math.round(wkey.offsetWidth * 0.8);
+            const width = Math.round(wkey.offsetWidth * 0.7);
   
             ruleList.style.minWidth = `${width}px`;
             ruleList.style.marginLeft = `-${width / 2}px`;
