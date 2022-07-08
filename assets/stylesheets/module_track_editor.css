@@ -4,7 +4,6 @@
 
 #timeline {
   flex-grow: 1000;
-  overflow: hidden;
 }
 
 #tlCol1, #tlCol2 {
@@ -20,6 +19,7 @@
 
 #tlCol2 {
   width: 100%;
+  overflow-y: auto;
 }
 
 #playbackData, #tlCol2 > :first-child {
@@ -57,7 +57,6 @@
 
 .trackHeader, .trackSequence {
   background-color: var(--m-0);
-  width: 100%;
   min-height: var(--track-height);
   height: var(--track-height);
 }
@@ -68,19 +67,14 @@
 }
 
 .trackHeader {
-  cursor: grab;
   display: flex;
   padding: 0.5rem;
-  margin-bottom: 1px;
   justify-content: space-between;
+  margin-bottom: 1px;
 }
 
 .trackHeader > div:last-child {
   flex-grow: 1;
-}
-
-.trackHeader:active {
-  cursor: grabbing;
 }
 
 .trackHeader.selected, .trackSequence.selected {
@@ -120,11 +114,16 @@
 }
 
 .trackDrag {
+  cursor: grab;
   margin: 0.5rem;
   margin-right: 1rem;
   padding: 0.5rem;
   background-image: radial-gradient(var(--ma) 30%, transparent 20%);
   background-size: 0.25rem 0.25rem;
+}
+
+.trackDrag:active {
+  cursor: grabbing;
 }
 
 .trackName {
@@ -133,13 +132,24 @@
 }
 
 #trackSequencer {
+  width: 100%;
+  display: grid;
+  grid-auto-rows: var(--track-height);
+  grid-row-gap: 1px;
   flex-grow: 1000;
   overflow-x: scroll;
   overflow-y: auto;
 }
 
-#trackSequencer:after {
-  content: '';
-  display: block;
-  min-width: 200%;
+.trackSequence {
+  display: flex;
+  padding-right: 150rem;
+}
+
+.pattern {
+  height: 100%;
+  min-width: 5rem;
+  background-color: var(--track-col-1);
+  border-radius: 0.25rem;
+  border: 2px solid var(--m-0);
 }

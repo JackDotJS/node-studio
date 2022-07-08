@@ -40,7 +40,7 @@
     </div>
   </div>
 
-  <div id="context">
+  <div id="context" class="cmhide">
     
   </div>
 
@@ -82,7 +82,14 @@
         <span>00:00:00</span>
       </div>
       <div id="trackSequencer">
-        <div class="trackSequence selected"></div>
+        <div class="trackSequence selected">
+          <div class="pattern"></div>
+        </div>
+        <div class="trackSequence test">
+          <div class="pattern"></div>
+          <div class="pattern"></div>
+          <div class="pattern"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -99,17 +106,17 @@
 
   <div id="keyboard" class="module">
     <div id="pitch" class="kbwheel">
-      <span class="label">PITCH</span>
+      <span>PITCH</span>
       <div class="slider vertical" min="0" max="100" value="50"></div>
     </div>
     <div id="modulation" class="kbwheel">
-      <span class="label">MOD</span>
+      <span>MOD</span>
       <div class="slider vertical" min="0" max="100" value="0"></div>
     </div>
     <div id="velocity" class="kbwheel">
-      <span class="label">VELOCITY</span>
+      <span>VELOCITY</span>
       <div class="slider vertical" min="0" max="100" value="50"></div>
-      <span class="label">&nbsp;</span>
+      <span>&nbsp;</span>
     </div>
     <div id="keys"></div>
   </div>

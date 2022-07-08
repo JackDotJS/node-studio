@@ -16,9 +16,7 @@
   height: 100%;
   text-align: center;
   writing-mode: vertical-lr;
-  /* text-orientation: upright; */
   letter-spacing: 0.2rem;
-  /* letter-spacing: 0.2rem; */
 }
 
 .kbwheel input {

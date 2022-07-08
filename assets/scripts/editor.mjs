@@ -42,4 +42,26 @@ document.addEventListener(`DOMContentLoaded`, () => {
   loadGraph(memory);
   loadPiano(memory);
   loadMemoryMonitor();
+
+  // show/hide context menu
+  document.addEventListener(`contextmenu`, e => {
+    e.preventDefault();
+    const pointerX = e.clientX;
+    const pointerY = e.clientY;
+    const cm = document.querySelector(`#context`);
+
+    const posX = (pointerX + cm.offsetWidth > window.innerWidth) ? window.innerWidth - cm.offsetWidth : pointerX;
+    const posY = (pointerY + cm.offsetHeight > window.innerHeight) ? window.innerHeight - cm.offsetHeight : pointerY;
+
+    cm.style.left = `${posX}px`;
+    cm.style.top = `${posY}px`;
+
+    cm.className = ``;
+  });
+
+  document.addEventListener(`click`, e => {
+    const cm = document.querySelector(`#context`);
+
+    cm.className = `cmhide`;
+  });
 });

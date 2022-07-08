@@ -1,0 +1,14 @@
+#context {
+  display: block;
+  position: absolute;
+  min-width: 10rem;
+  min-height: 2rem;
+  max-width: 100vw;
+  max-height: 100vh;
+  background-color: black;
+  z-index: 9999;
+}
+
+#context.cmhide {
+  display: none;
+}
