@@ -21,92 +21,104 @@
 </head>
 
 <body>
-  <div id="menubar" class="module">
-    <input type="button" id="mbFile" value="File">
-    <input type="button" id="mbEdit" value="Edit">
-    <!-- <input type="button" id="mbNodes" value="Nodes"> -->
-    <input type="button" id="mbTrack" value="Track">
-    <input type="button" id="mbHelp" value="Help">
-    <input type="button" id="undo" value="↪️">
-    <input type="button" id="redo" value="↩️">
-    <div class="spacer"></div>
+  <div id="menubar" class="bar">
+    <div>
+      <input type="button" id="mbFile" value="File">
+      <input type="button" id="mbEdit" value="Edit">
+      <!-- <input type="button" id="mbNodes" value="Nodes"> -->
+      <input type="button" id="mbTrack" value="Track">
+      <input type="button" id="mbHelp" value="Help">
+    </div>
+
+    <div>
+      <input type="text" id="projectTitle" placeholder="Untitled Project">
+    </div>
+
+    <div>
+      <canvas id="spectrum"></canvas>
+      <canvas id="waveform"></canvas>
+    </div>
   </div>
 
   <div id="context">
     
   </div>
 
-  <div id="header" class="module">
-    <div id="projectInfo">
-      <div>
-        <input type="text" id="projectTitle" placeholder="Untitled Project">
-      </div>
-      <div>
+  <div id="timeline" class="module">
+    <div id="tlCol1">
+      <div id="playbackData">
         <span id="playbackTime">00:00:00</span>
-        <div>
-          <input type="number" id="tempo" value="120">
+        <div id="tempo">
+          <input type="number" value="120">
           <span>BPM</span>
         </div>
       </div>
-    </div>
-    <canvas id="spectrum"></canvas>
-    <canvas id="waveform"></canvas>
-    <input type="button" class="large" id="stop" value="⏹️">
-    <input type="button" class="large" id="playpause" value="▶️">
-    <input type="button" class="large" id="metronome" value="⏲️">
-  </div>
 
-  <div id="timeline" class="module">
-    <div id="trackHeaders">
-      <div class="trackHeader selected">
-        <div class="trackDrag"></div>
-        <div>
+      <div id="trackHeaders">
+        <div class="trackHeader selected">
+          <div class="trackDrag"></div>
           <div>
-            <input type="text" class="trackName" value="Instrument 1" maxlength="32" placeholder="Untitled Instrument">
-            <input type="button" class="trackMute" value="🔇">
-            <input type="button" class="trackSolo" value="S">
-            <input type="button" class="trackNodes" value="🔌">
-          </div>
-          <div>
-            <span>VOL</span>
-            <div id="trackVolume" class="slider" min="0" max="100" value="100"></div>
-            <span>PAN</span>
-            <div id="trackPan" class="slider" min="0" max="100" value="50"></div>
+            <div>
+              <input type="text" class="trackName" value="Instrument 1" maxlength="32" placeholder="Untitled Instrument">
+              <input type="button" class="trackMute" value="🔇">
+              <input type="button" class="trackSolo" value="S">
+              <input type="button" class="trackNodes" value="🔌">
+            </div>
+            <div>
+              <span>VOL</span>
+              <div id="trackVolume" class="slider" min="0" max="100" value="100"></div>
+              <span>PAN</span>
+              <div id="trackPan" class="slider" min="0" max="100" value="50"></div>
+            </div>
           </div>
         </div>
-      </div>
-      <div id="trackCreate" class="trackHeader">
-        <input type="button" class="large" value="➕">
+        <div id="trackCreate" class="trackHeader">
+          <input type="button" class="large" value="➕">
+        </div>
       </div>
     </div>
-    <div id="trackSequencer">
-      <div class="trackSequence selected"></div>
+    <div id="tlCol2">
+      <div>
+        <span>00:00:00</span>
+      </div>
+      <div id="trackSequencer">
+        <div class="trackSequence selected"></div>
+      </div>
     </div>
   </div>
 
-  <div id="instrument" class="module"></div>
+  <div id="controlPanel">
+    <div>
+      <input type="button" class="large" id="stop" value="⏹️">
+      <input type="button" class="large" id="posStart" value="⏮️">
+      <input type="button" class="large" id="playpause" value="▶️">
+      <input type="button" class="large" id="posEnd" value="⏭️">
+      <input type="button" class="large" id="metronome" value="⏲️">
+    </div>
+  </div>
 
   <div id="keyboard" class="module">
     <div id="pitch" class="kbwheel">
       <span class="label">PITCH</span>
-      <input type="range" orient="vertical" min="0" max="100" value="50">
+      <div class="slider vertical" min="0" max="100" value="50"></div>
     </div>
     <div id="modulation" class="kbwheel">
       <span class="label">MOD</span>
-      <input type="range" orient="vertical" min="0" max="100" value="0">
+      <div class="slider vertical" min="0" max="100" value="0"></div>
     </div>
     <div id="velocity" class="kbwheel">
       <span class="label">VELOCITY</span>
-      <input type="range" orient="vertical" min="0" max="100" value="50">
+      <div class="slider vertical" min="0" max="100" value="50"></div>
+      <span class="label">&nbsp;</span>
     </div>
     <div id="keys"></div>
   </div>
 
-  <div id="toolbar" class="module">
+  <div id="statusbar" class="bar">
     <span id="version">Node Studio</span>
     <div class="spacer"></div>
     <span id="sounds">SND: 0</span>
-    <span id="latency">LAT: 0s</span>
-    <span id="memUsage">MEM: 0 MB</span>
+    <span id="latency">LAT: ...</span>
+    <span id="memUsage">MEM: ...</span>
   </div>
 </body>

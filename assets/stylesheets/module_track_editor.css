@@ -7,6 +7,46 @@
   overflow: hidden;
 }
 
+#tlCol1, #tlCol2 {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: transparent;
+}
+
+#tlCol1 > *:not(#playbackData), #tlCol2 > * {
+  background-color: var(--m-0);
+}
+
+#tlCol2 {
+  width: 100%;
+}
+
+#playbackData, #tlCol2 > :first-child {
+  margin-bottom: 0.25rem;
+  min-height: 2rem;
+}
+
+#playbackData {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0.5rem;
+}
+
+#playbackTime {
+  font-size: 1.5rem;
+}
+
+#tempo {
+  font-size: 1rem;
+}
+
+#tempo > input {
+  font-size: 1rem;
+  width: 4rem;
+}
+
 #trackHeaders, #trackSequencer {
   display: flex;
   flex-direction: column;

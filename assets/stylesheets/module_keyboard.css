@@ -8,14 +8,16 @@
   justify-content: space-between;
   height: 100%;
   padding: 0.5rem;
+  background: transparent;
 }
 
 .kbwheel span {
   margin: 0;
   height: 100%;
+  text-align: center;
   writing-mode: vertical-lr;
-  text-orientation: upright;
-  letter-spacing: -0.3rem;
+  /* text-orientation: upright; */
+  letter-spacing: 0.2rem;
   /* letter-spacing: 0.2rem; */
 }
 

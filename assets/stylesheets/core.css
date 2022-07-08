@@ -1,9 +1,10 @@
 @import "theme.css";
 @import "module_generic.css";
-@import "module_header.css";
+@import "control_panel.css";
 @import "module_track_editor.css";
 @import "module_keyboard.css";
-@import "module_toolbar.css";
+@import "toolbars.css";
+@import "contextmenu.css";
 
 :root {
   --m-0: var(--dark0);
@@ -23,4 +24,169 @@
   --piano-white-hover: var(--mid3);
   --piano-black: var(--dark0);
   --piano-black-hover: var(--dark1);
+}
+
+html, body {
+  scroll-behavior: smooth;
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+*::-webkit-scrollbar {
+  width: 1rem;
+  height: 1rem;
+  background-color: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 1rem 1rem var(--ma);
+  border: solid 0.25rem transparent;
+  border-radius: 2rem;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  box-shadow: inset 0 0 1rem 1rem var(--ma-hover);
+}
+
+*::-webkit-scrollbar-thumb:active {
+  box-shadow: inset 0 0 1rem 1rem var(--ma-select);
+}
+
+*::-webkit-scrollbar-corner {
+  background-color: transparent
+}
+
+body {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  flex-direction: column;
+  background-color: var(--m-0);
+  color: var(--ma);
+}
+
+input[type=button].large {
+  min-width: 3rem;
+  min-height: 3rem;
+  font-size: 1.5rem;
+}
+
+input[type=button] {
+  min-width: 3.5rem;
+  height: 2rem;
+  background-color: var(--ma);
+  color: var(--m-0);
+  font-size: 1rem;
+  border-radius: 0.25rem;
+  border: none;
+}
+
+input[type=button]:hover {
+  background-color: var(--ma-hover);
+  cursor: pointer;
+}
+
+input[type=button]:active {
+  background-color: var(--ma-select);
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  background-color: transparent;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 1rem;
+  width: 2rem;
+  cursor: grab;
+  background-color: var(--ma);
+  border-radius: 1rem;
+}
+
+input[type=range]::-webkit-slider-thumb:hover {
+  background-color: var(--ma-hover);
+}
+
+input[type=range]::-webkit-slider-thumb:active {
+  background-color: var(--ma-select);
+  cursor: grabbing;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  cursor: pointer;
+  background: var(--m-0);
+  width: 1rem;
+  height: 1rem;
+  border-radius: 1rem;
+}
+
+input[type=text], input[type=number] {
+  line-height: 1rem;
+  border-radius: 0.25rem;
+  padding: 0;
+  background-color: transparent;
+  color: var(--ma);
+  border-color: transparent transparent var(--ma);
+  border-style: solid;
+}
+
+input[type=text]::-webkit-input-placeholder {
+  color: var(--ma);
+}
+
+input[type=text]:hover::-webkit-input-placeholder {
+  color: var(--ma-hover);
+}
+
+input[type=text]:focus::-webkit-input-placeholder {
+  color: transparent;
+}
+
+input[type=text]:hover, input[type=number]:hover {
+  color: var(--ma-hover);
+  border-color: transparent transparent var(--ma-hover);
+}
+
+input[type=text]:focus, input[type=number]:focus {
+  background-color: var(--ma-select);
+  border-color: var(--ma-select);
+  outline: none;
+  color: var(--m-0);
+}
+
+.slider {
+  cursor: pointer;
+  background-color: var(--m-0);
+  border-radius: 100rem;
+  min-height: 1rem;
+  min-width: 1rem;
+}
+
+.slider::after {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  background-color: var(--ma);
+  height: 100%;
+  width: 1rem;
+  border-radius: 100rem;
+  border: 2px solid var(--m-0);
+}
+
+.slider.vertical::after {
+  height: 1rem;
+  width: 100%;
+}
+
+.slider:hover::after {
+  background-color: var(--ma-hover);
+}
+
+.slider:focus::after {
+  background-color: var(--ma-select);
 }

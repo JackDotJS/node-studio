@@ -1,0 +1,18 @@
+#controlPanel {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+#controlPanel > div {
+  width: 100%;
+  max-width: 20rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+}
+
+#controlPanel > div > *:not(:first-child) {
+  margin-left: 0.25rem;
+}
