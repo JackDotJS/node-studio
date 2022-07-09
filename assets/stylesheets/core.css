@@ -110,34 +110,7 @@ input[type=button]:active {
 }
 
 input[type=range] {
-  -webkit-appearance: none;
-  background-color: transparent;
-}
-
-input[type=range]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  height: 1rem;
-  width: 2rem;
-  cursor: grab;
-  background-color: var(--ma);
-  border-radius: 1rem;
-}
-
-input[type=range]::-webkit-slider-thumb:hover {
-  background-color: var(--ma-hover);
-}
-
-input[type=range]::-webkit-slider-thumb:active {
-  background-color: var(--ma-select);
-  cursor: grabbing;
-}
-
-input[type=range]::-webkit-slider-runnable-track {
-  cursor: pointer;
-  background: var(--m-0);
-  width: 1rem;
-  height: 1rem;
-  border-radius: 1rem;
+  display: none;
 }
 
 input[type=text], input[type=number] {
@@ -182,9 +155,8 @@ input[type=text]:focus, input[type=number]:focus {
   min-width: 1rem;
 }
 
-.slider::after {
-  content: "";
-  display: block;
+.slider > .sliderThumb {
+  position: relative;
   box-sizing: border-box;
   background-color: var(--ma);
   height: 100%;
@@ -193,15 +165,15 @@ input[type=text]:focus, input[type=number]:focus {
   border: 2px solid var(--m-0);
 }
 
-.slider.vertical::after {
+.slider.vertical > .sliderThumb {
   height: 1rem;
   width: 100%;
 }
 
-.slider:hover::after {
+.slider > .sliderThumb:hover {
   background-color: var(--ma-hover);
 }
 
-.slider:focus::after {
+.slider > .sliderThumb:focus {
   background-color: var(--ma-select);
 }

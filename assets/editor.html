@@ -66,9 +66,15 @@
             </div>
             <div>
               <span>VOL</span>
-              <div id="trackVolume" class="slider" min="0" max="100" value="100"></div>
+              <div id="trackVolume" class="slider">
+                <div class="sliderThumb"></div>
+                <input type="range" min="0" max="100" value="100">
+              </div>
               <span>PAN</span>
-              <div id="trackPan" class="slider" min="0" max="100" value="50"></div>
+              <div id="trackPan" class="slider">
+                <div class="sliderThumb"></div>
+                <input type="range" min="0" max="100" value="50">
+              </div>
             </div>
           </div>
         </div>
@@ -107,15 +113,24 @@
   <div id="keyboard" class="module">
     <div id="pitch" class="kbwheel">
       <span>PITCH</span>
-      <div class="slider vertical" min="0" max="100" value="50"></div>
+      <div class="slider vertical">
+        <div class="sliderThumb"></div>
+        <input type="range" min="0" max="100" value="50">
+      </div>
     </div>
     <div id="modulation" class="kbwheel">
       <span>MOD</span>
-      <div class="slider vertical" min="0" max="100" value="0"></div>
+      <div class="slider vertical">
+        <div class="sliderThumb"></div>
+        <input type="range" min="0" max="100" value="0">
+      </div>
     </div>
     <div id="velocity" class="kbwheel">
       <span>VELOCITY</span>
-      <div class="slider vertical" min="0" max="100" value="50"></div>
+      <div class="slider vertical">
+        <div class="sliderThumb"></div>
+        <input type="range" min="0" max="100" value="50">
+      </div>
       <span>&nbsp;</span>
     </div>
     <div id="keys"></div>

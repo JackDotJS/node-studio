@@ -1,6 +1,7 @@
 import { loadGraph } from "./graphs.mjs";
 import { loadPiano } from "./piano.mjs";
 import { loadMemoryMonitor } from "./memory_monitor.mjs";
+import { loadSliders } from "./slider.mjs";
 import { NodeStudioProject } from "./classes/project.mjs";
 
 const memory = {
@@ -41,6 +42,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
 
   loadGraph(memory);
   loadPiano(memory);
+  loadSliders();
   loadMemoryMonitor();
 
   // show/hide context menu
