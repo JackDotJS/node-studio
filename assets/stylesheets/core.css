@@ -70,6 +70,20 @@ body {
   color: var(--ma);
 }
 
+a {
+  color: var(--ma);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--ma-hover);
+  text-decoration: underline;
+}
+
+a:focus {
+  color: var(--ma-select);
+}
+
 input[type=button].large {
   min-width: 3rem;
   min-height: 3rem;
