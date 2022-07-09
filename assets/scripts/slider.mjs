@@ -29,15 +29,16 @@ export function loadSliders() {
 
       // snap thumb to nearest position based on max value of the input range
       const rounded = Math.max(0, Math.min(thumblimit, Math.round((thumblimit) * (rawValue / sliderData.max))));
-
-      // "invert" value if it's a vertical slider
-      // because otherwise setting the slider to the lowest position
-      // would make it it's max value, which would be weird and counter-intuitive
-      sliderData.value = (vertical) ? (1 - (rawValue / sliderData.max)) * sliderData.max : rawValue;
       
+      // done!
       if (vertical) {
+        // "invert" value if it's a vertical slider
+        // because otherwise setting the slider to the lowest position
+        // would make it it's max value, which would be weird and counter-intuitive
+        sliderData.value = Math.round((1 - (rawValue / sliderData.max)) * sliderData.max);
         thumb.style.top = rounded + `px`;
       } else {
+        sliderData.value = Math.round(rawValue);
         thumb.style.left = rounded + `px`;
       }
     };
