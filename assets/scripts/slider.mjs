@@ -4,8 +4,8 @@ export function loadSliders() {
     // also may need additional listeners for touch inputs
 
     const vertical = slider.classList.contains(`vertical`);
-    const thumb = slider.querySelector(`.sliderThumb`);
-    const inputElem = slider.querySelector(`input`);
+    const thumb = slider.querySelector(`div`);
+    const sliderData = thumb.dataset;
     let active = false;
 
     // im going to fucking explode
@@ -25,15 +25,15 @@ export function loadSliders() {
       }
 
       // get slider value from that position
-      const rawValue = Math.round(inputElem.max * (pos / (thumblimit)));
+      const rawValue = Math.round(sliderData.max * (pos / (thumblimit)));
 
       // snap thumb to nearest position based on max value of the input range
-      const rounded = Math.max(0, Math.min(thumblimit, Math.round((thumblimit) * (rawValue / inputElem.max))));
+      const rounded = Math.max(0, Math.min(thumblimit, Math.round((thumblimit) * (rawValue / sliderData.max))));
 
       // "invert" value if it's a vertical slider
       // because otherwise setting the slider to the lowest position
       // would make it it's max value, which would be weird and counter-intuitive
-      inputElem.value = (vertical) ? (1 - (rawValue / inputElem.max)) * inputElem.max : rawValue;
+      sliderData.value = (vertical) ? (1 - (rawValue / sliderData.max)) * sliderData.max : rawValue;
       
       if (vertical) {
         thumb.style.top = rounded + `px`;
@@ -46,10 +46,10 @@ export function loadSliders() {
     const initBox = slider.getBoundingClientRect();
 
     if (vertical) {
-      const val = initBox.top + ((slider.offsetHeight / inputElem.max) * inputElem.value);
+      const val = initBox.top + ((slider.offsetHeight / sliderData.max) * sliderData.value);
       updatePos(0, val);
     } else {
-      const val = initBox.left + ((slider.offsetWidth / inputElem.max) * inputElem.value);
+      const val = initBox.left + ((slider.offsetWidth / sliderData.max) * sliderData.value);
       updatePos(val, 0);
     }
 
