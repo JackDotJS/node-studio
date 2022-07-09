@@ -149,14 +149,25 @@ input[type=text]:focus, input[type=number]:focus {
 
 .slider {
   cursor: pointer;
+  position: relative;
   background-color: var(--m-0);
   border-radius: 100rem;
   min-height: 1rem;
   min-width: 1rem;
 }
 
+.slider.vertical {
+  height: 100%;
+  border-bottom: 1rem solid var(--m-0);
+}
+
+.slider:not(.vertical) {
+  width: 100%;
+  border-right: 1rem solid var(--m-0);
+}
+
 .slider > div {
-  position: relative;
+  position: absolute;
   box-sizing: border-box;
   background-color: var(--ma);
   height: 100%;

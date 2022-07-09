@@ -13,37 +13,47 @@ export function loadSliders() {
       const elemBox = slider.getBoundingClientRect();
 
       const thumbsize = (vertical) ? thumb.offsetHeight : thumb.offsetWidth;
-      const slidersize = (vertical) ? slider.offsetHeight : slider.offsetWidth;
-      const thumblimit = slidersize - thumbsize;
+      const sliderSize = (vertical) ? slider.offsetHeight : slider.offsetWidth;
+      
+      // bunch of stuff to ensure negative values are correctly interpreted
+      const fullRange = Math.abs(sliderData.max - sliderData.min);
+      const negRange = Math.abs(sliderData.min);
+      const flipSignage = parseInt(sliderData.max) < parseInt(sliderData.min);
 
-      // calculate base position of thumb
-      let pos;
+      // get target position
+      let targetPos;
       if (vertical) {
-        pos = Math.max(0, Math.min(slidersize, (y + (thumbsize / 2)) - elemBox.top) - thumbsize);
+        targetPos = Math.max((thumbsize / 2), Math.min(sliderSize - (thumbsize / 2), y - elemBox.top));
       } else {
-        pos = Math.max(0, Math.min(slidersize, (x + (thumbsize / 2)) - elemBox.left) - thumbsize);
+        targetPos = Math.max((thumbsize / 2), Math.min(sliderSize - (thumbsize / 2), x - elemBox.left));
       }
 
       // get slider value from that position
-      const rawValue = Math.round(sliderData.max * (pos / (thumblimit)));
+      const rawValue = Math.round(fullRange * ((targetPos - (thumbsize / 2)) / (sliderSize - (thumbsize))));
 
       // snap thumb to nearest position based on max value of the input range
-      const rounded = Math.max(0, Math.min(thumblimit, Math.round((thumblimit) * (rawValue / sliderData.max))));
+      const thumbPos = Math.max(0, Math.min(100, ((rawValue / fullRange) * 100)));
+
+      let newValue = rawValue - negRange;
       
       // done!
       if (vertical) {
         // "invert" value if it's a vertical slider
         // because otherwise setting the slider to the lowest position
         // would make it it's max value, which would be weird and counter-intuitive
-        sliderData.value = Math.round((1 - (rawValue / sliderData.max)) * sliderData.max);
-        thumb.style.top = rounded + `px`;
+        newValue = ((1 - (rawValue / fullRange)) * fullRange) - negRange;
+
+        thumb.style.top = thumbPos + `%`;
       } else {
-        sliderData.value = Math.round(rawValue);
-        thumb.style.left = rounded + `px`;
+        thumb.style.left = thumbPos + `%`;
       }
+
+      if (flipSignage) newValue = -newValue;
+
+      sliderData.value = Math.round(newValue);
     };
 
-    // set initial thumb position
+    //set initial thumb position
     const initBox = slider.getBoundingClientRect();
 
     if (vertical) {
