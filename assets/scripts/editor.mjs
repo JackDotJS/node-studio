@@ -50,8 +50,19 @@ document.addEventListener(`DOMContentLoaded`, () => {
     const pointerY = e.clientY;
     const cm = document.querySelector(`#context`);
 
-    const posX = (pointerX + cm.offsetWidth > window.innerWidth) ? window.innerWidth - cm.offsetWidth : pointerX;
-    const posY = (pointerY + cm.offsetHeight > window.innerHeight) ? window.innerHeight - cm.offsetHeight : pointerY;
+    // debugging data
+
+    // console.log({
+    //   winWidth: window.innerWidth,
+    //   winHeight: window.innerHeight,
+    //   cmWidth: cm.offsetWidth,
+    //   cmHeight: cm.offsetHeight,
+    //   curX: e.clientX,
+    //   curY: e.clientY
+    // });
+
+    const posX = (pointerX + cm.offsetWidth > window.innerWidth) ? pointerX - cm.offsetWidth : pointerX;
+    const posY = (pointerY + cm.offsetHeight > window.innerHeight) ? pointerY - cm.offsetHeight : pointerY;
 
     cm.style.left = `${posX}px`;
     cm.style.top = `${posY}px`;

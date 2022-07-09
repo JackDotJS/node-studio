@@ -10,5 +10,5 @@
 }
 
 #context.cmhide {
-  display: none;
+  opacity: 0;
 }
