@@ -75,6 +75,10 @@ export function loadSliders() {
     window.addEventListener(`mouseup`, (e) => {
       if (e.button !== 0 || !active) return;
       active = false;
+
+      if (sliderData.springy=== `true`) {
+        updatePos(null, null, sliderData.default);
+      }
     });
 
     new MutationObserver((changes) => {
