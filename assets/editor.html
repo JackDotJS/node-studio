@@ -17,7 +17,7 @@
 
   <!-- scripts -->
 
-  <script type="module" src="../assets/scripts/editor.mjs"></script>
+  <script type="module" src="../assets/scripts/core.mjs"></script>
 </head>
 
 <body>
@@ -96,11 +96,20 @@
 
   <div id="editnodes" class="module">
     <div id="ndHeader">
-      <input type="text" id="ndGroupTitle" placeholder="Untitled Pattern">
+      <input type="button" id="ndUpOne" value="⬆️">
+      <input type="text" id="ndGroupTitle" placeholder="Untitled Node Group">
+      <input type="button" id="ndClose" value="✖️">
     </div>
     <div id="ndGridWrapper">
-      <span id="nd"></span>
-      <div id="ndGrid"></div>
+      <span id="ndPath">Instrument > Group1 > Group2 > Etc</span>
+      <div id="ndGrid">
+        <div id="node001" class="node" style="--w: 12; --h: 6; --x: 6; --y: 8;">
+          <div class="nodeTitle">
+            <span>Node</span>
+            <input type="button" class="small nodeToggle" value="☑️">
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

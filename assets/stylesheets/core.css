@@ -2,6 +2,7 @@
 @import "module_generic.css";
 @import "control_panel.css";
 @import "module_track_editor.css";
+@import "module_node_editor.css";
 @import "module_keyboard.css";
 @import "toolbars.css";
 @import "contextmenu.css";
