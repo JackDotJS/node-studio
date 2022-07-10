@@ -32,7 +32,7 @@ app.on(`ready`, () => {
     show: false,
     autoHideMenuBar: true,
     webPreferences: {
-      preload: path.join(__dirname, `assets/scripts/preload.js`),
+      preload: path.join(__dirname, `assets/preload.js`),
       contextIsolation: true,
       enableRemoteModule: false,
       nodeIntegration: false // this should be false by default, but better safe than sorry
@@ -59,7 +59,5 @@ app.on(`ready`, () => {
 app.on(`window-all-closed`, () => {
   // end program when all windows are closed
   // except macOS because its ✨ not like other girls ✨ or something
-  if (process.platform !== `darwin`) {
-    app.quit();
-  }
+  if (process.platform !== `darwin`) app.quit();
 });
