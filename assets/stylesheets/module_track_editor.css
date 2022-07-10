@@ -38,13 +38,8 @@
   font-size: 1.5rem;
 }
 
-#tempo {
-  font-size: 1rem;
-}
-
-#tempo > input {
-  font-size: 1rem;
-  width: 4rem;
+#seek {
+  border-radius: 0.15rem 0.15rem 0 0;
 }
 
 #trackHeaders, #trackSequencer {
@@ -69,6 +64,7 @@
 .trackHeader {
   display: flex;
   padding: 0.5rem;
+  padding-left: 0;
   justify-content: space-between;
   margin-bottom: 1px;
 }
@@ -115,11 +111,14 @@
 
 .trackDrag {
   cursor: grab;
-  margin: 0.5rem;
-  margin-right: 1rem;
   padding: 0.5rem;
+  background-color: var(--m-1);
   background-image: radial-gradient(var(--ma) 30%, transparent 20%);
-  background-size: 0.25rem 0.25rem;
+  margin-right: 0.5rem;
+  border: 0.5rem solid var(--m-1);
+  border-radius: 0 0.5rem 0.5rem 0;
+  background-size: 4px 4px;
+  background-origin: 50% 50%;
 }
 
 .trackDrag:active {
@@ -147,9 +146,31 @@
 }
 
 .pattern {
-  height: 100%;
-  min-width: 5rem;
-  background-color: var(--track-col-1);
+  display: flex;
+  flex-flow: column nowrap;
+  min-width: 2rem;
+  background: transparent;
   border-radius: 0.25rem;
-  border: 2px solid var(--m-0);
+  border: 2px solid var(--m-1);
+  margin-top: 1px;
+  margin-bottom: 1px;
+  box-shadow: 0 0 1px black;
+}
+
+.pattern {
+  margin-left: 1px;
+}
+
+.pattern::before {
+  content: attr(data-name);
+  background-color: var(--track-col-1);
+  color: var(--ma-select);
+  border-radius: 0.1rem 0.1rem 0 0;
+  font-size: 0.85rem;
+  text-shadow: 0 0 6px black;
+  letter-spacing: 0.075rem;
+  padding: 0rem 0.3rem 0.1rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }

@@ -6,8 +6,8 @@
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-  <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
+  <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
 
   <title>Node Studio</title>
 
@@ -48,10 +48,6 @@
     <div id="tlCol1">
       <div id="playbackData">
         <span id="playbackTime">00:00:00</span>
-        <div id="tempo">
-          <input type="number" value="120">
-          <span>BPM</span>
-        </div>
       </div>
 
       <div id="trackHeaders">
@@ -66,12 +62,12 @@
             </div>
             <div>
               <span>VOL</span>
-              <div id="trackVolume" class="slider">
-                <div data-min="0" data-max="100" data-value="100"></div>
+              <div id="trackVolume" class="slider" data-mouseover="Volume: %1" data-cm="slider">
+                <div data-min="0" data-max="100" data-default="100"></div>
               </div>
               <span>PAN</span>
-              <div id="trackPan" class="slider">
-                <div data-min="0" data-max="100" data-value="50"></div>
+              <div id="trackPan" class="slider" data-cm="slider">
+                <div data-min="0" data-max="100" data-default="50"></div>
               </div>
             </div>
           </div>
@@ -82,49 +78,66 @@
       </div>
     </div>
     <div id="tlCol2">
-      <div>
+      <div id="seek">
         <span>00:00:00</span>
       </div>
       <div id="trackSequencer">
         <div class="trackSequence selected">
-          <div class="pattern"></div>
+          <div class="pattern" data-name="Pattern 01"></div>
         </div>
         <div class="trackSequence test">
-          <div class="pattern"></div>
-          <div class="pattern"></div>
-          <div class="pattern"></div>
+          <div class="pattern" data-name="Pattern 02"></div>
+          <div class="pattern" data-name="Pattern 03"></div>
+          <div class="pattern" data-name="Pattern 04"></div>
         </div>
       </div>
     </div>
   </div>
 
   <div id="controlPanel">
-    <div>
+    <div id="pbOptions">
+      <div id="masterVol">
+        <span>MASTER VOL</span>
+        <div class="slider" data-cm="slider">
+          <div data-min="0" data-max="100" data-default="100"></div>
+        </div>
+      </div>
+      <div id="tempo">
+        <input type="number" max="999" value="120">
+        <span>BPM</span>
+        <input type="button" class="small" id="metronome" value="⏲️">
+      </div>
+    </div>
+    <div id="pbControls">
       <input type="button" class="large" id="stop" value="⏹️">
       <input type="button" class="large" id="posStart" value="⏮️">
       <input type="button" class="large" id="playpause" value="▶️">
       <input type="button" class="large" id="posEnd" value="⏭️">
-      <input type="button" class="large" id="metronome" value="⏲️">
+      <input type="button" class="large" id="repeat" value="🔁">
+    </div>
+    <div id="menuTL" class="cpRight">
+      <!-- editor-specific controls go here -->
+      <input type="button" class="large" id="tkPatternManager" value="🗄️">
     </div>
   </div>
 
   <div id="keyboard" class="module">
     <div id="pitch" class="kbwheel">
       <span>PITCH</span>
-      <div class="slider vertical">
-        <div data-min="0" data-max="100" data-value="50"></div>
+      <div class="slider vertical" data-cm="slider">
+        <div data-min="0" data-max="100" data-default="50"></div>
       </div>
     </div>
     <div id="modulation" class="kbwheel">
       <span>MOD</span>
-      <div class="slider vertical">
-        <div data-min="0" data-max="100" data-value="0"></div>
+      <div class="slider vertical" data-cm="slider">
+        <div data-min="0" data-max="100" data-default="0"></div>
       </div>
     </div>
     <div id="velocity" class="kbwheel">
       <span>VELOCITY</span>
-      <div class="slider vertical">
-        <div data-min="0" data-max="100" data-value="50"></div>
+      <div class="slider vertical" data-cm="slider">
+        <div data-min="0" data-max="100" data-default="50"></div>
       </div>
       <span>&nbsp;</span>
     </div>

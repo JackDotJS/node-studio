@@ -1,7 +1,7 @@
 .module {
   display: flex;
   padding: 3px;
-  margin: 0 8px;
+  margin: 0 0.5rem;
   border-radius: 0.25rem;
   background-color: var(--m-1);
 }
