@@ -2,6 +2,7 @@ import { loadGraph } from "./graphs.mjs";
 import { loadPiano } from "./piano.mjs";
 import { loadMemoryMonitor } from "./memory_monitor.mjs";
 import { loadSliders } from "./slider.mjs";
+import { loadContextMenuHandler } from "./context.mjs";
 import { NodeStudioProject } from "./classes/project.mjs";
 
 const memory = {
@@ -44,37 +45,5 @@ document.addEventListener(`DOMContentLoaded`, () => {
   loadPiano(memory);
   loadSliders();
   loadMemoryMonitor();
-
-  // show/hide context menu
-  document.addEventListener(`contextmenu`, e => {
-    e.preventDefault();
-    const pointerX = e.clientX;
-    const pointerY = e.clientY;
-    const cm = document.querySelector(`#context`);
-
-    // debugging data
-
-    // console.log({
-    //   winWidth: window.innerWidth,
-    //   winHeight: window.innerHeight,
-    //   cmWidth: cm.offsetWidth,
-    //   cmHeight: cm.offsetHeight,
-    //   curX: e.clientX,
-    //   curY: e.clientY
-    // });
-
-    const posX = (pointerX + cm.offsetWidth > window.innerWidth) ? pointerX - cm.offsetWidth : pointerX;
-    const posY = (pointerY + cm.offsetHeight > window.innerHeight) ? pointerY - cm.offsetHeight : pointerY;
-
-    cm.style.left = `${posX}px`;
-    cm.style.top = `${posY}px`;
-
-    cm.className = ``;
-  });
-
-  document.addEventListener(`click`, e => {
-    const cm = document.querySelector(`#context`);
-
-    cm.className = `cmhide`;
-  });
+  loadContextMenuHandler();
 });
