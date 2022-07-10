@@ -1,7 +1,9 @@
+import { memory } from "./memory.mjs";
+
 // generate piano keys
-function generateKeys(memory, container) {
+function generateKeys(container) {
   const keyCount = 112;
-  const pattern = [ 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0 ];
+  const pattern = [0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0];
   const offset = -3; // matches standard 88-key piano
   let octaveCount = 1;
 
@@ -27,15 +29,15 @@ function generateKeys(memory, container) {
       const ci = memory.instruments[memory.currentInstrument];
       const oscillator = memory.audioCTX.createOscillator();
       ci.node = oscillator;
-  
+
       oscillator.connect(memory.masterVolume);
       memory.masterVolume.gain.value = 0.5;
-  
+
       const freq = (Math.pow(2, (key - 49) / 12)) * 440;
       oscillator.frequency.value = freq;
-  
+
       oscillator.type = ci.type;
-  
+
       oscillator.start(0);
     };
 
@@ -45,7 +47,7 @@ function generateKeys(memory, container) {
     };
 
     key.addEventListener(`mousedown`, (e) => {
-      if (e.button === 0) keyPressHandler(i+1);
+      if (e.button === 0) keyPressHandler(i + 1);
     });
 
     key.addEventListener(`mouseup`, (e) => {
@@ -53,7 +55,7 @@ function generateKeys(memory, container) {
     });
 
     key.addEventListener(`mouseenter`, (e) => {
-      if (e.buttons === 1) keyPressHandler(i+1);
+      if (e.buttons === 1) keyPressHandler(i + 1);
     });
 
     key.addEventListener(`mouseleave`, (e) => {
@@ -102,7 +104,7 @@ function scaleUpdate(container) {
             searchRuleList(ruleList.styleSheet);
           } else if (ruleList instanceof CSSStyleRule && ruleList.selectorText === `#keys .black`) {
             const width = Math.round(wkey.offsetWidth * 0.7);
-  
+
             ruleList.style.minWidth = `${width}px`;
             ruleList.style.marginLeft = `-${width / 2}px`;
             ruleList.style.marginRight = `-${width / 2}px`;
@@ -115,25 +117,22 @@ function scaleUpdate(container) {
   observer.observe(container);
 }
 
+const container = document.getElementById(`keys`);
 
-export function loadPiano(memory) {
-  const container = document.getElementById(`keys`);
+generateKeys(container);
+scaleUpdate(container);
 
-  generateKeys(memory, container);
-  scaleUpdate(container);
+// allow horizontal scrolling with mousewheel
+container.addEventListener(`wheel`, (e) => {
+  e.preventDefault();
 
-  // allow horizontal scrolling with mousewheel
-  container.addEventListener(`wheel`, (e) => {
-    e.preventDefault();
+  //container.scrollBy({ left: e.deltaY, behavior: `smooth` });
 
-    //container.scrollBy({ left: e.deltaY, behavior: `smooth` });
+  // container.animate([
+  //   { scrollLeft: container.scrollLeft - e.deltaY }
+  // ], {
+  //   duration: 500
+  // });
 
-    // container.animate([
-    //   { scrollLeft: container.scrollLeft - e.deltaY }
-    // ], {
-    //   duration: 500
-    // });
-
-    container.scrollLeft += e.deltaY;
-  });
-}
+  container.scrollLeft += e.deltaY;
+});

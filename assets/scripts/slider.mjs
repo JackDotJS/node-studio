@@ -1,91 +1,89 @@
-export function loadSliders() {
-  document.querySelectorAll(`.slider`).forEach((slider) => {
-    // there's probably a better way to do all this
-    // also may need additional listeners for touch inputs
+document.querySelectorAll(`.slider`).forEach((slider) => {
+  // there's probably a better way to do all this
+  // also may need additional listeners for touch inputs
 
-    const vertical = slider.classList.contains(`vertical`);
-    const thumb = slider.querySelector(`div`);
-    const sliderData = thumb.dataset;
-    let active = false;
+  const vertical = slider.classList.contains(`vertical`);
+  const thumb = slider.querySelector(`div`);
+  const sliderData = thumb.dataset;
+  let active = false;
 
-    // im going to fucking explode
-    const updatePos = (x, y, val) => {
-      const elemBox = slider.getBoundingClientRect();
+  // im going to fucking explode
+  const updatePos = (x, y, val) => {
+    const elemBox = slider.getBoundingClientRect();
 
-      const thumbsize = (vertical) ? thumb.offsetHeight : thumb.offsetWidth;
-      const sliderSize = (vertical) ? slider.offsetHeight : slider.offsetWidth;
-      
-      // bunch of stuff to ensure negative values are correctly interpreted
-      const fullRange = Math.abs(sliderData.max - sliderData.min);
-      const negRange = Math.abs(sliderData.min);
-      const flipSignage = parseInt(sliderData.max) < parseInt(sliderData.min);
+    const thumbsize = (vertical) ? thumb.offsetHeight : thumb.offsetWidth;
+    const sliderSize = (vertical) ? slider.offsetHeight : slider.offsetWidth;
 
-      let targetPos;
-      let rawValue;
+    // bunch of stuff to ensure negative values are correctly interpreted
+    const fullRange = Math.abs(sliderData.max - sliderData.min);
+    const negRange = Math.abs(sliderData.min);
+    const flipSignage = parseInt(sliderData.max) < parseInt(sliderData.min);
 
-      if (val) {
-        rawValue = Math.max(negRange, Math.min(fullRange, val));
-      } else {
-        // get target position
-        if (vertical) {
-          targetPos = Math.max((thumbsize / 2), Math.min(sliderSize - (thumbsize / 2), elemBox.bottom - y));
-        } else {
-          targetPos = Math.max((thumbsize / 2), Math.min(sliderSize - (thumbsize / 2), x - elemBox.left));
-        }
-  
-        // get slider value from that position
-        rawValue = Math.round(fullRange * ((targetPos - (thumbsize / 2)) / (sliderSize - (thumbsize))));
-      }
+    let targetPos;
+    let rawValue;
 
-      // snap thumb to nearest position based on max value of the input range
-      const thumbPos = Math.max(0, Math.min(100, ((rawValue / fullRange) * 100)));
-
-      let newValue = rawValue - negRange;
-      
+    if (val) {
+      rawValue = Math.max(negRange, Math.min(fullRange, val));
+    } else {
+      // get target position
       if (vertical) {
-        thumb.style.bottom = thumbPos + `%`;
+        targetPos = Math.max((thumbsize / 2), Math.min(sliderSize - (thumbsize / 2), elemBox.bottom - y));
       } else {
-        thumb.style.left = thumbPos + `%`;
+        targetPos = Math.max((thumbsize / 2), Math.min(sliderSize - (thumbsize / 2), x - elemBox.left));
       }
 
-      if (flipSignage) newValue = -newValue;
+      // get slider value from that position
+      rawValue = Math.round(fullRange * ((targetPos - (thumbsize / 2)) / (sliderSize - (thumbsize))));
+    }
 
-      // stop here if the value is the same
-      // prevents infinite loop: DO NOT REMOVE!!!
-      // there's probably a better way to do this
-      if (sliderData.value == Math.round(newValue)) return;
+    // snap thumb to nearest position based on max value of the input range
+    const thumbPos = Math.max(0, Math.min(100, ((rawValue / fullRange) * 100)));
 
-      thumb.setAttribute(`data-value`, Math.round(newValue));
-    };
+    let newValue = rawValue - negRange;
 
-    //set initial thumb position
-    updatePos(null, null, sliderData.default);
+    if (vertical) {
+      thumb.style.bottom = thumbPos + `%`;
+    } else {
+      thumb.style.left = thumbPos + `%`;
+    }
 
-    slider.addEventListener(`mousedown`, (e) => {
-      if (e.button !== 0) return;
-      active = true;
-      updatePos(e.clientX, e.clientY);
-    });
+    if (flipSignage) newValue = -newValue;
 
-    window.addEventListener(`mousemove`, (e) => {
-      if (e.button !== 0 || !active) return;
-      updatePos(e.clientX, e.clientY);
-    });
+    // stop here if the value is the same
+    // prevents infinite loop: DO NOT REMOVE!!!
+    // there's probably a better way to do this
+    if (sliderData.value == Math.round(newValue)) return;
 
-    window.addEventListener(`mouseup`, (e) => {
-      if (e.button !== 0 || !active) return;
-      active = false;
+    thumb.setAttribute(`data-value`, Math.round(newValue));
+  };
 
-      if (sliderData.springy=== `true`) {
-        updatePos(null, null, sliderData.default);
-      }
-    });
+  //set initial thumb position
+  updatePos(null, null, sliderData.default);
 
-    new MutationObserver((changes) => {
-      updatePos(null, null, changes[0].target.dataset.value);
-    }).observe(thumb, {
-      attributes: true,
-      attributeFilter: [`data-value`]
-    });
+  slider.addEventListener(`mousedown`, (e) => {
+    if (e.button !== 0) return;
+    active = true;
+    updatePos(e.clientX, e.clientY);
   });
-}
+
+  window.addEventListener(`mousemove`, (e) => {
+    if (e.button !== 0 || !active) return;
+    updatePos(e.clientX, e.clientY);
+  });
+
+  window.addEventListener(`mouseup`, (e) => {
+    if (e.button !== 0 || !active) return;
+    active = false;
+
+    if (sliderData.springy === `true`) {
+      updatePos(null, null, sliderData.default);
+    }
+  });
+
+  new MutationObserver((changes) => {
+    updatePos(null, null, changes[0].target.dataset.value);
+  }).observe(thumb, {
+    attributes: true,
+    attributeFilter: [`data-value`]
+  });
+});

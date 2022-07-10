@@ -1,81 +1,81 @@
-export function loadGraph(memory) {
-  const size = memory.masterAnalyser.frequencyBinCount;
+import { memory } from "./memory.mjs";
 
-  const spectrum = document.getElementById(`spectrum`);
-  const spectrumCTX = spectrum.getContext(`2d`);
-  const waveform = document.getElementById(`waveform`);
-  const waveformCTX = waveform.getContext(`2d`);
+const size = memory.masterAnalyser.frequencyBinCount;
 
-  const drawSpectrumGraph = () => {
-    // fix stupid canvas size bullshittery
-    spectrumCTX.canvas.width = spectrum.offsetWidth;
-    spectrumCTX.canvas.height = spectrum.offsetHeight;
+const spectrum = document.getElementById(`spectrum`);
+const spectrumCTX = spectrum.getContext(`2d`);
+const waveform = document.getElementById(`waveform`);
+const waveformCTX = waveform.getContext(`2d`);
 
-    spectrumCTX.clearRect(0, 0, spectrum.width, spectrum.height);
+const drawSpectrumGraph = () => {
+  // fix stupid canvas size bullshittery
+  spectrumCTX.canvas.width = spectrum.offsetWidth;
+  spectrumCTX.canvas.height = spectrum.offsetHeight;
 
-    const data = new Float32Array(size);
-    // const data = new Uint8Array(size);
-    memory.masterAnalyser.getFloatFrequencyData(data);
-    //memory.masterAnalyser.getByteFrequencyData(data);
+  spectrumCTX.clearRect(0, 0, spectrum.width, spectrum.height);
 
-    const width = spectrum.width / data.length;
+  const data = new Float32Array(size);
+  // const data = new Uint8Array(size);
+  memory.masterAnalyser.getFloatFrequencyData(data);
+  //memory.masterAnalyser.getByteFrequencyData(data);
 
-    let x = 0;
+  const width = spectrum.width / data.length;
 
-    for (let i = 0; i < (spectrum.width / width); i++) {
-      // values for float data (i want to cry)
-      const dbValue = data[Math.round(i * data.length / (spectrum.offsetWidth / width))];
-      const mappedDb = (dbValue - (memory.masterAnalyser.minDecibels)) * (spectrum.offsetHeight / 2) / (memory.masterAnalyser.maxDecibels - memory.masterAnalyser.minDecibels) + (spectrum.height / 2);
+  let x = 0;
 
-      // values for byte data
-      // const dbValue = data[Math.round(i * data.length / (spectrum.offsetWidth / width))];
-      // const mappedDb = dbValue * (spectrum.offsetHeight / 2) / 255;
+  for (let i = 0; i < (spectrum.width / width); i++) {
+    // values for float data (i want to cry)
+    const dbValue = data[Math.round(i * data.length / (spectrum.offsetWidth / width))];
+    const mappedDb = (dbValue - (memory.masterAnalyser.minDecibels)) * (spectrum.offsetHeight / 2) / (memory.masterAnalyser.maxDecibels - memory.masterAnalyser.minDecibels) + (spectrum.height / 2);
 
-      const height = Math.max(1, mappedDb);
+    // values for byte data
+    // const dbValue = data[Math.round(i * data.length / (spectrum.offsetWidth / width))];
+    // const mappedDb = dbValue * (spectrum.offsetHeight / 2) / 255;
 
-      spectrumCTX.fillStyle = getComputedStyle(document.documentElement).getPropertyValue(`--ma`);
+    const height = Math.max(1, mappedDb);
 
-      spectrumCTX.fillRect(
-        x,
-        (spectrum.height / 2) - Math.max(1, height / 2),
-        width,
-        height,
-      );
+    spectrumCTX.fillStyle = getComputedStyle(document.documentElement).getPropertyValue(`--ma`);
 
-      x += width;
-    }
+    spectrumCTX.fillRect(
+      x,
+      (spectrum.height / 2) - Math.max(1, height / 2),
+      width,
+      height,
+    );
 
-    requestAnimationFrame(drawSpectrumGraph);
-  };
+    x += width;
+  }
 
-  const drawWaveformGraph = () => {
-    // fix stupid canvas size bullshittery
-    waveformCTX.canvas.width = waveform.offsetWidth;
-    waveformCTX.canvas.height = waveform.offsetHeight;
+  requestAnimationFrame(drawSpectrumGraph);
+};
 
-    waveformCTX.clearRect(0, 0, waveform.width, waveform.height);
+const drawWaveformGraph = () => {
+  // fix stupid canvas size bullshittery
+  waveformCTX.canvas.width = waveform.offsetWidth;
+  waveformCTX.canvas.height = waveform.offsetHeight;
 
-    const data = new Float32Array(size);
-    memory.masterAnalyser.getFloatTimeDomainData(data);
+  waveformCTX.clearRect(0, 0, waveform.width, waveform.height);
 
-    const width = waveform.width / data.length;
+  const data = new Float32Array(size);
+  memory.masterAnalyser.getFloatTimeDomainData(data);
 
-    let x = 0;
+  const width = waveform.width / data.length;
 
-    waveformCTX.beginPath();
-    waveformCTX.lineWidth = 1;
-    waveformCTX.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue(`--ma`);
+  let x = 0;
 
-    for (let i = 0; i < (waveform.width / width); i++) {
+  waveformCTX.beginPath();
+  waveformCTX.lineWidth = 1;
+  waveformCTX.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue(`--ma`);
 
-      waveformCTX.lineTo(x, (waveform.offsetHeight / 2) + data[Math.round(i * data.length / (waveform.offsetWidth / width))] * waveform.offsetHeight);
-      x += width;
-    }
+  for (let i = 0; i < (waveform.width / width); i++) {
 
-    waveformCTX.stroke();
-    requestAnimationFrame(drawWaveformGraph);
-  };
+    waveformCTX.lineTo(x, (waveform.offsetHeight / 2) + data[Math.round(i * data.length / (waveform.offsetWidth / width))] * waveform.offsetHeight);
+    x += width;
+  }
 
-  drawSpectrumGraph();
-  drawWaveformGraph();
-}
+  waveformCTX.stroke();
+  requestAnimationFrame(drawWaveformGraph);
+};
+
+drawSpectrumGraph();
+drawWaveformGraph();

@@ -1,6 +1,6 @@
 function closeCM() {
   const cm = document.querySelector(`#context`);
-  
+
   cm.style.left = `0px`;
   cm.style.top = `0px`;
   cm.className = `cmhide`;
@@ -23,68 +23,66 @@ const menus = {
   ]
 };
 
-export function loadContextMenuHandler() {
-  const cm = document.querySelector(`#context`);
+const cm = document.querySelector(`#context`);
 
-  // show/hide context menu
-  document.addEventListener(`contextmenu`, e => {
-    e.preventDefault();
-    const x = e.clientX;
-    const y = e.clientY;
+// show/hide context menu
+document.addEventListener(`contextmenu`, e => {
+  e.preventDefault();
+  const x = e.clientX;
+  const y = e.clientY;
 
-    // debugging data
+  // debugging data
 
-    // console.log({
-    //   winWidth: window.innerWidth,
-    //   winHeight: window.innerHeight,
-    //   cmWidth: cm.offsetWidth,
-    //   cmHeight: cm.offsetHeight,
-    //   curX: e.clientX,
-    //   curY: e.clientY
-    // });
+  // console.log({
+  //   winWidth: window.innerWidth,
+  //   winHeight: window.innerHeight,
+  //   cmWidth: cm.offsetWidth,
+  //   cmHeight: cm.offsetHeight,
+  //   curX: e.clientX,
+  //   curY: e.clientY
+  // });
 
-    let elem = document.elementFromPoint(x, y);
-    let dataNode;
-    while (elem.parentNode != null && dataNode == null) {
-      if (elem.dataset.cm) {
-        dataNode = elem;
-      }
-
-      elem = elem.parentNode;
+  let elem = document.elementFromPoint(x, y);
+  let dataNode;
+  while (elem.parentNode != null && dataNode == null) {
+    if (elem.dataset.cm) {
+      dataNode = elem;
     }
 
-    if (dataNode == null) return;
+    elem = elem.parentNode;
+  }
 
-    // TEMPORARY!!!
-    if (dataNode.dataset.cm === `slider`) {
-      const button = document.createElement(`a`);
-      button.innerHTML = menus.slider[0].label;
-      button.onclick = () => { menus.slider[0].func(dataNode); };
+  if (dataNode == null) return;
 
-      console.log(button);
+  // TEMPORARY!!!
+  if (dataNode.dataset.cm === `slider`) {
+    const button = document.createElement(`a`);
+    button.innerHTML = menus.slider[0].label;
+    button.onclick = () => { menus.slider[0].func(dataNode); };
 
-      cm.appendChild(button);
-    }
+    console.log(button);
 
-    const posX = (x + cm.offsetWidth > window.innerWidth) ? x - cm.offsetWidth : x;
-    const posY = (y + cm.offsetHeight > window.innerHeight) ? y - cm.offsetHeight : y;
+    cm.appendChild(button);
+  }
 
-    cm.style.left = `${posX}px`;
-    cm.style.top = `${posY}px`;
+  const posX = (x + cm.offsetWidth > window.innerWidth) ? x - cm.offsetWidth : x;
+  const posY = (y + cm.offsetHeight > window.innerHeight) ? y - cm.offsetHeight : y;
 
-    cm.className = ``;
-  });
+  cm.style.left = `${posX}px`;
+  cm.style.top = `${posY}px`;
 
-  document.addEventListener(`mousedown`, e => {
-    if (e.path.includes(cm)) return;
-    closeCM();
-  });
+  cm.className = ``;
+});
 
-  window.addEventListener(`blur`, () => {
-    closeCM();
-  });
+document.addEventListener(`mousedown`, e => {
+  if (e.path.includes(cm)) return;
+  closeCM();
+});
 
-  window.addEventListener(`resize`, () => {
-    closeCM();
-  });
-}
+window.addEventListener(`blur`, () => {
+  closeCM();
+});
+
+window.addEventListener(`resize`, () => {
+  closeCM();
+});
