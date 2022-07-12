@@ -1,8 +1,28 @@
+const fs = require(`fs`);
 const path = require(`path`);
 const { app, BrowserWindow, nativeImage, shell } = require(`electron`);
 
 // fix color reproduction
 app.commandLine.appendSwitch(`force-color-profile`, `srgb`);
+
+// create directories that may or may not exist because Git(TM)
+const mkdirs = [
+  `./.local`,
+  `./userdata`,
+  `./logs/`,
+];
+
+for (const item of mkdirs) {
+  if (!fs.existsSync(item)) {
+    fs.mkdirSync(item, { recursive: true });
+  }
+}
+
+if (!fs.existsSync(`./userdata/config.json`)) {
+  fs.writeFileSync(`./userdata/config.json`, `{}`, { encoding: `utf8` });
+}
+
+const config = require(`./userdata/config.json`);
 
 app.on(`ready`, () => {
   // create splash screen
@@ -28,7 +48,7 @@ app.on(`ready`, () => {
     width: 1000,
     height: 800,
     minWidth: 950,
-    minHeight: 720,
+    minHeight: 650,
     show: false,
     autoHideMenuBar: true,
     webPreferences: {
@@ -39,6 +59,16 @@ app.on(`ready`, () => {
     },
     icon: nativeImage.createFromPath(path.join(__dirname, `./assets/images/node-studio.ico`))
   });
+
+  if (config.window != null) {
+    window.setPosition(config.window.pos[0], config.window.pos[1]);
+    window.setSize(config.window.size[0], config.window.size[1]);
+  } else {
+    config.window = {
+      pos: window.getPosition(),
+      size: window.getSize()
+    }
+  }
   
   window.loadFile(`assets/editor.html`);
 
@@ -54,9 +84,19 @@ app.on(`ready`, () => {
       shell.openExternal(url);
     });
   });
+
+  window.on(`move`, () => {
+    config.window.pos = window.getPosition();
+  });
+
+  window.on(`resize`, () => {
+    config.window.size = window.getSize();
+  });
 });
 
 app.on(`window-all-closed`, () => {
+  fs.writeFileSync(`./userdata/config.json`, JSON.stringify(config), { encoding: `utf8` });
+
   // end program when all windows are closed
   // except macOS because its ✨ not like other girls ✨ or something
   if (process.platform !== `darwin`) app.quit();
