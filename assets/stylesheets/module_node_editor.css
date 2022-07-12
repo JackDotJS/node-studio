@@ -25,6 +25,10 @@
   overflow-y: scroll;
 }
 
+#ndGridWrapper.panning {
+  cursor: move;
+}
+
 #ndPath {
   position: absolute;
   margin: 1rem;
