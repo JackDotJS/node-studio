@@ -2,6 +2,8 @@ const editor = document.querySelector(`#nodeEditor`);
 const wrapper = editor.querySelector(`#ndGridWrapper`);
 const grid = editor.querySelector(`#ndGrid`);
 
+console.warn(`reminder: cursor changes dont work with the webdev console open!!!`)
+
 let active = null;
 let edgeScroll = null;
 let mx = 0;
