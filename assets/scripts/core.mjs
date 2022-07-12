@@ -17,12 +17,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
   setInterval(() => {
     document.querySelector(`#latency`).innerHTML = `LAT: ${memory.audioCTX.baseLatency}s`;
   }, 2500);
-
-  // loadGraph(memory);
-  // loadPiano(memory);
-  // loadSliders();
-  // loadMemoryMonitor();
-  // loadContextMenuHandler();
+  
   import(`./graphs.mjs`);
   import(`./piano.mjs`);
   import(`./mem_usage.mjs`);
