@@ -42,12 +42,22 @@ html, body {
 }
 
 *::-webkit-scrollbar {
-  width: 1rem;
-  height: 1rem;
-  background-color: transparent;
+  --t: calc(1rem + 4px);
+  width: var(--t);
+  height: var(--t);
+  background-color: var(--m-1);
 }
 
+ *::-webkit-scrollbar-track {
+  border-radius: 1rem;
+  background-color: var(--m-0);
+  border: 2px solid var(--m-1);
+ }
+
 *::-webkit-scrollbar-thumb {
+  --t: calc(1rem + 4px);
+  width: var(--t);
+  height: var(--t);
   box-shadow: inset 0 0 1rem 1rem var(--ma);
   border: solid 0.25rem transparent;
   border-radius: 2rem;
@@ -62,7 +72,7 @@ html, body {
 }
 
 *::-webkit-scrollbar-corner {
-  background-color: transparent
+  background-color: var(--m-1);
 }
 
 body {
@@ -132,6 +142,7 @@ input[type=text], input[type=number] {
   color: var(--ma);
   border-color: transparent transparent var(--ma);
   border-style: solid;
+  text-overflow: ellipsis;
 }
 
 input[type=text]::-webkit-input-placeholder {

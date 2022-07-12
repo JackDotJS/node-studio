@@ -3,7 +3,16 @@
 }
 
 #timeline {
-  flex-grow: 1000;
+  grid-column: 1;
+  grid-row: 1;
+}
+
+#tlCol1 {
+  max-width: 25rem;
+  min-width: 15rem;
+  /* idk why but this needs to be
+  here for scaling to work right */
+  width: 100vw;
 }
 
 #tlCol1, #tlCol2 {
@@ -18,7 +27,7 @@
 }
 
 #tlCol2 {
-  width: 100%;
+  min-width: 12rem;
   overflow-y: auto;
 }
 
@@ -57,7 +66,7 @@
 }
 
 #trackHeaders {
-  min-width: 25rem;
+  width: 100%;
   overflow-y: hidden;
 }
 

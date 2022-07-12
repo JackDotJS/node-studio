@@ -1,7 +1,6 @@
 .module {
   display: flex;
   padding: 3px;
-  margin: 0 0.5rem;
   border-radius: 0.25rem;
   background-color: var(--m-1);
 }
@@ -18,4 +17,27 @@
 .spacer {
   opacity: 0;
   flex-grow: 2;
+}
+
+.module, #editorSpace {
+  margin: 0 0.5rem;
+}
+
+#editorSpace {
+  flex-grow: 1000;
+  display: grid;
+  grid-template: repeat(2, minmax(5rem, 1fr)) / repeat(2, minmax(5rem, 1fr));
+  grid-gap: 0.5rem;
+  align-items: stretch;
+  justify-items: stretch;
+  justify-content: stretch;
+  /* 
+  for some reason this prevents the container from blowing up the page 
+  pls dont remove
+  */
+  height: 20rem; 
+}
+
+#editorSpace > .module {
+  margin: 0;
 }

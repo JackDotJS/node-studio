@@ -25,7 +25,8 @@
     <div>
       <input type="button" id="mbFile" value="File">
       <input type="button" id="mbEdit" value="Edit">
-      <!-- <input type="button" id="mbNodes" value="Nodes"> -->
+      <input type="button" id="mbView" value="View">
+      <input type="button" id="mbNodes" value="Nodes">
       <input type="button" id="mbTrack" value="Track">
       <input type="button" id="mbHelp" value="Help">
     </div>
@@ -40,77 +41,79 @@
     </div>
   </div>
 
-  <div id="context" class="cmhide">
-    
-  </div>
+  <div id="context" class="cmhide"></div>
 
-  <div id="timeline" class="module" style="display: none;">
-    <div id="tlCol1">
-      <div id="playbackData">
-        <span id="playbackTime">00:00:00</span>
-      </div>
-
-      <div id="trackHeaders">
-        <div class="trackHeader selected">
-          <div class="trackDrag"></div>
-          <div>
+  <div id="editorSpace">
+    <div id="timeline" class="module"">
+      <div id="tlCol1">
+        <div id="playbackData">
+          <span id="playbackTime">00:00:00</span>
+        </div>
+  
+        <div id="trackHeaders">
+          <div class="trackHeader selected">
+            <div class="trackDrag"></div>
             <div>
-              <input type="text" class="trackName" value="Instrument 1" maxlength="32" placeholder="Untitled Instrument">
-              <input type="button" class="trackMute" value="🔇">
-              <input type="button" class="trackSolo" value="S">
-              <input type="button" class="trackNodes" value="🔌">
-            </div>
-            <div>
-              <span>VOL</span>
-              <div id="trackVolume" class="slider" data-mouseover="Volume: %1" data-cm="slider">
-                <div data-min="0" data-max="100" data-default="100"></div>
+              <div>
+                <input type="text" class="trackName" value="Instrument 1" maxlength="32" placeholder="Untitled Instrument">
+                <input type="button" class="small trackMute" value="🔇">
+                <input type="button" class="small trackSolo" value="S">
+                <input type="button" class="small trackNodes" value="🔌">
               </div>
-              <span>PAN</span>
-              <div id="trackPan" class="slider" data-cm="slider">
-                <div data-min="0" data-max="100" data-default="50"></div>
+              <div>
+                <span>VOL</span>
+                <div id="trackVolume" class="slider" data-mouseover="Volume: %1" data-cm="slider">
+                  <div data-min="0" data-max="100" data-default="100"></div>
+                </div>
+                <span>PAN</span>
+                <div id="trackPan" class="slider" data-cm="slider">
+                  <div data-min="0" data-max="100" data-default="50"></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div id="trackCreate" class="trackHeader">
-          <input type="button" class="large" value="➕">
-        </div>
-      </div>
-    </div>
-    <div id="tlCol2">
-      <div id="seek">
-        <span>00:00:00</span>
-      </div>
-      <div id="trackSequencer">
-        <div class="trackSequence selected">
-          <div class="pattern" data-name="Pattern 01"></div>
-        </div>
-        <div class="trackSequence test">
-          <div class="pattern" data-name="Pattern 02"></div>
-          <div class="pattern" data-name="Pattern 03"></div>
-          <div class="pattern" data-name="Pattern 04"></div>
+          <div id="trackCreate" class="trackHeader">
+            <input type="button" class="large" value="➕">
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-
-  <div id="editnodes" class="module">
-    <div id="ndHeader">
-      <input type="button" id="ndUpOne" value="⬆️">
-      <input type="text" id="ndGroupTitle" placeholder="Untitled Node Group">
-      <input type="button" id="ndClose" value="✖️">
-    </div>
-    <div id="ndGridWrapper">
-      <span id="ndPath">Instrument > Group1 > Group2 > Etc</span>
-      <div id="ndGrid">
-        <div id="node001" class="node" style="--w: 12; --h: 6; --x: 6; --y: 8;">
-          <div class="nodeTitle">
-            <span>Node</span>
-            <input type="button" class="small nodeToggle" value="☑️">
+      <div id="tlCol2">
+        <div id="seek">
+          <span>00:00:00</span>
+        </div>
+        <div id="trackSequencer">
+          <div class="trackSequence selected">
+            <div class="pattern" data-name="Pattern 01"></div>
+          </div>
+          <div class="trackSequence test">
+            <div class="pattern" data-name="Pattern 02"></div>
+            <div class="pattern" data-name="Pattern 03"></div>
+            <div class="pattern" data-name="Pattern 04"></div>
           </div>
         </div>
       </div>
     </div>
+  
+    <div id="nodeEditor" class="module">
+      <div id="ndHeader">
+        <input type="button" id="ndUpOne" value="⬆️">
+        <input type="text" id="ndGroupTitle" placeholder="Untitled Node Group">
+        <input type="button" id="ndClose" value="✖️">
+      </div>
+      <div id="ndGridWrapper">
+        <span id="ndPath">Instrument > Group1 > Group2 > Etc</span>
+        <div id="ndGrid">
+          <div id="node001" class="node" style="--w: 12; --h: 6; top: 50%; left: 50%;">
+            <div class="nodeTitle">
+              <span>Node</span>
+              <input type="button" class="small nodeToggle" value="☑️">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="patternEditor" class="module"></div>
   </div>
 
   <div id="controlPanel">
