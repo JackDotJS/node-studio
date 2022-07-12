@@ -12,7 +12,7 @@
   "main": "index.js",
   "scripts": {
     "start": "electron .",
-    "build": "npx electron-packager . --out=./build"
+    "build": "npx electron-packager . --out=./build --icon=./assets/images/node-studio.ico"
   },
   "dependencies": {
     "adm-zip": "^0.4.13",
