@@ -2,7 +2,20 @@ const editor = document.querySelector(`#nodeEditor`);
 const wrapper = editor.querySelector(`#ndGridWrapper`);
 const grid = editor.querySelector(`#ndGrid`);
 
-console.warn(`reminder: cursor changes dont work with the webdev console open!!!`)
+console.warn(`reminder: cursor changes dont work with the webdev console open!!!`);
+
+const connections = [
+  {
+    node0: {
+      id: `node001`,
+      plug: 1
+    },
+    node1: {
+      id: `node002`,
+      plug: 0
+    }
+  }
+];
 
 let active = null;
 let edgeScroll = null;
@@ -96,6 +109,8 @@ function moveNode() {
 
   active.node.style.left = Math.max(0, Math.min(limitH, ((mx - gridRect.left) + active.offsetX))) + `px`;
   active.node.style.top = Math.max(0, Math.min(limitV, ((my - gridRect.top) + active.offsetY))) + `px`;
+
+  updateConnections();
 }
 
 function scrollStep()  {
@@ -154,3 +169,67 @@ function releaseMiddle() {
   wrapper.classList.remove(`panning`);
   gridMove == null;
 }
+
+// rendering functions
+
+function updateConnections() {
+  const canvas = document.querySelector(`#nodeConnections`);
+  const ctx = canvas.getContext(`2d`);
+
+  ctx.canvas.width = canvas.offsetWidth;
+  ctx.canvas.height = canvas.offsetHeight;
+
+  console.log(ctx.canvas.width, ctx.canvas.height);
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  for (const connection of connections) {
+    const node0 = grid.querySelector(`#` + connection.node0.id);
+    const node1 = grid.querySelector(`#` + connection.node1.id);
+
+    const debug = {
+      connection,
+      node0,
+      node1
+    };
+
+    if (node0 == null || node1 == null) {
+      return console.error(`Failed to get nodes from grid`, debug);
+    }
+
+    const outputs = node0.querySelectorAll(`.nodeIO.output .nodePlug`);
+    const inputs = node1.querySelectorAll(`.nodeIO.input .nodePlug`);
+
+    const plug0 = outputs[connection.node0.plug];
+    const plug1 = inputs[connection.node1.plug];
+
+    if (plug0 == null || plug1 == null) {
+      return console.error(`Failed to get node plugs`, debug);
+    }
+
+    const gbox = grid.getBoundingClientRect();
+    const box0 = plug0.getBoundingClientRect();
+    const box1 = plug1.getBoundingClientRect();
+
+    const x0 = Math.abs(box0.left - gbox.left) + (box0.width / 2);
+    const y0 = Math.abs(box0.top - gbox.top) + (box0.height / 2);
+    const x1 = Math.abs(box1.left - gbox.left) + (box1.width / 2);
+    const y1 = Math.abs(box1.top - gbox.top) + (box1.height / 2);
+    
+
+    console.log(x0, y0, x1, y1);
+    console.log(gbox, box0, box1);
+
+    ctx.lineWidth = 4;
+    ctx.lineCap = `round`;
+    ctx.beginPath();
+    ctx.strokeStyle = `yellow`;
+    ctx.moveTo(x0, y0);
+    ctx.lineTo(x1, y1);
+    // ctx.moveTo(0, 0);
+    // ctx.lineTo(4096, 2048);
+    ctx.stroke();
+  }
+}
+
+updateConnections();
