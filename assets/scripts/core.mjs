@@ -29,8 +29,8 @@ import(`./context.mjs`);
 import(`./classes/project.mjs`);
 import(`./node_editor.mjs`);
 
-document.addEventListener(`change`, (e) => {
-  // just to be sure
+window.addEventListener(`keydown`, (e) => {
+  if (e.key != `Enter` && e.key != `Escape`) return;
   if (e.target.type !== `text` && e.target.type !== `number`) return;
 
   if (e.target.id === `projectTitle`) window.setWinTitle(e.target.value || e.target.placeholder);
