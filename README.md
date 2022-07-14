@@ -42,6 +42,6 @@ Coming soon!
   <h1>Contributing</h1>
 </div>
 
-**Suggestions are always welcome!** Even if you aren't really a developer, feel free to use the [issues page](issues) to submit your ideas.
+**Suggestions are always welcome!** Even if you aren't really a developer, feel free to use the [issues page](../../issues) to submit your ideas.
 
-For those who would like to contribute more directly, check out the [contributing guidelines](contributing.md).
+For those who would like to contribute more directly, check out the [contributing guidelines](CONTRIBUTING.md).
