@@ -2,6 +2,8 @@ const fs = require(`fs`);
 const path = require(`path`);
 const { app, BrowserWindow, nativeImage, shell } = require(`electron`);
 
+let config = {};
+
 // fix color reproduction
 app.commandLine.appendSwitch(`force-color-profile`, `srgb`);
 
@@ -18,11 +20,14 @@ for (const item of mkdirs) {
   }
 }
 
-if (!fs.existsSync(`./userdata/config.json`)) {
-  fs.writeFileSync(`./userdata/config.json`, `{}`, { encoding: `utf8` });
-}
+try {
+  // try making file if it does not exist
+  fs.writeFileSync(`./userdata/config.json`, JSON.stringify(config), { encoding: `utf8`, flag: `ax` });
+} catch (e) {
+  if (e.code !== `EEXIST`) throw e;
 
-const config = require(`./userdata/config.json`);
+  config = require(`./userdata/config.json`);
+}
 
 app.on(`ready`, () => {
   // create splash screen
