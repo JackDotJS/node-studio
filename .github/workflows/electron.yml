@@ -1,21 +1,27 @@
-name: Build
-on: [push]
 
-git_hash=$(git rev-parse --short "$GITHUB_SHA")
-
+name: Snapshot Builds
+on: 
+  push:
+    branches: [ "main" ]
 jobs:
-  build_on_win:
+  build-snapshot:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@master
-      with:
-        node-version: 17
-    - name: install dependencies
-      run: npm install
-    - name: build
-      run: npm run build
-    - uses: actions/upload-artifact@v3
-      with:
-        name: SNAPSHOT-${{ git_hash }}-NightlyNodeStudio-win32-x64
-        path: build/node-studio-win32-x64
+      - name: Checkout repository
+        id: checkout
+      - uses: actions/checkout@v2
+      - run: echo "::set-output name=SHA_SHORT::$(git rev-parse --short HEAD)"
+      - name: Set up Node.JS environment
+        uses: actions/setup-node@master
+        with:
+          node-version: 17
+      - name: Install Dependencies
+      - run: npm install
+      - name: Begin Compiling
+      - run: npm run build
+      
+      - name: Upload Snapshot
+        uses: actions/upload-artifact@v3
+        with:
+          name: SNAPSHOT-${{ steps.checkout.outputs.SHA_SHORT }}-node-studio-win32-x64
+          path: build/node-studio-win32-x64
