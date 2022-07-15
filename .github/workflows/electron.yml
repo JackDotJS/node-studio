@@ -15,4 +15,5 @@ jobs:
       run: npm run build
     - uses: actions/upload-artifact@v3
       with:
+        name: NightlyNodeStudio-win32-x64
         path: build/node-studio-win32-x64
