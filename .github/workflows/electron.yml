@@ -2,30 +2,27 @@ name: Snapshot Builds
 on: 
   push:
     branches: [ "main" ]
-
 jobs:
-  build_snapshot:
+  build-snapshot:
     runs-on: windows-latest
-    env:
-      SHA_SHORT: $(git rev-parse --short HEAD)
     steps:
       - name: Checkout repository
-        id: checkout
         uses: actions/checkout@v2
-
+      
+      - name: Get revision hash
+        id: getrev
+        run: echo "::set-output name=SHA_SHORT::$(git rev-parse --short HEAD)"
       - name: Set up Node.JS environment
         uses: actions/setup-node@master
         with:
           node-version: 17
-
       - name: Install Dependencies
         run: npm install
-
       - name: Begin Compiling
         run: npm run build
-
+      
       - name: Upload Snapshot
         uses: actions/upload-artifact@v3
         with:
-          name: SNAPSHOT-${{ env.SHA_SHORT }}-node-studio-win32-x64
+          name: SNAPSHOT-${{ steps.getrev.outputs.SHA_SHORT }}-node-studio-win32-x64
           path: build/node-studio-win32-x64
