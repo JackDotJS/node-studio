@@ -2,20 +2,6 @@ export class NSDataType {
   constructor() {
     this.id = window.crypto.randomUUID();
   }
-
-  toJSON() {
-    // JSON.stringify() is recursive so *supposedly* we
-    // don't need to manually call toJSON() on any
-    // stuff sitting in arrays or inner objects
-
-    const serialized = {};
-
-    for (const property of Object.getOwnPropertyNames(this)) {
-      serialized[property] = this[property];
-    }
-
-    return serialized;
-  }
 }
 
 export class NSDataCollection {
