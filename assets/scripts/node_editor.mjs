@@ -165,7 +165,7 @@ function handleMiddleMove() {
 
 function releaseMiddle() {
   wrapper.classList.remove(`panning`);
-  gridMove == null;
+  gridMove = null;
 }
 
 // rendering functions
