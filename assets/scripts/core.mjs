@@ -35,7 +35,12 @@ window.addEventListener(`keydown`, (e) => {
   if (e.key != `Enter` && e.key != `Escape`) return;
   if (e.target.type !== `text` && e.target.type !== `number`) return;
 
-  if (e.target.id === `projectTitle`) window.setWinTitle(e.target.value || e.target.placeholder);
+  if (e.target.id === `projectTitle`) {
+    const newVal = e.target.value || e.target.placeholder;
+    window.setWinTitle(newVal);
+    memory.project.title = newVal;
+    console.log(JSON.stringify(memory.project, null, 2));
+  }
 
   e.target.blur();
 }, true);
