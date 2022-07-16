@@ -1,12 +1,10 @@
-import { NSDataType, NSDataCollection } from "./baseClass.mjs";
+import { NSDataCollection } from "./baseClass.mjs";
 import { NodeGroup } from "./nodes.mjs";
 import { Track } from "./tracks.mjs";
 import { Pattern } from "./patterns.mjs";
 
-export class NodeStudioProject extends NSDataType {
+export class NodeStudioProject {
   constructor(data = {}) {
-    super(false);
-
     this.format = data.format || 1;
     this.title = data.title || `Untitled Project`;
     this.author = data.author || `Unknown`;
