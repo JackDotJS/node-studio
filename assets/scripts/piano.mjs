@@ -1,5 +1,51 @@
 import { memory } from "./memory.mjs";
 
+// thanks MDN https://developer.mozilla.org/en-US/docs/Web/API/Web_MIDI_API#examples
+let midi = null;
+function onMIDISuccess(midiAccess) {
+  console.log(`MIDI ready!`);
+  midi = midiAccess;  // store in the global (in real usage, would probably keep in an object instance)
+}
+
+function onMIDIFailure(msg) {
+  console.log(`Failed to get MIDI access - ` + msg);
+}
+
+navigator.requestMIDIAccess()
+  .then(onMIDISuccess, onMIDIFailure)
+  .then(() => {
+    listInputsAndOutputs(midi);
+    startLoggingMIDIInput(midi);
+  });
+
+function listInputsAndOutputs(midiAccess) {
+  for (const entry of midiAccess.inputs) {
+    const input = entry[1];
+    console.log(`Input port [type:'` + input.type + `'] id:'` + input.id +
+      `' manufacturer:'` + input.manufacturer + `' name:'` + input.name +
+      `' version:'` + input.version + `'`);
+  }
+
+  for (const entry of midiAccess.outputs) {
+    const output = entry[1];
+    console.log(`Output port [type:'` + output.type + `'] id:'` + output.id +
+      `' manufacturer:'` + output.manufacturer + `' name:'` + output.name +
+      `' version:'` + output.version + `'`);
+  }
+}
+
+function onMIDIMessage(event) {
+  let str = `MIDI message received at timestamp ` + event.timeStamp + `[` + event.data.length + ` bytes]: `;
+  for (let i = 0; i < event.data.length; i++) {
+    str += `0x` + event.data[i].toString(16) + ` `;
+  }
+  console.log(str);
+}
+
+function startLoggingMIDIInput(midiAccess, indexOfPort) {
+  midiAccess.inputs.forEach(function (entry) { entry.onmidimessage = onMIDIMessage; });
+}
+
 const container = document.getElementById(`keys`);
 let playing = false;
 let curX = 0;
@@ -52,7 +98,7 @@ function getKeyIndex(x, y) {
 
   let key = 0;
   let nIndexTest = dataNode;
-  while ( nIndexTest != null ) {
+  while (nIndexTest != null) {
     if (nIndexTest.nodeType !== 3) {
       key++;
     }
@@ -85,13 +131,13 @@ function keyPressHandler(e) {
   oscillator.start(0);
 }
 
-function keyReleaseHandler () {
+function keyReleaseHandler() {
   const ci = memory.instruments[memory.currentInstrument];
   ci.node.stop(0);
   playing = false;
 }
 
-function moveCurHandler (x, y) {
+function moveCurHandler(x, y) {
   if (!playing) return;
 
   const ci = memory.instruments[memory.currentInstrument];
@@ -105,7 +151,7 @@ function moveCurHandler (x, y) {
 container.addEventListener(`mousedown`, (e) => {
   e.preventDefault();
   if (e.button !== 0) return;
-  
+
   curX = e.clientX;
   curY = e.clientY;
 
