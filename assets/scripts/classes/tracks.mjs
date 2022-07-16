@@ -1,4 +1,4 @@
-import { DataBlock, NSDataCollection } from "./baseClass.mjs";
+import { DataBlock } from "./baseClass.mjs";
 
 export class Track extends DataBlock {
   constructor(data) {
@@ -8,11 +8,11 @@ export class Track extends DataBlock {
     this.muted = data.muted || false;
     this.volume = data.volume || 100;
     this.pan = data.pan || 50;
-    this.timeline = new NSDataCollection(TrackSequence);
+    this.timeline = [];
     this.instrument = data.instrument || null;
 
     if (data.timeline) for (const cData of data.timeline) {
-      this.timeline.add(cData);
+      this.timeline.push(new TrackSequence(cData));
     }
   }
 }

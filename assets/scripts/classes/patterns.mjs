@@ -1,14 +1,14 @@
-import { DataBlock, NSDataCollection } from "./baseClass.mjs";
+import { DataBlock } from "./baseClass.mjs";
 
 export class Pattern extends DataBlock {
   constructor(data) {
     super(data.id);
 
     this.name = data.name || `Pattern`;
-    this.notes = new NSDataCollection(Note);
+    this.notes = [];
 
     if (data.notes) for (const cData of data.notes) {
-      this.notes.add(cData);
+      this.notes.push(new Note(cData));
     }
   }
 }
@@ -19,10 +19,10 @@ export class Note extends DataBlock {
 
     this.position = data.position || 0;
     this.length = data.length || 1;
-    this.bend = new NSDataCollection(NoteBend);
+    this.bend = [];
 
     if (data.bend) for (const cData of data.bend) {
-      this.bend.add(cData);
+      this.bend.push(new NoteBend(cData));
     }
   }
 }
