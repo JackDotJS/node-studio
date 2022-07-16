@@ -1,6 +1,6 @@
-import { NSDataType, NSDataCollection } from "./baseClass.mjs";
+import { DataBlock, NSDataCollection } from "./baseClass.mjs";
 
-export class Node extends NSDataType {
+export class Node extends DataBlock {
   constructor(data, parent) {
     super(data.id);
 
@@ -13,7 +13,7 @@ export class Node extends NSDataType {
   }
 }
 
-export class NodeGroup extends NSDataType {
+export class NodeGroup extends DataBlock {
   constructor(data) {
     super(data.id);
 
@@ -26,7 +26,7 @@ export class NodeGroup extends NSDataType {
   }
 }
 
-export class NodeConnection extends NSDataType {
+export class NodeConnection extends DataBlock {
   constructor(data) {
     super(data.id);
 
