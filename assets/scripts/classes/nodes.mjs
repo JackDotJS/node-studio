@@ -1,4 +1,4 @@
-import { DataBlock, NSDataCollection } from "./baseClass.mjs";
+import { DataBlock } from "./baseClass.mjs";
 
 export class Node extends DataBlock {
   constructor(data, parent) {
@@ -8,7 +8,7 @@ export class Node extends DataBlock {
     this.type = data.type || `unknown`;
     this.posX = data.posX || 0;
     this.posY = data.posY || 0;
-    this.outputs = new NSDataCollection(NodeConnection);
+    this.outputs = [];
     this.group = parent.id;
   }
 }
@@ -18,10 +18,10 @@ export class NodeGroup extends DataBlock {
     super(data.id);
 
     this.name = data.name || `Node Group 1`;
-    this.nodes = new NSDataCollection(Node);
+    this.nodes = [];
 
     if (data.nodes) for (const cData of data.nodes) {
-      this.nodes.add(cData, this);
+      this.nodes.push(new Node(cData, this));
     }
   }
 }

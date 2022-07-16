@@ -1,4 +1,3 @@
-import { NSDataCollection } from "./baseClass.mjs";
 import { NodeGroup } from "./nodes.mjs";
 import { Track } from "./tracks.mjs";
 import { Pattern } from "./patterns.mjs";
@@ -10,20 +9,20 @@ export class NodeStudioProject {
     this.author = data.author || `Unknown`;
     this.description = data.description || `No description.`;
     this.tempo = data.tempo || 120;
-    this.nodeGroups = new NSDataCollection(NodeGroup);
-    this.tracks = new NSDataCollection(Track);
-    this.patterns = new NSDataCollection(Pattern);
+    this.nodeGroups = [];
+    this.tracks = [];
+    this.patterns = [];
     
     if (data.nodeGroups) for (const cData of data.nodeGroups) {
-      this.nodeGroups.add(cData);
+      this.nodeGroups.push(new NodeGroup(cData));
     }
 
     if (data.patterns) for (const cData of data.patterns) {
-      this.patterns.add(cData);
+      this.patterns.push(new Pattern(cData));
     }
 
     if (data.tracks) for (const cData of data.tracks) {
-      this.tracks.add(cData);
+      this.tracks.push(new Track(cData));
     }
   }
 }
