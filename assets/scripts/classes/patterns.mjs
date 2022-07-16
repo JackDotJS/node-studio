@@ -1,6 +1,6 @@
-import { NSDataType, NSDataCollection } from "./baseClass.mjs";
+import { DataBlock, NSDataCollection } from "./baseClass.mjs";
 
-export class Pattern extends NSDataType {
+export class Pattern extends DataBlock {
   constructor(data) {
     super(data.id);
 
@@ -13,7 +13,7 @@ export class Pattern extends NSDataType {
   }
 }
 
-export class Note extends NSDataType {
+export class Note extends DataBlock {
   constructor(data) {
     super(data.id);
 
@@ -27,7 +27,7 @@ export class Note extends NSDataType {
   }
 }
 
-export class NoteBend extends NSDataType {
+export class NoteBend extends DataBlock {
   constructor(data) {
     super(data.id);
 

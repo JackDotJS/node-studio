@@ -1,6 +1,6 @@
-import { NSDataType, NSDataCollection } from "./baseClass.mjs";
+import { DataBlock, NSDataCollection } from "./baseClass.mjs";
 
-export class Track extends NSDataType {
+export class Track extends DataBlock {
   constructor(data) {
     super(data.id);
 
@@ -17,7 +17,7 @@ export class Track extends NSDataType {
   }
 }
 
-export class TrackSequence extends NSDataType {
+export class TrackSequence extends DataBlock {
   constructor(data) {
     super(data.id);
 
