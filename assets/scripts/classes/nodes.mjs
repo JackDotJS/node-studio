@@ -1,4 +1,4 @@
-import { DataBlock } from "./baseClass.mjs";
+import { DataBlock } from "./datablock.mjs";
 
 export class Node extends DataBlock {
   constructor(data, parent) {
