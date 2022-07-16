@@ -2,7 +2,7 @@ import { NSDataType, NSDataCollection } from "./baseClass.mjs";
 
 export class Pattern extends NSDataType {
   constructor(data) {
-    super();
+    super(data.id);
 
     this.name = data.name || `Pattern`;
     this.notes = new NSDataCollection(Note);
@@ -15,7 +15,7 @@ export class Pattern extends NSDataType {
 
 export class Note extends NSDataType {
   constructor(data) {
-    super();
+    super(data.id);
 
     this.position = data.position || 0;
     this.length = data.length || 1;
@@ -29,7 +29,7 @@ export class Note extends NSDataType {
 
 export class NoteBend extends NSDataType {
   constructor(data) {
-    super();
+    super(data.id);
 
     this.position = data.position || 0;
     this.length = data.length || 1;

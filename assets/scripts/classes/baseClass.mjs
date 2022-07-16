@@ -1,6 +1,11 @@
 export class NSDataType {
-  constructor() {
-    this.id = window.crypto.randomUUID();
+  constructor(id) {
+    // 3 possible outcomes:
+    // - (id == null) generate a new id
+    // - (id === false) dont set an id at all
+    // - ([anything else]) use supplied value as id
+
+    if (id !== false) this.id = id || window.crypto.randomUUID();
   }
 }
 
