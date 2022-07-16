@@ -1,3 +1,5 @@
+import { NodeStudioProject } from "./classes/project.mjs";
+
 export const memory = {
   audioCTX: new window.AudioContext(),
   currentInstrument: 0,
@@ -14,5 +16,5 @@ export const memory = {
   ],
   masterVolume: null,
   masterAnalyser: null,
-  willChange: 0
+  project: new NodeStudioProject()
 };
