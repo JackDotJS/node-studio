@@ -1,5 +1,7 @@
 import { memory } from "./memory.mjs";
 
+console.warn(`reminder: cursor changes dont work with the webdev console open!!!`);
+
 memory.masterVolume = memory.audioCTX.createGain();
 memory.masterAnalyser = memory.audioCTX.createAnalyser();
 
@@ -37,3 +39,6 @@ window.addEventListener(`keydown`, (e) => {
 
   e.target.blur();
 }, true);
+
+console.log(memory.project);
+console.log(JSON.stringify(memory.project, null, 2));

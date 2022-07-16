@@ -2,8 +2,6 @@ const editor = document.querySelector(`#nodeEditor`);
 const wrapper = editor.querySelector(`#ndGridWrapper`);
 const grid = editor.querySelector(`#ndGrid`);
 
-console.warn(`reminder: cursor changes dont work with the webdev console open!!!`);
-
 const connections = [
   {
     node0: {
@@ -179,8 +177,6 @@ function updateConnections() {
   ctx.canvas.width = canvas.offsetWidth;
   ctx.canvas.height = canvas.offsetHeight;
 
-  console.log(ctx.canvas.width, ctx.canvas.height);
-
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   for (const connection of connections) {
@@ -215,10 +211,6 @@ function updateConnections() {
     const y0 = Math.abs(box0.top - gbox.top) + (box0.height / 2);
     const x1 = Math.abs(box1.left - gbox.left) + (box1.width / 2);
     const y1 = Math.abs(box1.top - gbox.top) + (box1.height / 2);
-    
-
-    console.log(x0, y0, x1, y1);
-    console.log(gbox, box0, box1);
 
     ctx.lineWidth = 4;
     ctx.lineCap = `round`;
