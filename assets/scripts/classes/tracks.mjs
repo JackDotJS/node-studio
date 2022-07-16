@@ -1,4 +1,4 @@
-import { DataBlock } from "./baseClass.mjs";
+import { DataBlock } from "./datablock.mjs";
 
 export class Track extends DataBlock {
   constructor(data) {
