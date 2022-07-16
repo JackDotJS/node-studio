@@ -2,7 +2,7 @@ import { NSDataType, NSDataCollection } from "./baseClass.mjs";
 
 export class Node extends NSDataType {
   constructor(data, parent) {
-    super();
+    super(data.id);
 
     this.name = data.name || `Node`;
     this.type = data.type || `unknown`;
@@ -15,7 +15,7 @@ export class Node extends NSDataType {
 
 export class NodeGroup extends NSDataType {
   constructor(data) {
-    super();
+    super(data.id);
 
     this.name = data.name || `Node Group 1`;
     this.nodes = new NSDataCollection(Node);
@@ -28,7 +28,7 @@ export class NodeGroup extends NSDataType {
 
 export class NodeConnection extends NSDataType {
   constructor(data) {
-    super();
+    super(data.id);
 
     this.destination = data.destination || null;
   }

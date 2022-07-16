@@ -2,7 +2,7 @@ import { NSDataType, NSDataCollection } from "./baseClass.mjs";
 
 export class Track extends NSDataType {
   constructor(data) {
-    super();
+    super(data.id);
 
     this.solo = data.solo || false;
     this.muted = data.muted || false;
@@ -19,7 +19,7 @@ export class Track extends NSDataType {
 
 export class TrackSequence extends NSDataType {
   constructor(data) {
-    super();
+    super(data.id);
 
     this.position = data.position || 0;
     this.pattern = data.pattern || null;

@@ -5,7 +5,7 @@ import { Pattern } from "./patterns.mjs";
 
 export class NodeStudioProject extends NSDataType {
   constructor(data = {}) {
-    super();
+    super(false);
 
     this.format = data.format || 1;
     this.title = data.title || `Untitled Project`;
