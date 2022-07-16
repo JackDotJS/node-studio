@@ -1,6 +1,7 @@
 const fs = require(`fs`);
 const path = require(`path`);
 const { app, BrowserWindow, nativeImage, shell } = require(`electron`);
+require(`./assets/drpc`);
 
 let config = {};
 
