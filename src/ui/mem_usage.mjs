@@ -9,12 +9,10 @@ function formatBytes(bytes) {
   return (bytes / Math.pow(k, i)).toFixed(2) + ` ` + sizes[i];
 }
 
-export function loadMemoryMonitor() {
-  const readout = document.querySelector(`#memUsage`);
+const readout = document.querySelector(`#memUsage`);
 
-  setInterval(() => {
-    const mem = window.memUsage().rss;
+setInterval(() => {
+  const mem = window.memUsage().rss;
 
-    readout.innerHTML = `MEM: ${formatBytes(mem)}`;
-  }, 2500);
-}
+  readout.innerHTML = `MEM: ${formatBytes(mem)}`;
+}, 2500);
