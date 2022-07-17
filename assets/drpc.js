@@ -1,38 +1,52 @@
 const DiscordRPC = require(`discord-rpc`);
+const pkg = require(`../package.json`);
 
 const clientId = `997378700611952660`;
-const rpc = new DiscordRPC.Client({ transport: `ipc` });
-const startTimestamp = new Date();
 
-let projectVersion = ``;
-let ready = false;
+let client = null;
 
-module.exports.setDetails = details => {
-  // wait until ready is true before setting the details
-  if (!ready) {
-    return this.setDetails(details);
-  }
+let projectTimestamp = new Date();
+let projectDetails = `Loading...`;
 
-  setActivity(projectVersion, details);
+module.exports._test = () => {
+  console.log(projectDetails);
 };
 
-module.exports.setup = (version, details) => {
-  projectVersion = version;
+module.exports.setDetails = text => {
+  projectDetails = text;
 
-  rpc.on(`ready`, () => {
-    setActivity(version, details);
-    ready = true;
+  if (client == null) setup();
+  else setActivity();
+};
+
+module.exports.resetTime = () => {
+  projectTimestamp = new Date();
+
+  if (client == null) setup();
+  else setActivity();
+};
+
+module.exports.destroy = () => {
+  if (client == null) return;
+  client.destroy();
+};
+
+function setup() {
+  client = new DiscordRPC.Client({ transport: `ipc` });
+
+  client.on(`ready`, () => {
+    setActivity();
   });
 
-  rpc.login({ clientId }).catch(console.error);
-};
+  client.login({ clientId }).catch(console.error);
+}
 
-function setActivity(version, details) {
-  rpc.setActivity({
-    details: details,
-    startTimestamp,
+function setActivity() {
+  if (client != null) client.setActivity({
+    details: projectDetails,
+    startTimestamp: projectTimestamp,
     largeImageKey: `logo`,
-    largeImageText: `v${version}`,
+    largeImageText: `v${pkg.version}`,
     instance: false
   });
 }

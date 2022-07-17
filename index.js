@@ -1,7 +1,7 @@
 const fs = require(`fs`);
 const path = require(`path`);
 const { app, BrowserWindow, nativeImage, shell } = require(`electron`);
-require(`./assets/drpc`);
+const drpc = require(`./assets/drpc`);
 
 let config = {};
 
@@ -102,6 +102,9 @@ app.on(`ready`, () => {
 
 app.on(`window-all-closed`, () => {
   fs.writeFileSync(`./userdata/config.json`, JSON.stringify(config), { encoding: `utf8` });
+
+  drpc._test();
+  drpc.destroy();
 
   // end program when all windows are closed
   // except macOS because its ✨ not like other girls ✨ or something

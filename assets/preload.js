@@ -1,12 +1,12 @@
 const { contextBridge, ipcRenderer } = require(`electron`);
 const pkg = require(`../package.json`);
-const { setup: drpcSetup, setDetails: setDrpcDetails } = require(`./drpc.js`);
+const drpc = require(`./drpc.js`);
 
 const appVersion = `Node Studio ${pkg.version}`;
 
-function setWinTitle(text) {
+function setProjectTitle(text) {
   document.title = `${text} | ${appVersion}`;
-  setDrpcDetails(text);
+  drpc.setDetails(text);
 }
 
 window.addEventListener(`DOMContentLoaded`, () => {
@@ -14,6 +14,5 @@ window.addEventListener(`DOMContentLoaded`, () => {
 });
 
 contextBridge.exposeInMainWorld(`memUsage`, process.memoryUsage);
-contextBridge.exposeInMainWorld(`setWinTitle`, setWinTitle);
-
-drpcSetup(pkg.version, `Loading...`);
+contextBridge.exposeInMainWorld(`setProjectTitle`, setProjectTitle);
+contextBridge.exposeInMainWorld(`DRPCResetTime`, drpc.resetTime);
