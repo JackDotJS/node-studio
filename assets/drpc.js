@@ -4,21 +4,28 @@ const clientId = `997378700611952660`;
 const rpc = new DiscordRPC.Client({ transport: `ipc` });
 const startTimestamp = new Date();
 
-function setActivity() {
+let projectVersion = ``;
+
+module.exports.setDetails = details => {
+  setActivity(projectVersion, details);
+};
+
+module.exports.setup = (version, details) => {
+  projectVersion = version;
+
+  rpc.on(`ready`, () => {
+    setActivity(version, details);
+  });
+
+  rpc.login({ clientId }).catch(console.error);
+};
+
+function setActivity(version, details) {
   rpc.setActivity({
-    details: `[Project name here]`,
+    details: details,
     startTimestamp,
     largeImageKey: `logo`,
-    largeImageText: `v[version-num-here]`,
+    largeImageText: `v${version}`,
     instance: false
   });
 }
-
-rpc.on(`ready`, () => {
-  setActivity();
-
-  // activity can only be set every 15 seconds
-  setInterval(() => { setActivity(); }, 15e3);
-});
-
-rpc.login({ clientId }).catch(console.error);
