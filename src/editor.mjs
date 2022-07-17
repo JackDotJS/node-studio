@@ -23,13 +23,13 @@ const pTitle = document.querySelector(`#projectTitle`);
 
 window.setProjectTitle(pTitle.value || pTitle.placeholder);
 
-import(`./graphs.mjs`);
-import(`./piano.mjs`);
-import(`./mem_usage.mjs`);
-import(`./slider.mjs`);
-import(`./context.mjs`);
+import(`./ui/graphs.mjs`);
+import(`./ui/piano.mjs`);
+import(`./ui/mem_usage.mjs`);
+import(`./ui/slider.mjs`);
+import(`./ui/context.mjs`);
 import(`./classes/project.mjs`);
-import(`./node_editor.mjs`);
+import(`./ui/node_editor.mjs`);
 
 window.addEventListener(`keydown`, (e) => {
   if (e.key != `Enter` && e.key != `Escape`) return;

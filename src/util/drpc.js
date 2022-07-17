@@ -1,5 +1,5 @@
 const DiscordRPC = require(`discord-rpc`);
-const pkg = require(`../package.json`);
+const pkg = require(`../../package.json`);
 
 const clientId = `997378700611952660`;
 

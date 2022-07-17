@@ -1,11 +1,11 @@
-@import "theme.css";
-@import "module_generic.css";
-@import "control_panel.css";
-@import "module_track_editor.css";
-@import "module_node_editor.css";
-@import "module_keyboard.css";
-@import "toolbars.css";
-@import "contextmenu.css";
+@import "modules/module_generic.css";
+@import "modules/module_track_editor.css";
+@import "modules/module_node_editor.css";
+@import "modules/module_keyboard.css";
+@import "ui/toolbars.css";
+@import "ui/contextmenu.css";
+@import "ui/control_panel.css";
+@import "themes/theme.css";
 
 :root {
   --m-0: var(--dark0);

@@ -1,6 +1,6 @@
 const { contextBridge, ipcRenderer } = require(`electron`);
 const pkg = require(`../package.json`);
-const drpc = require(`./drpc.js`);
+const drpc = require(`./util/drpc.js`);
 
 const appVersion = `Node Studio ${pkg.version}`;
 

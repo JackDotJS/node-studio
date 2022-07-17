@@ -1,7 +1,7 @@
 const fs = require(`fs`);
 const path = require(`path`);
 const { app, BrowserWindow, nativeImage, shell } = require(`electron`);
-const drpc = require(`./assets/drpc`);
+const drpc = require(`./util/drpc`);
 
 let config = {};
 
@@ -27,7 +27,7 @@ try {
 } catch (e) {
   if (e.code !== `EEXIST`) throw e;
 
-  config = require(`./userdata/config.json`);
+  config = require(`../userdata/config.json`);
 }
 
 app.on(`ready`, () => {
@@ -58,12 +58,12 @@ app.on(`ready`, () => {
     show: false,
     autoHideMenuBar: true,
     webPreferences: {
-      preload: path.join(__dirname, `assets/preload.js`),
+      preload: path.join(__dirname, `../src/bridge.js`),
       contextIsolation: true,
       enableRemoteModule: false,
       nodeIntegration: false // this should be false by default, but better safe than sorry
     },
-    icon: nativeImage.createFromPath(path.join(__dirname, `./assets/images/node-studio.ico`))
+    icon: nativeImage.createFromPath(path.join(__dirname, `../assets/node-studio.ico`))
   });
 
   if (config.window != null) {
@@ -76,7 +76,7 @@ app.on(`ready`, () => {
     }
   }
   
-  window.loadFile(`assets/editor.html`);
+  window.loadFile(`./src/editor.html`);
 
   window.once(`ready-to-show`, () => {
     window.show();

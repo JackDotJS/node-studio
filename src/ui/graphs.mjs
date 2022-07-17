@@ -1,4 +1,4 @@
-import { memory } from "./memory.mjs";
+import { memory } from "../memory.mjs";
 
 const size = memory.masterAnalyser.frequencyBinCount;
 
