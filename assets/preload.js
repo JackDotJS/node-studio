@@ -6,7 +6,7 @@ const appVersion = `Node Studio ${pkg.version}`;
 
 function setWinTitle(text) {
   document.title = `${text} | ${appVersion}`;
-  setDrpcDetails(pkg.version, text);
+  setDrpcDetails(text);
 }
 
 window.addEventListener(`DOMContentLoaded`, () => {
