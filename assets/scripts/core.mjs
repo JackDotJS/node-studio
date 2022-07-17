@@ -21,7 +21,7 @@ setInterval(() => {
 
 const pTitle = document.querySelector(`#projectTitle`);
 
-window.setWinTitle(pTitle.value || pTitle.placeholder);
+window.setProjectTitle(pTitle.value || pTitle.placeholder);
 
 import(`./graphs.mjs`);
 import(`./piano.mjs`);
@@ -37,7 +37,7 @@ window.addEventListener(`keydown`, (e) => {
 
   if (e.target.id === `projectTitle`) {
     const newVal = e.target.value || e.target.placeholder;
-    window.setWinTitle(newVal);
+    window.setProjectTitle(newVal);
     memory.project.title = newVal;
     console.log(JSON.stringify(memory.project, null, 2));
   }
