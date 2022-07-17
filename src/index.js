@@ -28,9 +28,10 @@ try {
   if (e.code !== `EEXIST`) throw e;
 
   config = require(`../userdata/config.json`);
+  console.log(config);
 }
 
-app.on(`ready`, () => {
+app.whenReady().then(() => {
   // create splash screen
   // may be used later if initial loading times get long
   // but for now, the editor loads almost instantly
