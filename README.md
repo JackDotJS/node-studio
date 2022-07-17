@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/JackDotJS/node-studio/main/assets/images/node-studio.png" width="100px">
+  <img src="https://raw.githubusercontent.com/JackDotJS/node-studio/main/assets/node-studio.png" width="128px">
   <h3>Node Studio</h3>
   <p>Node-based music production tool, built with Electron.</p>
 
@@ -45,5 +45,7 @@ Coming soon!
 </div>
 
 **Suggestions are always welcome!** Even if you aren't really a developer, feel free to use the [issues page](../../issues) to submit your ideas.
+
+<!-- TODO: add stuff about opening issues and searching for existing ones first -->
 
 For those who would like to contribute more directly, check out the [contributing guidelines](CONTRIBUTING.md).
