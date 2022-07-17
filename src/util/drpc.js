@@ -1,7 +1,8 @@
 const DiscordRPC = require(`discord-rpc`);
 const pkg = require(`../../package.json`);
 
-const clientId = `997378700611952660`;
+// https://discord.com/developers
+const clientId = `998040133829922817`;
 
 let client = null;
 
@@ -43,10 +44,10 @@ function setup() {
 
 function setActivity() {
   if (client != null) client.setActivity({
-    details: projectDetails,
+    details: `Working on "${projectDetails}"`,
     startTimestamp: projectTimestamp,
-    largeImageKey: `logo`,
-    largeImageText: `v${pkg.version}`,
+    largeImageKey: `nodestudio`,
+    largeImageText: `V${pkg.version}`,
     instance: false
   });
 }
