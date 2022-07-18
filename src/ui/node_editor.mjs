@@ -212,10 +212,18 @@ function updateConnections() {
     const x1 = Math.abs(box1.left - gbox.left) + (box1.width / 2);
     const y1 = Math.abs(box1.top - gbox.top) + (box1.height / 2);
 
+    const plug0Color = window.getComputedStyle(plug0, `:before`).backgroundColor;
+    const plug1Color = window.getComputedStyle(plug1, `:before`).backgroundColor;
+
+    const gradient = ctx.createLinearGradient(x0, y0, x1, y1);
+
+    gradient.addColorStop(0, plug0Color);
+    gradient.addColorStop(1, plug1Color);
+
     ctx.lineWidth = 4;
     ctx.lineCap = `round`;
     ctx.beginPath();
-    ctx.strokeStyle = `yellow`;
+    ctx.strokeStyle = gradient;
     ctx.moveTo(x0, y0);
     ctx.lineTo(x1, y1);
     // ctx.moveTo(0, 0);
