@@ -13,18 +13,20 @@
   "main": "src/index.js",
   "scripts": {
     "start": "electron .",
-    "build": "npx electron-packager . --out=./build --icon=./assets/node-studio.ico"
+    "build": "tsc",
+    "dist": "npx electron-packager . --out=./build --icon=./assets/node-studio.ico"
   },
   "dependencies": {
     "adm-zip": "^0.4.13",
     "discord-rpc": "^4.0.1",
     "jaro-winkler": "^0.2.8",
     "node-fetch": "^2.6.1",
-    "string-similarity": "^3.0.0"
+    "string-similarity": "^3.0.0",
+    "electron": "^17.1.2"
   },
   "devDependencies": {
-    "electron": "^17.1.2",
     "electron-packager": "^15.4.0",
-    "eslint": "^7.27.0"
+    "eslint": "^7.27.0",
+    "typescript": "^4.7.4"
   }
 }
