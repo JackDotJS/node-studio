@@ -1,4 +1,4 @@
-import { NodeStudioProject } from "./classes/project.mjs";
+import { NodeStudioProject } from "./classes/project.js";
 
 export const memory = {
   audioCTX: new window.AudioContext(),

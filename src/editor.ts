@@ -1,4 +1,4 @@
-import { memory } from "./memory.mjs";
+import { memory } from "./memory.js";
 
 console.warn(`reminder: cursor changes dont work with the webdev console open!!!`);
 
@@ -23,13 +23,13 @@ const pTitle = document.querySelector(`#projectTitle`);
 
 window.setProjectTitle(pTitle.value || pTitle.placeholder);
 
-import(`./ui/graphs.mjs`);
-import(`./ui/piano.mjs`);
-import(`./ui/mem_usage.mjs`);
-import(`./ui/slider.mjs`);
-import(`./ui/context.mjs`);
-import(`./classes/project.mjs`);
-import(`./ui/node_editor.mjs`);
+import(`./ui/graphs.ts/index.js`);
+import(`./ui/piano.ts/index.js`);
+import(`./ui/mem_usage.js`);
+import(`./ui/slider.js`);
+import(`./ui/context.js`);
+import(`./classes/project.js`);
+import(`./ui/node_editor.js`);
 
 window.addEventListener(`keydown`, (e) => {
   if (e.key != `Enter` && e.key != `Escape`) return;

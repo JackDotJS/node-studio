@@ -1,4 +1,4 @@
-import { memory } from "../memory.mjs";
+import { memory } from "../memory.js";
 
 const container = document.getElementById(`keys`);
 let playing = false;
