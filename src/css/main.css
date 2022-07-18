@@ -5,35 +5,21 @@
 @import "ui/toolbars.css";
 @import "ui/contextmenu.css";
 @import "ui/control_panel.css";
-@import "themes/theme.css";
-
-:root {
-  --m-0: var(--dark0);
-  --m-1: var(--dark3);
-  --m-2: var(--dark1);
-  --ma: var(--mid1);
-  --ma-hover: var(--mid3);
-  --ma-select: var(--light1);
-
-  --track-col-1: var(--blue);
-  --track-col-2: var(--purple);
-  --track-col-3: var(--red);
-  --track-col-4: var(--orange);
-  --track-col-5: var(--yellow);
-
-  --piano-white: var(--mid1);
-  --piano-white-hover: var(--mid3);
-  --piano-black: var(--dark0);
-  --piano-black-hover: var(--dark1);
-
-  --cm-bg: var(--light1);
-  --cm-hover: var(--light0);
-}
+@import "themes/default_dark.css";
 
 html, body {
   scroll-behavior: smooth;
   height: 100%;
   user-select: none;
+}
+
+body {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  flex-direction: column;
+  background-color: var(--window-bg);
+  color: var(--generic-text);
 }
 
 * {
@@ -45,57 +31,51 @@ html, body {
   --t: calc(1rem + 4px);
   width: var(--t);
   height: var(--t);
-  background-color: var(--m-1);
+  background-color: var(--scrollbar-bg);
 }
 
- *::-webkit-scrollbar-track {
+*::-webkit-scrollbar-track {
   border-radius: 1rem;
-  background-color: var(--m-0);
-  border: 2px solid var(--m-1);
- }
+  background-color: var(--scrollbar-track);
+  border: 2px solid var(--scrollbar-bg);
+}
 
 *::-webkit-scrollbar-thumb {
   --t: calc(1rem + 4px);
   width: var(--t);
   height: var(--t);
-  box-shadow: inset 0 0 1rem 1rem var(--ma);
+  color: var(--scrollbar-thumb);
+  box-shadow: inset 0 0 1rem 1rem;
   border: solid 0.25rem transparent;
   border-radius: 2rem;
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  box-shadow: inset 0 0 1rem 1rem var(--ma-hover);
+  color: var(--scrollbar-thumb-hover);
+  box-shadow: inset 0 0 1rem 1rem;
 }
 
 *::-webkit-scrollbar-thumb:active {
-  box-shadow: inset 0 0 1rem 1rem var(--ma-select);
+  color: var(--scrollbar-thumb-active);
+  box-shadow: inset 0 0 1rem 1rem;
 }
 
 *::-webkit-scrollbar-corner {
-  background-color: var(--m-1);
-}
-
-body {
-  display: flex;
-  padding: 0;
-  margin: 0;
-  flex-direction: column;
-  background-color: var(--m-0);
-  color: var(--ma);
+  background-color: var(--scrollbar-bg);
 }
 
 a {
-  color: var(--ma);
+  color: var(--generic-link);
   text-decoration: none;
 }
 
 a:hover {
-  color: var(--ma-hover);
+  color: var(--generic-link-hover);
   text-decoration: underline;
 }
 
-a:focus {
-  color: var(--ma-select);
+a:active {
+  color: var(--generic-link-active);
 }
 
 input[type=button].large {
@@ -113,8 +93,8 @@ input[type=button].small {
 input[type=button] {
   width: 3.5rem;
   height: 2rem;
-  background-color: var(--ma);
-  color: var(--m-0);
+  background-color: var(--generic-button);
+  color: var(--generic-button-text);
   font-size: 1rem;
   border-radius: 0.25rem;
   border: none;
@@ -122,57 +102,54 @@ input[type=button] {
 }
 
 input[type=button]:hover {
-  background-color: var(--ma-hover);
+  background-color: var(--generic-button-hover);
   cursor: pointer;
 }
 
 input[type=button]:active {
-  background-color: var(--ma-select);
-}
-
-input[type=range] {
-  display: none;
+  background-color: var(--generic-button-active);
 }
 
 input[type=text], input[type=number] {
   line-height: 1rem;
   border-radius: 0.25rem;
   padding: 0;
-  background-color: transparent;
-  color: var(--ma);
-  border-color: transparent transparent var(--ma);
+  background-color: var(--generic-textinput-bg);
+  color: var(--generic-textinput-text);
+  border-color: var(--generic-textinput-bg) var(--generic-textinput-bg) var(--generic-textinput-underline);
   border-style: solid;
   text-overflow: ellipsis;
 }
 
 input[type=text]::-webkit-input-placeholder {
-  color: var(--ma);
+  color: var(--generic-textinput-placeholder);
 }
 
 input[type=text]:hover::-webkit-input-placeholder {
-  color: var(--ma-hover);
+  color: var(--generic-textinput-placeholder-hover);
 }
 
 input[type=text]:focus::-webkit-input-placeholder {
-  color: transparent;
+  color: var(--generic-textinput-placeholder-active);
 }
 
 input[type=text]:hover, input[type=number]:hover {
-  color: var(--ma-hover);
-  border-color: transparent transparent var(--ma-hover);
+  background-color: var(--generic-textinput-bg-hover);
+  color: var(--generic-textinput-text-hover);
+  border-color: transparent transparent var(--generic-textinput-underline-hover);
 }
 
 input[type=text]:focus, input[type=number]:focus {
-  background-color: var(--ma-select);
-  border-color: var(--ma-select);
+  background-color: var(--generic-textinput-bg-active);
+  border-color: var(--generic-textinput-underline-active);
   outline: none;
-  color: var(--m-0);
+  color: var(--generic-textinput-text-active);
 }
 
 .slider {
   cursor: pointer;
   position: relative;
-  background-color: var(--m-0);
+  background-color: var(--slider-track);
   border-radius: 100rem;
   min-height: 1rem;
   min-width: 1rem;
@@ -180,22 +157,22 @@ input[type=text]:focus, input[type=number]:focus {
 
 .slider.vertical {
   height: 100%;
-  border-top: 1rem solid var(--m-0);
+  border-top: 1rem solid var(--slider-track);
 }
 
 .slider:not(.vertical) {
   width: 100%;
-  border-right: 1rem solid var(--m-0);
+  border-right: 1rem solid var(--slider-track);
 }
 
 .slider > div {
   position: absolute;
   box-sizing: border-box;
-  background-color: var(--ma);
+  background-color: var(--slider-thumb);
   height: 100%;
   width: 1rem;
   border-radius: 100rem;
-  border: 2px solid var(--m-0);
+  border: 2px solid var(--slider-track);
 }
 
 .slider.vertical > div {
@@ -204,9 +181,9 @@ input[type=text]:focus, input[type=number]:focus {
 }
 
 .slider > div:hover {
-  background-color: var(--ma-hover);
+  background-color: var(--slider-thumb-hover);
 }
 
-.slider > div:focus {
-  background-color: var(--ma-select);
+.slider > div:active {
+  background-color: var(--slider-thumb-active);
 }

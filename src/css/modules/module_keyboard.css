@@ -2,6 +2,51 @@
   display: flex;
   height: 10rem;
   min-height: 7rem;
+  background-color: var(--keyboard-frame);
+  color: var(--keyboard-text);
+}
+
+#keyboard ::-webkit-scrollbar {
+  background-color: var(--keyboard-scrollbar-bg);
+}
+
+#keyboard ::-webkit-scrollbar-track {
+  background-color: var(--keyboard-scrollbar-track);
+  border-color: var(--keyboard-scrollbar-bg);
+}
+
+#keyboard ::-webkit-scrollbar-thumb {
+  color: var(--keyboard-scrollbar-thumb)
+}
+
+#keyboard ::-webkit-scrollbar-thumb:hover {
+  color: var(--keyboard-scrollbar-thumb-hover);
+}
+
+#keyboard ::-webkit-scrollbar-thumb:active {
+  color: var(--keyboard-scrollbar-thumb-active);
+}
+
+#keyboard ::-webkit-scrollbar-corner {
+  background-color: var(--keyboard-scrollbar-bg);
+}
+
+#keyboard .slider {
+  background-color: var(--keyboard-slider-track);
+  border-color: var(--keyboard-slider-track);
+}
+
+#keyboard .slider > div {
+  background-color: var(--keyboard-slider-thumb);
+  border-color: var(--keyboard-slider-track);
+}
+
+#keyboard .slider > div:hover {
+  background-color: var(--keyboard-scrollbar-thumb-hover);
+}
+
+#keyboard .slider > div:active {
+  background-color: var(--keyboard-scrollbar-thumb-active);
 }
 
 .kbwheel {
@@ -20,15 +65,6 @@
   letter-spacing: 0.2rem;
 }
 
-.kbwheel input {
-  writing-mode: vertical-lr;
-  height: 100%;
-  width: 2rem;
-  margin: 0;
-  transform: rotate(90deg);
-  transform-origin: left;
-}
-
 #keys {
   display: flex;
   height: 100%;
@@ -37,6 +73,7 @@
   overflow-y: hidden;
   user-select: none;
   padding-bottom: 0.25rem;
+  background-color: var(--keyboard-bg);
 }
 
 #keys :first-child {
@@ -51,7 +88,7 @@
   display: block;
   border-width: 2px 1px 1px;
   border-style: solid;
-  border-color: var(--m-0);
+  border-color: var(--keyboard-bg);
   border-radius: 0rem 0rem 0.4rem 0.4rem;
   user-select: none;
   cursor: pointer;
@@ -66,13 +103,13 @@
   flex-grow: 1;
   flex-basis: 0px;
   height: 100%;
-  background-color: var(--piano-white);
-  color: var(--m-0);
+  background-color: var(--keyboard-whitekey);
+  color: var(--keyboard-whitekey-text);
   font-weight: bolder;
 }
 
 #keys .white:hover {
-  background-color: var(--piano-white-hover);
+  background-color: var(--keyboard-whitekey-hover);
 }
 
 #keys .black {
@@ -82,13 +119,17 @@
   */
   border-width: 2px;
   z-index: 1;
-  background-color: var(--piano-black);
+  background-color: var(--keyboard-blackkey);
 }
 
 #keys .black:hover {
-  background-color: var(--piano-black-hover);
+  background-color: var(--keyboard-blackkey-hover);
 }
 
-#keys:active .white:hover, #keys:active .black:hover {
-  background-color: var(--ma-select);
+#keys:active .white:hover {
+  background-color: var(--keyboard-whitekey-active)
+}
+
+#keys:active .black:hover {
+  background-color: var(--keyboard-blackkey-active);
 }
