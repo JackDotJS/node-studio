@@ -3,6 +3,32 @@
   grid-row: 2;
   display: flex;
   flex-flow: column nowrap;
+  background-color: var(--nodegroup-frame);
+}
+
+#nodeEditor ::-webkit-scrollbar {
+  background-color: var(--nodegroup-scrollbar-bg);
+}
+
+#nodeEditor ::-webkit-scrollbar-track {
+  background-color: var(--nodegroup-scrollbar-track);
+  border-color: var(--nodegroup-scrollbar-bg);
+}
+
+#nodeEditor ::-webkit-scrollbar-thumb {
+  color: var(--nodegroup-scrollbar-thumb)
+}
+
+#nodeEditor ::-webkit-scrollbar-thumb:hover {
+  color: var(--nodegroup-scrollbar-thumb-hover);
+}
+
+#nodeEditor ::-webkit-scrollbar-thumb:active {
+  color: var(--nodegroup-scrollbar-thumb-active);
+}
+
+#nodeEditor ::-webkit-scrollbar-corner {
+  background-color: var(--nodegroup-scrollbar-bg);
 }
 
 #ndHeader {
@@ -10,7 +36,7 @@
   justify-content: space-between;
   height: 2.5rem;
   padding: 0.25rem;
-  background-color: var(--m-1);
+  background-color: var(--nodegroup-frame);
 }
 
 #ndPatternTitle {
@@ -32,19 +58,17 @@
 #ndPath {
   position: absolute;
   margin: 1rem;
-  color: var(--ma-hover);
+  color: var(--nodegroup-directory);
   text-shadow: 0 0.1rem 0.5rem black;
   z-index: 10;
   pointer-events: none;
 }
 
 #ndGrid {
-  background-color: var(--m-0);
-  background-image: radial-gradient(var(--m-1) 10%, transparent 5%);
+  background-image: radial-gradient(var(--nodegroup-bg-dots) 10%, var(--nodegroup-bg) 5%);
   background-size: 16px 16px;
   background-position: 4px 4px;
   box-sizing: border-box;
-  -border: 4px solid var(--m-0);
   min-width: 4096px;
   min-height: 2048px;
   margin: 0;
@@ -59,15 +83,16 @@
 
   display: flex;
   flex-flow: column nowrap;
-  background-color: var(--m-1);
-  border: 2px solid var(--m-1);
+  background-color: var(--nodegroup-node);
+  border: 2px solid var(--nodegroup-node);
+  color: var(--nodegroup-node-text);
   border-radius: 0.33rem;
   box-shadow: 0 0.25rem 1rem black;
   user-select: none;
 }
 
 .node.active {
-  border: 2px solid var(--cm-bg);
+  border: 2px solid var(--nodegroup-node-active);
 }
 
 .nodeTitle {
@@ -75,7 +100,7 @@
   flex-flow: row nowrap;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--m-0);
+  background-color: var(--nodegroup-node-header);
   width: 100%;
   padding: 0.5rem;
   padding-left: 0.5rem;
@@ -119,14 +144,19 @@
   margin-left: -1rem;
 }
 
+/* for gradient testing later */
+#node002 .nodePlug::before {
+  background-color: var(--blue);
+}
+
 .nodePlug::before {
   content: "";
   width: 1rem;
   height: 1rem;
   display: block;
-  background-color: yellow;
+  background-color: var(--orange);
   box-sizing: border-box;
-  border: 2px solid var(--m-0);
+  border: 2px solid var(--nodegroup-node-plug-border);
   border-radius: 2rem;
 }
 

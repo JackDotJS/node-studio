@@ -1,0 +1,139 @@
+:root {
+  --dark0: #1D383D;
+  --dark1: #2F4F4C;
+  --dark2: #3C5F58;
+  --dark3: #4A7167;
+  --mid0: #83ABA5;
+  --mid1: #9DC1B2;
+  --mid2: #B1D3BE;
+  --mid3: #C8E9CC;
+  --light0: #C0E2EC;
+  --light1: #E2F1F5;
+  --light2: #FFFFFF;
+  --blue: #507FF4;
+  --purple: #BD64BB;
+  --red: #F95858;
+  --orange: #F98F5B;
+  --yellow: #F7C060;
+
+  /* GENERAL COLORS */
+
+  --window-bg: var(--dark0);
+
+  --generic-text: var(--mid1);
+
+  --generic-link: var(--mid1);
+  --generic-link-hover: var(--mid3);
+  --generic-link-active: var(--light1);
+
+  --generic-button: var(--mid1);
+  --generic-button-text: var(--dark0);
+  --generic-button-hover: var(--mid3);
+  --generic-button-active: var(--light1);
+
+  --generic-textinput-bg: transparent;
+  --generic-textinput-bg-hover: transparent;
+  --generic-textinput-bg-active: var(--light1);
+  --generic-textinput-underline: var(--mid1);
+  --generic-textinput-underline-hover: var(--mid3);
+  --generic-textinput-underline-active: var(--light1);
+  --generic-textinput-text: var(--mid1);
+  --generic-textinput-text-hover: var(--mid3);
+  --generic-textinput-text-active: var(--dark0);
+  --generic-textinput-placeholder: var(--mid1);
+  --generic-textinput-placeholder-hover: var(--mid3);
+  --generic-textinput-placeholder-active: transparent;
+
+  --scrollbar-bg: var(--dark3);
+  --scrollbar-track: var(--dark0);
+  --scrollbar-thumb: var(--mid1);
+  --scrollbar-thumb-hover: var(--mid3);
+  --scrollbar-thumb-active: var(--light1);
+
+  --slider-track: var(--dark0);
+  --slider-thumb: var(--mid1);
+  --slider-thumb-hover: var(--mid3);
+  --slider-thumb-active: var(--light1);
+
+  --generic-module-frame: var(--dark3);
+  --generic-module-bg: var(--dark0);
+
+  /* KEYBOARD MODULE COLORS */
+
+  --keyboard-frame: var(--dark3);
+  --keyboard-bg: var(--dark0);
+  --keyboard-text: var(--mid1);
+
+  --keyboard-slider-track: var(--dark0);
+  --keyboard-slider-thumb: var(--mid1);
+  --keyboard-slider-thumb-hover: var(--mid3);
+  --keyboard-slider-thumb-active: var(--light1);
+
+  --keyboard-scrollbar-bg: var(--dark3);
+  --keyboard-scrollbar-track: var(--dark0);
+  --keyboard-scrollbar-thumb: var(--mid1);
+  --keyboard-scrollbar-thumb-hover: var(--mid3);
+  --keyboard-scrollbar-thumb-active: var(--light1);
+
+  --keyboard-whitekey: var(--mid1);
+  --keyboard-whitekey-text: var(--dark0);
+  --keyboard-whitekey-hover: var(--mid3);
+  --keyboard-whitekey-active: var(--light1);
+  --keyboard-blackkey: var(--dark0);
+  --keyboard-blackkey-hover: var(--dark1);
+  --keyboard-blackkey-active: var(--light1);
+
+  /* NODE EDITOR COLORS */
+
+  --nodegroup-frame: var(--dark3);
+  --nodegroup-bg: var(--dark0);
+  --nodegroup-bg-dots: var(--dark2);
+
+  --nodegroup-directory: var(--mid3);
+
+  --nodegroup-scrollbar-bg: var(--dark3);
+  --nodegroup-scrollbar-track: var(--dark0);
+  --nodegroup-scrollbar-thumb: var(--mid1);
+  --nodegroup-scrollbar-thumb-hover: var(--mid3);
+  --nodegroup-scrollbar-thumb-active: var(--light1);
+
+  --nodegroup-node: var(--dark3);
+  --nodegroup-node-active: var(--light1);
+  --nodegroup-node-text: var(--mid1);
+  --nodegroup-node-header: var(--dark0);
+  --nodegroup-node-header-text: var(--dark0);
+  --nodegroup-node-plug-border: var(--dark0);
+
+  /* OLD START */
+  /* OLD START */
+  /* OLD START */
+
+  --m-0: var(--dark0);
+  --m-1: var(--dark3);
+  --m-2: var(--dark1);
+  --ma: var(--mid1);
+  --ma-hover: var(--mid3);
+  --ma-select: var(--light1);
+
+  --track-col-1: var(--blue);
+  --track-col-2: var(--purple);
+  --track-col-3: var(--red);
+  --track-col-4: var(--orange);
+  --track-col-5: var(--yellow);
+
+  --piano-white: var(--mid1);
+  --piano-white-hover: var(--mid3);
+  --piano-black: var(--dark0);
+  --piano-black-hover: var(--dark1);
+
+  --cm-bg: var(--light1);
+  --cm-hover: var(--light0);
+
+  /* OLD END */
+  /* OLD END */
+  /* OLD END */
+
+  /* TIMELINE EDITOR COLORS */
+
+  /* PATTERN EDITOR COLORS */
+}
