@@ -144,7 +144,7 @@
   margin-left: -1rem;
 }
 
-/* for gradient testing later */
+/* temporary */
 #node002 .nodePlug::before {
   background-color: var(--blue);
 }
