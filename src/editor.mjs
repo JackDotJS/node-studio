@@ -21,15 +21,15 @@ setInterval(() => {
 
 const pTitle = document.querySelector(`#projectTitle`);
 
-window.setWinTitle(pTitle.value || pTitle.placeholder);
+window.setProjectTitle(pTitle.value || pTitle.placeholder);
 
-import(`./graphs.mjs`);
-import(`./piano.mjs`);
-import(`./mem_usage.mjs`);
-import(`./slider.mjs`);
-import(`./context.mjs`);
+import(`./ui/graphs.mjs`);
+import(`./ui/piano.mjs`);
+import(`./ui/mem_usage.mjs`);
+import(`./ui/slider.mjs`);
+import(`./ui/context.mjs`);
 import(`./classes/project.mjs`);
-import(`./node_editor.mjs`);
+import(`./ui/node_editor.mjs`);
 
 window.addEventListener(`keydown`, (e) => {
   if (e.key != `Enter` && e.key != `Escape`) return;
@@ -37,7 +37,7 @@ window.addEventListener(`keydown`, (e) => {
 
   if (e.target.id === `projectTitle`) {
     const newVal = e.target.value || e.target.placeholder;
-    window.setWinTitle(newVal);
+    window.setProjectTitle(newVal);
     memory.project.title = newVal;
     console.log(JSON.stringify(memory.project, null, 2));
   }

@@ -1,4 +1,4 @@
-import { memory } from "./memory.mjs";
+import { memory } from "../memory.mjs";
 
 // thanks MDN https://developer.mozilla.org/en-US/docs/Web/API/Web_MIDI_API#examples
 let midi = null;

@@ -10,13 +10,14 @@
     "type": "git",
     "url": "https://github.com/JackDotJS/node-studio"
   },
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "start": "electron .",
-    "build": "npx electron-packager . --out=./build --icon=./assets/images/node-studio.ico"
+    "build": "npx electron-packager . --out=./build --icon=./assets/node-studio.ico"
   },
   "dependencies": {
     "adm-zip": "^0.4.13",
+    "discord-rpc": "^4.0.1",
     "jaro-winkler": "^0.2.8",
     "node-fetch": "^2.6.1",
     "string-similarity": "^3.0.0"
