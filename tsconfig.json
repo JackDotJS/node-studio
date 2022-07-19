@@ -14,7 +14,7 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "noFallthroughCasesInSwitch": true,
-    "lib": ["esnext"],
+    "lib": ["esnext", "DOM"],
     "incremental": true,
     "noImplicitOverride": true,
     "skipLibCheck": true  
