@@ -1,6 +1,19 @@
+import isInterface from "../util/isInterface";
+
 const editor = document.querySelector(`#nodeEditor`);
-const wrapper = editor.querySelector(`#ndGridWrapper`);
-const grid = editor.querySelector(`#ndGrid`);
+if (!editor) {
+  throw new Error(`Node editor not found`);
+}
+
+const wrapper: HTMLElement | null = editor.querySelector(`#ndGridWrapper`);
+if (!wrapper) {
+  throw new Error(`Node editor wrapper not found`);
+}
+
+const grid: HTMLElement | null = editor.querySelector(`#ndGrid`);
+if (!grid) {
+  throw new Error(`Node editor grid not found`);
+}
 
 const connections = [
   {
@@ -15,17 +28,32 @@ const connections = [
   }
 ];
 
-let active = null;
-let edgeScroll = null;
+interface IActive { // TODO: this may need to be renamed
+  node: HTMLElement,
+  offsetX: number,
+  offsetY: number,
+}
+let active: IActive | null = null;
+let edgeScroll: (() => void) | null = null; // TODO: what the heck is this
 let mx = 0;
 let my = 0;
-let gridMove = null;
+
+interface IGridMove { // TODO: this may need to be renamed
+  oldLeft: number,
+  oldTop: number,
+  oldX: number,
+  oldY: number
+}
+let gridMove: IGridMove | null = null;
 
 // center grid on startup
 wrapper.scrollLeft = (wrapper.scrollWidth - wrapper.clientWidth) / 2;
 wrapper.scrollTop = (wrapper.scrollHeight - wrapper.clientHeight) / 2;
 
 grid.addEventListener(`mousedown`, (e) => {
+  if (!isInterface<MouseEvent>(e, `clientX`)) {
+    throw new Error(`You should not be seeing this error. For some reason, \`mousedown\` is not a MouseEvent.`);
+  }
   e.preventDefault();
 
   mx = e.clientX;
@@ -39,7 +67,7 @@ window.addEventListener(`mousemove`, (e) => {
   mx = e.clientX;
   my = e.clientY;
 
-  /**
+  /*
    * for some fucking reason this will continue
    * moving around even if gridMove is null
    * ??????????????????????????
@@ -65,12 +93,19 @@ window.addEventListener(`blur`, () => {
 
 // left click functions
 
-function handleMouseL() {
-  let elem = document.elementFromPoint(mx, my);
-
+// TODO: this function seems to be very closely related to the one in contextMenu.
+// maybe it can be extracted to a utility and abstracted? 
+// especially the part where it goes up the node chain
+function handleMouseL(): void {
+  let elem: Node | null = document.elementFromPoint(mx, my);
+  
   let titleSelected = false;
   let dataNode;
-  while (elem.parentNode != null && dataNode == null) {
+
+  while (elem?.parentNode != null && dataNode == null) { // "elem?.parentNode" could potentially go wrong.
+    if (!isInterface<HTMLElement>(elem, `parentNode`)) {
+      return;
+    }
     if (elem.tagName.toLowerCase() === `input`) return;
 
     if (elem.classList.contains(`nodeTitle`)) titleSelected = true;
@@ -79,11 +114,14 @@ function handleMouseL() {
       dataNode = elem;
     }
 
-    elem = elem.parentNode;
+    elem = elem.parentNode as Node;
   }
 
   if (dataNode == null || !titleSelected) return;
 
+  if (!grid) {
+    throw new Error(`Node editor grid not found`);
+  }
   const gridRect = grid.getBoundingClientRect();
 
   active = {
@@ -99,8 +137,15 @@ function handleMouseL() {
   window.requestAnimationFrame(edgeScroll);
 }
 
-function moveNode() {
+function moveNode(): void {
+  if (!grid) {
+    throw new Error(`Node editor grid not found`);
+  }
   const gridRect = grid.getBoundingClientRect();
+
+  if (!active) {
+    throw new Error(`There doesn't appear to be any active node`);
+  }
 
   const limitH = grid.offsetWidth - active.node.offsetWidth;
   const limitV = grid.offsetHeight - active.node.offsetHeight;
@@ -111,7 +156,11 @@ function moveNode() {
   updateConnections();
 }
 
-function scrollStep()  {
+function scrollStep(): void {
+  if (!wrapper) {
+    throw new Error(`Node editor wrapper not found`);
+  }
+
   const box = wrapper.getBoundingClientRect();
   const cw = wrapper.clientWidth;
   const ch = wrapper.clientHeight;
@@ -137,9 +186,9 @@ function scrollStep()  {
   if (edgeScroll != null) window.requestAnimationFrame(edgeScroll);
 }
 
-function releaseNode() {
+function releaseNode(): void {
   if (active == null) return;
-  
+
   active.node.classList.remove(`active`);
   active = null;
   if (edgeScroll != null) edgeScroll = null;
@@ -147,7 +196,11 @@ function releaseNode() {
 
 // middle click functions
 
-function handleMiddle() {
+function handleMiddle(): void {
+  if (!wrapper) {
+    throw new Error(`Node editor wrapper not found`);
+  }
+
   wrapper.classList.add(`panning`);
 
   gridMove = {
@@ -158,26 +211,48 @@ function handleMiddle() {
   };
 }
 
-function handleMiddleMove() {
+function handleMiddleMove(): void {
+  if (!wrapper) {
+    throw new Error(`Node editor wrapper not found`);
+  }
+  if (!gridMove) {
+    throw new Error(`TODO: what is \`gridMove\`?`);
+  }
+
   wrapper.scrollLeft = gridMove.oldLeft + (gridMove.oldX - mx);
   wrapper.scrollTop = gridMove.oldTop + (gridMove.oldY - my);
 }
 
-function releaseMiddle() {
+function releaseMiddle(): void {
+  if (!wrapper) {
+    throw new Error(`Node editor wrapper not found`);
+  }
+
   wrapper.classList.remove(`panning`);
   gridMove = null;
 }
 
 // rendering functions
 
-function updateConnections() {
-  const canvas = document.querySelector(`#nodeConnections`);
+function updateConnections(): void {
+  const canvas: HTMLCanvasElement | null = document.querySelector(`#nodeConnections`);
+  if (!canvas) {
+    throw new Error(`Element with ID #nodeConnections was not found`);
+  }
+
   const ctx = canvas.getContext(`2d`);
+  if (!ctx) {
+    throw new Error(`Could not get context for #nodeConnections`);
+  }
 
   ctx.canvas.width = canvas.offsetWidth;
   ctx.canvas.height = canvas.offsetHeight;
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  if (!grid) {
+    throw new Error(`Node editor grid not found`);
+  }
 
   for (const connection of connections) {
     const node0 = grid.querySelector(`#` + connection.node0.id);
@@ -212,18 +287,10 @@ function updateConnections() {
     const x1 = Math.abs(box1.left - gbox.left) + (box1.width / 2);
     const y1 = Math.abs(box1.top - gbox.top) + (box1.height / 2);
 
-    const plug0Color = window.getComputedStyle(plug0, `:before`).backgroundColor;
-    const plug1Color = window.getComputedStyle(plug1, `:before`).backgroundColor;
-
-    const gradient = ctx.createLinearGradient(x0, y0, x1, y1);
-
-    gradient.addColorStop(0, plug0Color);
-    gradient.addColorStop(1, plug1Color);
-
     ctx.lineWidth = 4;
     ctx.lineCap = `round`;
     ctx.beginPath();
-    ctx.strokeStyle = gradient;
+    ctx.strokeStyle = `yellow`;
     ctx.moveTo(x0, y0);
     ctx.lineTo(x1, y1);
     // ctx.moveTo(0, 0);
