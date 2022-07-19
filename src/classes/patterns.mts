@@ -12,7 +12,7 @@ export default class Pattern extends DataBlock {
   constructor(data: PatternOptions) {
     super(data.id);
 
-    this.name = data.name ?? `Untitled Pattern`;
+    this.name = data.name || `Untitled Pattern`;
     this.notes = [];
 
     if (data.notes) for (const cData of data.notes) {
@@ -21,21 +21,16 @@ export default class Pattern extends DataBlock {
   }
 }
 
-export interface INoteBend {
-  position: number,
-  length: number,
-  amount: number
-}
 interface NoteOptions extends DataBlock {
   position?: number,
   length?: number,
-  bend?: INoteBend[]
+  bend?: []
 }
 export class Note extends DataBlock {
 
   public position: number;
   public length: number;
-  public bend: INoteBend[];
+  public bend: NoteBend[];
 
   constructor(data: NoteOptions) {
     super(data.id);
@@ -45,7 +40,27 @@ export class Note extends DataBlock {
     this.bend = [];
 
     if (data.bend) for (const cData of data.bend) {
-      this.bend.push(cData);
+      this.bend.push(new NoteBend(cData));
     }
+  }
+}
+
+interface NodeBendOptions extends DataBlock {
+  position?: number,
+  length?: number,
+  amount?: number
+}
+export class NoteBend extends DataBlock {
+
+  public position: number;
+  public length: number;
+  public amount: number;
+
+  constructor(data: NodeBendOptions) {
+    super(data.id);
+
+    this.position = data.position ?? 0;
+    this.length = data.length ?? 1;
+    this.amount = data.amount ?? 0;
   }
 }
