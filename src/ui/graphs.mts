@@ -1,11 +1,30 @@
-import { memory } from "../memory.js";
+import memory from "../memory.mjs";
+import isInterface from "../util/isInterface.js";
 
-const size = memory.masterAnalyser.frequencyBinCount;
+const masterAnalyser = memory.masterAnalyser;
+if (!masterAnalyser) {
+  throw new Error(`masterAnalyser not found`);
+}
+
+const size = masterAnalyser.frequencyBinCount;
 
 const spectrum = document.getElementById(`spectrum`);
+if (!spectrum || !isInterface<HTMLCanvasElement>(spectrum, 'getContext')) { // getContext is a method that only exists on HTMLCanvasElement
+  throw new Error(`element with ID #spectrum does not refer to a canvas element`);
+}
+
 const spectrumCTX = spectrum.getContext(`2d`);
+if (!spectrumCTX) {
+  throw new Error(`spectrum element has no context`);
+}
 const waveform = document.getElementById(`waveform`);
+if (!waveform || !isInterface<HTMLCanvasElement>(waveform, 'getContext')) {
+  throw new Error(`element with ID #waveform does not refer to a canvas element`);
+}
 const waveformCTX = waveform.getContext(`2d`);
+if (!waveformCTX) {
+  throw new Error(`waveform element has no context`);
+}
 
 const drawSpectrumGraph = () => {
   // fix stupid canvas size bullshittery
@@ -16,7 +35,7 @@ const drawSpectrumGraph = () => {
 
   const data = new Float32Array(size);
   // const data = new Uint8Array(size);
-  memory.masterAnalyser.getFloatFrequencyData(data);
+  masterAnalyser.getFloatFrequencyData(data);
   //memory.masterAnalyser.getByteFrequencyData(data);
 
   const width = spectrum.width / data.length;
@@ -26,7 +45,7 @@ const drawSpectrumGraph = () => {
   for (let i = 0; i < (spectrum.width / width); i++) {
     // values for float data (i want to cry)
     const dbValue = data[Math.round(i * data.length / (spectrum.offsetWidth / width))];
-    const mappedDb = (dbValue - (memory.masterAnalyser.minDecibels)) * (spectrum.offsetHeight / 2) / (memory.masterAnalyser.maxDecibels - memory.masterAnalyser.minDecibels) + (spectrum.height / 2);
+    const mappedDb = (dbValue - (masterAnalyser.minDecibels)) * (spectrum.offsetHeight / 2) / (masterAnalyser.maxDecibels - masterAnalyser.minDecibels) + (spectrum.height / 2);
 
     // values for byte data
     // const dbValue = data[Math.round(i * data.length / (spectrum.offsetWidth / width))];
@@ -57,7 +76,7 @@ const drawWaveformGraph = () => {
   waveformCTX.clearRect(0, 0, waveform.width, waveform.height);
 
   const data = new Float32Array(size);
-  memory.masterAnalyser.getFloatTimeDomainData(data);
+  masterAnalyser.getFloatTimeDomainData(data);
 
   const width = waveform.width / data.length;
 
