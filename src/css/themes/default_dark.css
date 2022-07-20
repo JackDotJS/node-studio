@@ -89,7 +89,23 @@
   --nodegroup-bg: var(--dark0);
   --nodegroup-bg-dots: var(--dark2);
 
-  --nodegroup-directory: var(--mid3);
+  --nodegroup-button: var(--mid1);
+  --nodegroup-button-text: var(--dark0);
+  --nodegroup-button-hover: var(--mid3);
+  --nodegroup-button-active: var(--light1);
+
+  --nodegroup-textinput-bg: transparent;
+  --nodegroup-textinput-bg-hover: transparent;
+  --nodegroup-textinput-bg-active: var(--light1);
+  --nodegroup-textinput-underline: var(--mid1);
+  --nodegroup-textinput-underline-hover: var(--mid3);
+  --nodegroup-textinput-underline-active: var(--light1);
+  --nodegroup-textinput-text: var(--mid1);
+  --nodegroup-textinput-text-hover: var(--mid3);
+  --nodegroup-textinput-text-active: var(--dark0);
+  --nodegroup-textinput-placeholder: var(--mid1);
+  --nodegroup-textinput-placeholder-hover: var(--mid3);
+  --nodegroup-textinput-placeholder-active: transparent;
 
   --nodegroup-scrollbar-bg: var(--dark3);
   --nodegroup-scrollbar-track: var(--dark0);
@@ -97,14 +113,14 @@
   --nodegroup-scrollbar-thumb-hover: var(--mid3);
   --nodegroup-scrollbar-thumb-active: var(--light1);
 
+  --nodegroup-directory: var(--mid3);
+
   --nodegroup-node: var(--dark3);
   --nodegroup-node-active: var(--light1);
   --nodegroup-node-text: var(--mid1);
   --nodegroup-node-header: var(--dark0);
   --nodegroup-node-header-text: var(--dark0);
   --nodegroup-node-plug-border: var(--dark0);
-
-  /* todo: add text input, buttons */
 
   /* OLD START */
   /* OLD START */
@@ -137,5 +153,25 @@
 
   /* TIMELINE EDITOR COLORS */
 
+  /* TODO */
+
   /* PATTERN EDITOR COLORS */
+
+  /* TODO */
+
+  /* CONTEXT MENU COLORS */
+
+  /* TODO */
+
+  /* CONTROL PANEL COLORS */
+
+  /* TODO */
+
+  /* MENU BAR COLORS */
+
+  /* TODO */
+
+  /* STATUS BAR COLORS */
+
+  /* TODO */
 }

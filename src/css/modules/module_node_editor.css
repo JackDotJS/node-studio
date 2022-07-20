@@ -31,6 +31,49 @@
   background-color: var(--nodegroup-scrollbar-bg);
 }
 
+#nodeEditor input[type=button] {
+  background-color: var(--nodegroup-button);
+  color: var(--nodegroup-button-text);
+}
+
+#nodeEditor input[type=button]:hover {
+  background-color: var(--nodegroup-button-hover);
+}
+
+#nodeEditor input[type=button]:active {
+  background-color: var(--nodegroup-button-active);
+}
+
+#nodeEditor input[type=text], #nodeEditor input[type=number] {
+  background-color: var(--nodegroup-textinput-bg);
+  color: var(--nodegroup-textinput-text);
+  border-color: var(--nodegroup-textinput-bg) var(--nodegroup-textinput-bg) var(--nodegroup-textinput-underline);
+}
+
+#nodeEditor input[type=text]::-webkit-input-placeholder {
+  color: var(--nodegroup-textinput-placeholder);
+}
+
+#nodeEditor input[type=text]:hover::-webkit-input-placeholder {
+  color: var(--nodegroup-textinput-placeholder-hover);
+}
+
+#nodeEditor input[type=text]:focus::-webkit-input-placeholder {
+  color: var(--nodegroup-textinput-placeholder-active);
+}
+
+#nodeEditor input[type=text]:hover, #nodeEditor input[type=number]:hover {
+  background-color: var(--nodegroup-textinput-bg-hover);
+  color: var(--nodegroup-textinput-text-hover);
+  border-color: transparent transparent var(--nodegroup-textinput-underline-hover);
+}
+
+#nodeEditor input[type=text]:focus, #nodeEditor input[type=number]:focus {
+  background-color: var(--nodegroup-textinput-bg-active);
+  border-color: var(--nodegroup-textinput-underline-active);
+  color: var(--nodegroup-textinput-text-active);
+}
+
 #ndHeader {
   display: flex;
   justify-content: space-between;
