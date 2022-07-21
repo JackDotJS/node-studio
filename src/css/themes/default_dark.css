@@ -122,35 +122,6 @@
   --nodegroup-node-header-text: var(--dark0);
   --nodegroup-node-plug-border: var(--dark0);
 
-  /* OLD START */
-  /* OLD START */
-  /* OLD START */
-
-  --m-0: var(--dark0);
-  --m-1: var(--dark3);
-  --m-2: var(--dark1);
-  --ma: var(--mid1);
-  --ma-hover: var(--mid3);
-  --ma-select: var(--light1);
-
-  --track-col-1: var(--blue);
-  --track-col-2: var(--purple);
-  --track-col-3: var(--red);
-  --track-col-4: var(--orange);
-  --track-col-5: var(--yellow);
-
-  --piano-white: var(--mid1);
-  --piano-white-hover: var(--mid3);
-  --piano-black: var(--dark0);
-  --piano-black-hover: var(--dark1);
-
-  --cm-bg: var(--light1);
-  --cm-hover: var(--light0);
-
-  /* OLD END */
-  /* OLD END */
-  /* OLD END */
-
   /* TIMELINE EDITOR COLORS */
 
   --timeline-frame: var(--dark3);
@@ -188,14 +159,46 @@
   --timeline-pattern-border: var(--dark3);
   --timeline-pattern-title: var(--light1);
 
-
   /* PATTERN EDITOR COLORS */
 
   /* TODO */
 
+  /* OLD START */
+  /* OLD START */
+  /* OLD START */
+
+  --m-0: var(--dark0);
+  --m-1: var(--dark3);
+  --m-2: var(--dark1);
+  --ma: var(--mid1);
+  --ma-hover: var(--mid3);
+  --ma-select: var(--light1);
+
+  --track-col-1: var(--blue);
+  --track-col-2: var(--purple);
+  --track-col-3: var(--red);
+  --track-col-4: var(--orange);
+  --track-col-5: var(--yellow);
+
+  --piano-white: var(--mid1);
+  --piano-white-hover: var(--mid3);
+  --piano-black: var(--dark0);
+  --piano-black-hover: var(--dark1);
+
+  --cm-bg: var(--light1);
+  --cm-hover: var(--light0);
+
+  /* OLD END */
+  /* OLD END */
+  /* OLD END */
+
   /* CONTEXT MENU COLORS */
 
-  /* TODO */
+  --contextmenu: var(--light1);
+  --contextmenu-item-bg: transparent;
+  --contextmenu-item-bg-hover: var(--mid1);
+  --contextmenu-item-text: var(--dark0);
+  --contextmenu-item-text-hover: var(--dark0);
 
   /* CONTROL PANEL COLORS */
 
