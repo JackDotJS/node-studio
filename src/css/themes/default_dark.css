@@ -153,7 +153,41 @@
 
   /* TIMELINE EDITOR COLORS */
 
-  /* TODO */
+  --timeline-frame: var(--dark3);
+  --timeline-grid-bg: var(--dark0);
+  --timeline-grid-line: var(--dark3);
+
+  --timeline-button: var(--mid1);
+  --timeline-button-text: var(--dark0);
+  --timeline-button-hover: var(--mid3);
+  --timeline-button-active: var(--light1);
+
+  --timeline-newtrack-button: var(--mid1);
+  --timeline-newtrack-button-text: var(--dark0);
+  --timeline-newtrack-button-hover: var(--mid3);
+  --timeline-newtrack-button-active: var(--light1);
+
+  --timeline-slider-track: var(--dark0);
+  --timeline-slider-thumb: var(--mid1);
+  --timeline-slider-thumb-hover: var(--mid3);
+  --timeline-slider-thumb-active: var(--light1);
+
+  --timeline-timecode: var(--mid1);
+  --timeline-ruler: var(--dark0);
+
+  --timeline-trackheader: var(--dark0);
+  --timeline-trackheader-selected: var(--dark1);
+  --timeline-trackheader-grid-bg: var(--dark0);
+  --timeline-trackheader-grid-line: var(--dark3);
+  --timeline-trackheader-grab: var(--dark3);
+  --timeline-trackheader-grab-dots: var(--mid1);
+  
+  --timeline-track-sequence: var(--dark0);
+  --timeline-track-sequence-selected: var(--dark1);
+
+  --timeline-pattern-border: var(--dark3);
+  --timeline-pattern-title: var(--light1);
+
 
   /* PATTERN EDITOR COLORS */
 

@@ -5,6 +5,45 @@
 #timeline {
   grid-column: 1;
   grid-row: 1;
+  background-color: var(--timeline-frame);
+}
+
+#timeline input[type=button] {
+  background-color: var(--timeline-button);
+  color: var(--timeline-button-text);
+}
+
+#timeline input[type=button]:hover {
+  background-color: var(--timeline-button-hover);
+}
+
+#timeline input[type=button]:active {
+  background-color: var(--timeline-button-active);
+}
+
+#timeline .slider {
+  background-color: var(--timeline-slider-track);
+}
+
+#timeline .slider.vertical {
+  border-color: var(--timeline-slider-track);
+}
+
+#timeline .slider:not(.vertical) {
+  border-color: var(--timeline-slider-track);
+}
+
+#timeline .slider > div {
+  background-color: var(--timeline-slider-thumb);
+  border-color: var(--timeline-slider-track);
+}
+
+#timeline .slider > div:hover {
+  background-color: var(--timeline-slider-thumb-hover);
+}
+
+#timeline .slider > div:active {
+  background-color: var(--timeline-slider-thumb-active);
 }
 
 #tlCol1 {
@@ -22,8 +61,8 @@
   background: transparent;
 }
 
-#trackHeaders, #tlCol2 > * {
-  background-color: var(--m-0);
+#ruler {
+  background-color: var(--timeline-ruler);
 }
 
 #tlCol2 {
@@ -45,6 +84,7 @@
 
 #playbackTime {
   font-size: 1.5rem;
+  color: var(--timeline-timecode);
 }
 
 #seek {
@@ -56,11 +96,9 @@
   flex-direction: column;
   height: 100%;
   background-size: calc(var(--track-height) + 1px) calc(var(--track-height) + 1px);
-  background-image: linear-gradient(to top, var(--m-1) 1px, transparent 1px);
 }
 
-.trackHeader, .trackSequence {
-  background-color: var(--m-0);
+.trackHeader, .trackSequence, #trackCreate {
   min-height: var(--track-height);
   height: var(--track-height);
 }
@@ -68,9 +106,12 @@
 #trackHeaders {
   width: 100%;
   overflow-y: hidden;
+  background-color: var(--timeline-trackheader-grid-bg);
+  background-image: linear-gradient(to top, var(--timeline-trackheader-grid-line) 1px, transparent 1px);
 }
 
-.trackHeader {
+.trackHeader, #trackCreate {
+  background-color: var(--timeline-trackheader);
   display: flex;
   padding: 0.5rem;
   padding-left: 0;
@@ -78,12 +119,12 @@
   margin-bottom: 1px;
 }
 
-.trackHeader > div:last-child {
-  flex-grow: 1;
+.trackHeader.selected {
+  background-color: var(--timeline-trackheader-selected);
 }
 
-.trackHeader.selected, .trackSequence.selected {
-  background-color: var(--m-2);
+.trackHeader > div:last-child {
+  flex-grow: 1;
 }
 
 .trackHeader > div {
@@ -118,13 +159,26 @@
   justify-content: center;
 }
 
+#trackCreate input {
+  background-color: var(--timeline-newtrack-button);
+  color: var(--timeline-newtrack-button-text);
+}
+
+#trackCreate input:hover {
+  background-color: var(--timeline-newtrack-button-hover);
+}
+
+#trackCreate input:active {
+  background-color: var(--timeline-newtrack-button-active);
+}
+
 .trackDrag {
   cursor: grab;
   padding: 0.5rem;
-  background-color: var(--m-1);
-  background-image: radial-gradient(var(--ma) 30%, transparent 20%);
+  background-color: var(--timeline-trackheader-grab);
+  background-image: radial-gradient(var(--timeline-trackheader-grab-dots) 30%, transparent 20%);
   margin-right: 0.5rem;
-  border: 0.5rem solid var(--m-1);
+  border: 0.5rem solid var(--timeline-trackheader-grab);
   border-radius: 0 0.5rem 0.5rem 0;
   background-size: 4px 4px;
   background-origin: 50% 50%;
@@ -140,6 +194,8 @@
 }
 
 #trackSequencer {
+  background-color: var(--timeline-grid-bg);
+  background-image: linear-gradient(to top, var(--timeline-grid-line) 1px, transparent 1px);
   width: 100%;
   display: grid;
   grid-auto-rows: var(--track-height);
@@ -150,8 +206,13 @@
 }
 
 .trackSequence {
+  background-color: var(--timeline-track-sequence);
   display: flex;
   padding-right: 150vw;
+}
+
+.trackSequence.selected {
+  background-color: var(--timeline-track-sequence-selected);
 }
 
 .pattern {
@@ -160,7 +221,7 @@
   min-width: 2rem;
   background: transparent;
   border-radius: 0.25rem;
-  border: 2px solid var(--m-1);
+  border: 2px solid var(--timeline-pattern-border);
   margin-top: 1px;
   margin-bottom: 1px;
   box-shadow: 0 0 1px black;
@@ -172,8 +233,9 @@
 
 .pattern::before {
   content: attr(data-name);
-  background-color: var(--track-col-1);
-  color: var(--ma-select);
+  /* TEMPORARY */
+  background-color: var(--track-col-1); 
+  color: var(--timeline-pattern-title);
   border-radius: 0.1rem 0.1rem 0 0;
   font-size: 0.85rem;
   text-shadow: 0 0 6px black;
