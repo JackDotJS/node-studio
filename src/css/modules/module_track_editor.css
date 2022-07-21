@@ -22,7 +22,7 @@
   background: transparent;
 }
 
-#tlCol1 > *:not(#playbackData), #tlCol2 > * {
+#trackHeaders, #tlCol2 > * {
   background-color: var(--m-0);
 }
 
