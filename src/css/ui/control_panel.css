@@ -4,19 +4,24 @@
   margin: 0.5rem;
 }
 
+#controlPanel input[type=button] {
+  background-color: var(--cp-button);
+  color: var(--cp-button-text);
+}
+
+#controlPanel input[type=button]:hover {
+  background-color: var(--cp-button-hover);
+}
+
+#controlPanel input[type=button]:active {
+  background-color: var(--cp-button-active);
+}
+
 #controlPanel > div {
   width: 100%;
   max-width: 20rem;
   background: transparent;
 }
-
-/* #controlPanel > div:first-child {
-  margin-left: auto;
-}
-
-#controlPanel > div:last-child {
-  margin-right: auto;
-}*/
 
 #controlPanel > *:not(:first-child) {
   margin-left: 1rem;
@@ -42,7 +47,7 @@
 }
 
 #pbOptions > * {
-  background-color: var(--m-1);
+  background-color: var(--cp-globaloptions);
   padding: 0.25rem;
   border-radius: 0.25rem;
   height: 100%;

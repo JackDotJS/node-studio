@@ -234,7 +234,7 @@
 .pattern::before {
   content: attr(data-name);
   /* TEMPORARY */
-  background-color: var(--track-col-1); 
+  background-color: var(--blue); 
   color: var(--timeline-pattern-title);
   border-radius: 0.1rem 0.1rem 0 0;
   font-size: 0.85rem;
