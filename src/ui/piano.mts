@@ -1,6 +1,12 @@
-import { memory } from "../memory.js";
+import memory from "../memory.mjs";
+import isInterface from "../util/isInterface.js";
 
 const container = document.getElementById(`keys`);
+
+if (!container) {
+  throw new Error(`#keys element not found`);
+}
+
 let playing = false;
 let curX = 0;
 let curY = 0;
@@ -32,38 +38,47 @@ for (let i = 0; i < keyCount; i++) {
   container.appendChild(key);
 }
 
-function getKeyFreq(key) {
+function getKeyFreq(key: number) {
   return (Math.pow(2, (key - 49) / 12)) * 440;
 }
 
-function getKeyIndex(x, y) {
-  let elem = document.elementFromPoint(x, y);
+function getKeyIndex(x: number, y: number): number | undefined {
+  let elem: Node | null = document.elementFromPoint(x, y);
 
   let dataNode;
-  while (elem.parentNode != null && dataNode == null) {
+  while (elem?.parentNode != null && dataNode == null) {
+    // TODO: this is the third time i'm seeing node parent traversal. im really thinking we should abstract this into its own util.
+    if (!isInterface<HTMLElement>(elem, `dataset`)) {
+      return;
+    }
     if (elem.classList.contains(`black`) || elem.classList.contains(`white`)) {
       dataNode = elem;
     }
 
-    elem = elem.parentNode;
+    elem = elem.parentNode as Node;
   }
 
   if (dataNode == null) return;
 
   let key = 0;
   let nIndexTest = dataNode;
-  while ( nIndexTest != null ) {
+  while (nIndexTest != null) {
     if (nIndexTest.nodeType !== 3) {
       key++;
     }
 
-    nIndexTest = nIndexTest.previousElementSibling;
+    if (!nIndexTest.previousElementSibling) {
+      throw new Error(`nIndexTest.previousElementSibling is null`);
+      // FIXME: this should probably just exit the loop at this point
+    }
+
+    nIndexTest = nIndexTest.previousElementSibling as HTMLElement;
   }
 
   return key;
 }
 
-function keyPressHandler(e) {
+function keyPressHandler(e: MouseEvent) {
   const key = getKeyIndex(e.clientX, e.clientY);
 
   if (!key) return;
@@ -73,6 +88,10 @@ function keyPressHandler(e) {
   const ci = memory.instruments[memory.currentInstrument];
   const oscillator = memory.audioCTX.createOscillator();
   ci.node = oscillator;
+
+  if (!memory.masterVolume) {
+    throw new Error('Missing memory.masterVolume'); // TODO: there's probably a better way of checking this
+  }
 
   oscillator.connect(memory.masterVolume);
   memory.masterVolume.gain.value = 0.5;
@@ -85,19 +104,34 @@ function keyPressHandler(e) {
   oscillator.start(0);
 }
 
-function keyReleaseHandler () {
+function keyReleaseHandler() {
   const ci = memory.instruments[memory.currentInstrument];
+  if (!ci?.node) {
+    throw new Error(`Missing current instrument / ci.node`);
+  }
+
+  if (!isInterface<OscillatorNode>(ci.node, `stop`)) { // FIXME: does this look right to you
+    throw new Error(`Current instrument node is not an OscillatorNode`);
+  }
+
   ci.node.stop(0);
   playing = false;
 }
 
-function moveCurHandler (x, y) {
+function moveCurHandler(x: number, y: number) {
   if (!playing) return;
 
   const ci = memory.instruments[memory.currentInstrument];
+  if (!ci?.node) {
+    throw new Error(`Missing current instrument / ci.node`);
+  }
 
   const key = getKeyIndex(x, y);
   if (key == null) return;
+
+  if (!isInterface<OscillatorNode>(ci.node, `frequency`)) {
+    throw new Error(`ci.node is not an OscillatorNode`);
+  }
 
   ci.node.frequency.value = getKeyFreq(key);
 }
@@ -105,7 +139,7 @@ function moveCurHandler (x, y) {
 container.addEventListener(`mousedown`, (e) => {
   e.preventDefault();
   if (e.button !== 0) return;
-  
+
   curX = e.clientX;
   curY = e.clientY;
 
@@ -133,6 +167,10 @@ container.addEventListener(`mouseenter`, (e) => {
   curX = e.clientX;
   curY = e.clientY;
 
+  if (!memory.masterVolume) {
+    throw new Error(`Missing memory.masterVolume`);
+  }
+
   memory.masterVolume.gain.value = 0.5;
 });
 
@@ -142,12 +180,20 @@ container.addEventListener(`mouseleave`, (e) => {
   curX = e.clientX;
   curY = e.clientY;
 
+  if (!memory.masterVolume) {
+    throw new Error(`Missing memory.masterVolume`);
+  }
+
   memory.masterVolume.gain.value = 0;
 });
 
 // scale black keys with correct margins
 new ResizeObserver(() => {
-  const wkey = container.querySelector(`#keys .white`);
+  const wkey: HTMLElement | null = container.querySelector(`#keys .white`);
+
+  if (!wkey) {
+    throw new Error('Missing piano, effectively');
+  }
 
   /**
    * search through stylesheets to find the rule for the black keys
@@ -157,10 +203,10 @@ new ResizeObserver(() => {
    * for each individual element.
    */
   for (const sheet of document.styleSheets) {
-    (function searchRuleList(sheet) {
+    (function searchRuleList(sheet): void {
       for (const ruleList of sheet.cssRules) {
         if (ruleList instanceof CSSImportRule) {
-          searchRuleList(ruleList.styleSheet);
+          return searchRuleList(ruleList.styleSheet);
         } else if (ruleList instanceof CSSStyleRule && ruleList.selectorText === `#keys .black`) {
           const width = Math.round(wkey.offsetWidth * 0.7);
 

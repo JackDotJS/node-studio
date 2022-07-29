@@ -3,8 +3,8 @@ import NodeStudioProject from "./classes/project.mjs";
 
 export interface IInstrument {
   name: string,
-  type: string,
-  node: Node | null,
+  type: `sine` | `square` | `sawtooth` | `triangle` | `custom`,
+  node: Node | OscillatorNode | null, // FIXME: can we reduce OscillatorNode to Node?
   attack: number,
   decay: number,
   sustain: number,
