@@ -30,7 +30,7 @@
 }
 
 #statusbar > *:not(:first-child, :last-child) {
-  border-right-color: var(--ma);
+  border-right-color: var(--statusbar-item-divider);
   border-right-style: solid;
   border-right-width: 2px;
   padding-right: 0.5rem;
@@ -44,7 +44,8 @@
 #spectrum, #waveform {
   width: 10rem;
   height: 2rem;
-  border: 2px solid var(--ma);
+  color: var(--mb-graph);
+  border: 2px solid var(--mb-graph-border);
   border-radius: 0.25rem;
 }
 

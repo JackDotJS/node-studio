@@ -5,7 +5,7 @@
   min-height: 2rem;
   max-width: 100vw;
   max-height: 100vh;
-  background-color: var(--cm-bg);
+  background-color: var(--contextmenu);
   border-radius: 0.25rem;
   padding: 0.25rem 0;
   box-shadow: 0 3px 1rem black;
@@ -16,15 +16,16 @@
   display: flex;
   align-items: center;
   width: 100%;
-  color: var(--m-0);
+  color: var(--contextmenu-item-text);
   cursor: pointer;
   text-decoration: none;
-  background: transparent;
+  background-color: var(--contextmenu-item-bg);
   padding: 0.25rem 0.5rem;
 }
 
 #context > a:hover {
-  background-color: var(--ma);
+  background-color: var(--contextmenu-item-bg-hover);
+  color: var(--contextmenu-item-text-hover);
 }
 
 #context.cmhide {

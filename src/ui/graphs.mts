@@ -53,7 +53,7 @@ const drawSpectrumGraph = () => {
 
     const height = Math.max(1, mappedDb);
 
-    spectrumCTX.fillStyle = getComputedStyle(document.documentElement).getPropertyValue(`--ma`);
+    spectrumCTX.fillStyle = getComputedStyle(spectrum).getPropertyValue(`color`);
 
     spectrumCTX.fillRect(
       x,
@@ -84,7 +84,7 @@ const drawWaveformGraph = () => {
 
   waveformCTX.beginPath();
   waveformCTX.lineWidth = 1;
-  waveformCTX.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue(`--ma`);
+  waveformCTX.strokeStyle = getComputedStyle(waveform).getPropertyValue(`color`);
 
   for (let i = 0; i < (waveform.width / width); i++) {
 
