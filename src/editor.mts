@@ -1,4 +1,3 @@
-import { ExtendedWindow } from "./bridge.js";
 import memory from "./memory.mjs";
 
 import './ui/graphs.mjs';
