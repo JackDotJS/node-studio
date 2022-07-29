@@ -34,7 +34,7 @@ interface IActive { // TODO: this may need to be renamed
   offsetY: number,
 }
 let active: IActive | null = null;
-let edgeScroll: (() => void) | null = null; // TODO: what the heck is this
+let edgeScroll: (() => void) | null = null; // FIXME: what the heck is this
 let mx = 0;
 let my = 0;
 
@@ -216,7 +216,7 @@ function handleMiddleMove(): void {
     throw new Error(`Node editor wrapper not found`);
   }
   if (!gridMove) {
-    throw new Error(`TODO: what is \`gridMove\`?`);
+    throw new Error(`FIXME: what is \`gridMove\`?`);
   }
 
   wrapper.scrollLeft = gridMove.oldLeft + (gridMove.oldX - mx);
