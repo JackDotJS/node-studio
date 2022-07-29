@@ -1,5 +1,10 @@
+import isInterface from "../util/isInterface";
+
 function closeCM() {
-  const cm = document.querySelector(`#context`);
+  const cm: HTMLElement | null = document.querySelector(`#context`);
+  if (!cm) {
+    throw new Error(`context menu not found`);
+  }
 
   cm.style.left = `0px`;
   cm.style.top = `0px`;
@@ -13,9 +18,11 @@ const menus = {
   slider: [
     {
       label: `Reset to Default`,
-      func: (node) => {
-        const elem = node.querySelector(`div[data-value][data-default]`);
-        if (elem == null) return;
+      func: (node: HTMLElement) => {
+        const elem: HTMLElement | null = node.querySelector(`div[data-value][data-default]`);
+        if (!elem) {
+          throw new Error(`[contextMenu] slider element not found`);
+        }
         elem.dataset.value = elem.dataset.default;
         closeCM();
       }
@@ -23,7 +30,10 @@ const menus = {
   ]
 };
 
-const cm = document.querySelector(`#context`);
+const cm: HTMLElement | null = document.querySelector(`#context`);
+if (!cm) {
+  throw new Error(`context menu not found`);
+}
 
 // show/hide context menu
 document.addEventListener(`contextmenu`, e => {
@@ -42,23 +52,34 @@ document.addEventListener(`contextmenu`, e => {
   //   curY: e.clientY
   // });
 
-  let elem = document.elementFromPoint(x, y);
-  let dataNode;
-  while (elem.parentNode != null && dataNode == null) {
+  let elem: Node | null = document.elementFromPoint(x, y);
+
+  if (!elem) {
+    throw new Error(`[contextMenu] element not found`);
+  }
+
+  let dataNode: HTMLElement | null = null;
+  while (elem?.parentNode != null && dataNode === null) {
+    if (!isInterface<HTMLElement>(elem, `dataset`)) {
+      return;
+    }
     if (elem.dataset.cm) {
       dataNode = elem;
     }
 
-    elem = elem.parentNode;
+    elem = elem.parentNode as Node;
   }
 
-  if (dataNode == null) return;
+  if (dataNode === null)
+    return;
 
   // TEMPORARY!!!
   if (dataNode.dataset.cm === `slider`) {
     const button = document.createElement(`a`);
     button.innerHTML = menus.slider[0].label;
+    // @ts-ignore // FIXME: THIS IS A BAD IDEA. BUT SINCE IT'S TEMPORARY, I'LL ALLOW IT.
     button.onclick = () => { menus.slider[0].func(dataNode); };
+    // -------------------------------------------^^^^^^^^ THIS COULD BE NULL.
 
     console.log(button);
 
@@ -75,7 +96,10 @@ document.addEventListener(`contextmenu`, e => {
 });
 
 document.addEventListener(`mousedown`, e => {
-  if (e.path.includes(cm)) return;
+  let mouseClickPoint = document.elementFromPoint(e.clientX, e.clientY);
+
+  // if (e.path.includes(cm)) return; // TODO: what is path? it doesnt seem to exist on mousedown.
+  if (mouseClickPoint === cm) return; // FIXME: this is dangerous
   closeCM();
 });
 
