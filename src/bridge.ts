@@ -1,16 +1,21 @@
-const { contextBridge, ipcRenderer } = require(`electron`);
-const pkg = require(`../package.json`);
-const drpc = require(`./util/drpc.js`);
+import { contextBridge, ipcRenderer } from 'electron';
+import pkg from '../package.json';
+import * as drpc from './util/drpc.js';
 
 const appVersion = `Node Studio ${pkg.version}`;
 
-function setProjectTitle(text) {
+function setProjectTitle(text: string) {
   document.title = `${text} | ${appVersion}`;
   drpc.setDetails(text);
 }
 
 window.addEventListener(`DOMContentLoaded`, () => {
-  document.querySelector(`#version`).innerHTML = appVersion;
+  const version = document.querySelector(`#version`);
+  if (!version) {
+    throw new Error('#version element not found');
+  }
+  
+  version.innerHTML = appVersion;
 });
 
 contextBridge.exposeInMainWorld(`memUsage`, process.memoryUsage);
