@@ -18,6 +18,6 @@
     "./src/web/**/*.mts"
   ],
   "files": [
-    "./src/index.d.ts"
+    "src/web/index.d.ts"
   ]
 }

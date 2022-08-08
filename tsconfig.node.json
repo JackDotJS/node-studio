@@ -20,8 +20,5 @@
     "src/node/**/*.mts",
     "./package.json",
     "./userdata/config.json"
-  ],
-  "files": [
-    "./src/index.d.ts"
   ]
 }
