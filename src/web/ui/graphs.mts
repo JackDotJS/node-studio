@@ -1,5 +1,4 @@
 import memory from "../memory.mjs";
-import isInterface from "common/util/isInterface.js";
 
 const masterAnalyser = memory.masterAnalyser;
 if (!masterAnalyser) {

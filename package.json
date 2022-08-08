@@ -10,14 +10,11 @@
     "type": "git",
     "url": "https://github.com/JackDotJS/node-studio"
   },
-  "main": "build/src/index.js",
+  "main": "build/src/node/index.js",
   "scripts": {
     "start": "electron .",
     "build": "tsc -b",
     "dist": "npx electron-packager . --out=./build --icon=./assets/node-studio.ico"
-  },
-  "preload": {
-    "js": "build/src/bridge.js"
   },
   "dependencies": {
     "adm-zip": "^0.4.13",

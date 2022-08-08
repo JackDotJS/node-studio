@@ -1,5 +1,3 @@
-import isInterface from "common/util/isInterface";
-
 function closeCM() {
   const cm: HTMLElement | null = document.querySelector(`#context`);
   if (!cm) {

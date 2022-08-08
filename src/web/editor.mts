@@ -6,7 +6,6 @@ import './ui/slider.mjs';
 import './ui/contextMenu.mjs';
 import './ui/node_editor.mjs'
 import './classes/project.mjs';
-import isInterface from "../common/util/isInterface.js";
 
 console.warn(`reminder: cursor changes don't work with the console open!!!`);
 

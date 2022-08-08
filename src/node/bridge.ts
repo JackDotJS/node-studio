@@ -1,6 +1,7 @@
 import { contextBridge, ipcRenderer } from 'electron';
 import pkg from '../../package.json';
 import * as drpc from './util/drpc.js';
+import isInterface from './util/isInterface';
 
 const appVersion = `Node Studio ${pkg.version}`;
 
@@ -21,3 +22,10 @@ window.addEventListener(`DOMContentLoaded`, () => {
 contextBridge.exposeInMainWorld(`memUsage`, process.memoryUsage);
 contextBridge.exposeInMainWorld(`setProjectTitle`, setProjectTitle);
 contextBridge.exposeInMainWorld(`DRPCResetTime`, drpc.resetTime);
+
+// This is a common function between Node and Web. Unfortunately, TS cannot
+// compile it to *both* commonjs and esmodules simultaneously without
+// duplicating the code.
+// The best shot we have at making isInterface available to Web is to pass it
+// through and update the global typings.
+contextBridge.exposeInMainWorld(`isInterface`, isInterface)

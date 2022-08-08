@@ -1,5 +1,3 @@
-import isInterface from "common/util/isInterface";
-
 document.querySelectorAll(`.slider`).forEach((slider) => {
   // there's probably a better way to do all this
   // also may need additional listeners for touch inputs

@@ -18,8 +18,8 @@
   "include": [
     "src/node/**/*.ts",
     "src/node/**/*.mts",
-    "src/common/**/**.ts",
-    "./package.json"
+    "./package.json",
+    "./userdata/config.json"
   ],
   "files": [
     "./src/index.d.ts"
