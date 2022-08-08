@@ -15,7 +15,7 @@
     ]
   },
   "include": [
-    "./src/dom/**/*.mts",
+    "./src/web/**/*.mts",
     "./src/common/**/*.ts"
   ],
   "files": [

@@ -14,7 +14,7 @@
   // setting `"noEmit": true` in the compiler options yells at me.
   "references": [
     {
-      "path": "./tsconfig.dom.json"
+      "path": "./tsconfig.web.json"
     },
     {
       "path": "./tsconfig.node.json"
