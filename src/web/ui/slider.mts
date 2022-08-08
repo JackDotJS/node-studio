@@ -14,7 +14,7 @@ document.querySelectorAll(`.slider`).forEach((slider) => {
   }
   
   const sliderData = thumb.dataset;
-  sliderData.value = `0`; // sets a default value
+  // sliderData.value = `0`; // sets a default value
   // TODO: load from save file when we get to that
 
   let active = false;
@@ -77,15 +77,10 @@ document.querySelectorAll(`.slider`).forEach((slider) => {
 
     if (flipSignage) newValue = -newValue;
 
-    if (sliderData.value === undefined) {
-      console.error(slider);
-      throw new Error(`slider element (see above) does not have a value`);
-    }
-
     // stop here if the value is the same
     // prevents infinite loop: DO NOT REMOVE!!!
     // there's probably a better way to do this
-    if (+sliderData.value == Math.round(newValue)) return;
+    if (+sliderData.value! == Math.round(newValue)) return;
 
     thumb.setAttribute(`data-value`, String(Math.round(newValue)));
   };
@@ -93,9 +88,6 @@ document.querySelectorAll(`.slider`).forEach((slider) => {
   if (!sliderData.default) {
     throw new Error(`slider element ${slider} does not have a default value`);
   }
-
-  // set initial thumb position
-  updatePos(null, null, +sliderData.default);
 
   slider.addEventListener(`mousedown`, (e) => {
     if (e.button !== 0) return;
