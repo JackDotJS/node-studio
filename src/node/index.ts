@@ -33,13 +33,13 @@ interface ErrorWithCode extends Error {
 }
 try {
   // try making file if it does not exist
-  fs.writeFileSync(`./userdata/config.json`, JSON.stringify(config), { encoding: `utf8`, flag: `ax` });
+  fs.writeFileSync('./userdata/config.json', JSON.stringify(config), { encoding: `utf8`, flag: `ax` });
 } catch (e) {
   if (isInterface<ErrorWithCode>(e, `code`)) {
     if (e.code !== `EEXIST`) throw e;
   }
 
-  config = require(`../userdata/config.json`);
+  config = require(`../../userdata/config.json`);
   console.log(config);
 }
 
@@ -71,8 +71,8 @@ app.whenReady().then(() => {
     show: false,
     autoHideMenuBar: true,
     webPreferences: {
-      preload: path.join(__dirname, `../src/bridge.js`),
-      contextIsolation: true, 
+      preload: path.resolve(__dirname, `../../src/node/bridge.js`),
+      contextIsolation: true,
       nodeIntegration: false // this should be false by default, but better safe than sorry
     },
     icon: nativeImage.createFromPath(path.join(__dirname, `../assets/node-studio.ico`))
@@ -87,7 +87,7 @@ app.whenReady().then(() => {
       size: window.getSize()
     }
   }
-  
+
   window.loadFile(`./src/editor.html`);
 
   window.once(`ready-to-show`, () => {
