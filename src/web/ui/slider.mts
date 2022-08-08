@@ -14,11 +14,19 @@ document.querySelectorAll(`.slider`).forEach((slider) => {
   }
   
   const sliderData = thumb.dataset;
+  sliderData.value = `0`; // sets a default value
+  // TODO: load from save file when we get to that
 
   let active = false;
 
   // im going to fucking explode
   const updatePos = (x: number | null, y: number | null, val?: number) => {
+
+    console.log("slider", slider,
+      "x", x,
+      "y", y,
+      "val", val);
+
     const elemBox = slider.getBoundingClientRect();
 
     const thumbSize = (vertical) ? thumb.offsetHeight : thumb.offsetWidth;
@@ -37,7 +45,7 @@ document.querySelectorAll(`.slider`).forEach((slider) => {
     let targetPos;
     let rawValue;
 
-    if (val) {
+    if (val != null) {
       rawValue = Math.max(negRange, Math.min(fullRange, val));
     } else {
 
@@ -70,7 +78,8 @@ document.querySelectorAll(`.slider`).forEach((slider) => {
     if (flipSignage) newValue = -newValue;
 
     if (sliderData.value === undefined) {
-      throw new Error(`slider element ${slider} does not have a value`);
+      console.error(slider);
+      throw new Error(`slider element (see above) does not have a value`);
     }
 
     // stop here if the value is the same
