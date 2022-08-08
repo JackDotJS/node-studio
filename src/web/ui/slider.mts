@@ -2,8 +2,9 @@ document.querySelectorAll(`.slider`).forEach((slider) => {
   // there's probably a better way to do all this
   // also may need additional listeners for touch inputs
 
-  if (!isInterface<HTMLInputElement>(slider, 'max')) {
-    throw new Error(`slider element ${slider} does not appear to be a HTMLInputElement`);
+  if (!isInterface<HTMLDivElement>(slider, 'dataset')) {
+    console.error(slider);
+    throw new Error(`slider element (see above) does not appear to be a HTMLDivElement`);
   }
 
   const vertical = slider.classList.contains(`vertical`);
