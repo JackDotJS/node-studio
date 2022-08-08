@@ -1,4 +1,4 @@
-import isInterface from "../util/isInterface";
+import isInterface from "common/util/isInterface";
 
 const editor = document.querySelector(`#nodeEditor`);
 if (!editor) {

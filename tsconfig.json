@@ -1,24 +1,23 @@
 {
-  "buildOptions": {
-    "verbose": true
-  },
   "compilerOptions": {
-    "outDir": "./build",
-    "allowJs": true,
-    "target": "es2020",
-    "module": "commonjs",
     "strict": true,
-    "moduleResolution": "node",
     "noImplicitReturns": true,
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
     "noFallthroughCasesInSwitch": true,
-    "lib": ["esnext", "DOM"],
-    "incremental": true,
     "noImplicitOverride": true,
-    "skipLibCheck": true  
+
+    "baseUrl": "src",
+    "paths": {
+      "common/*": ["common/*"]
+    }
   },
-  "include": ["./src/**/*", "./userdata/config.json"],
-  "files": ["src/index.d.ts"]
+  "files": [], // disables base config's output
+  // setting `"noEmit": true` in the compiler options yells at me.
+  "references": [
+    {
+      "path": "./tsconfig.dom.json"
+    },
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
 }

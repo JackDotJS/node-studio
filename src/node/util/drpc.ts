@@ -1,5 +1,5 @@
 import { Client } from 'discord-rpc';
-import pkg from '../../package.json';
+import pkg from '../../../package.json';
 
 // https://discord.com/developers
 const clientId = `998040133829922817`;

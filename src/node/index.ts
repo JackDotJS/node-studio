@@ -1,9 +1,8 @@
-import fs from 'fs';
-import path from 'path';
+import * as fs from 'fs';
+import * as path from 'path';
 import { app, BrowserWindow, nativeImage, shell } from 'electron';
 import * as drpc from './util/drpc';
-import isInterface from './util/isInterface';
-
+import isInterface from 'common/util/isInterface';
 
 interface IConfig {
   window?: {

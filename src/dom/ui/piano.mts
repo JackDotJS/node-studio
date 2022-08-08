@@ -1,5 +1,5 @@
 import memory from "../memory.mjs";
-import isInterface from "../util/isInterface.js";
+import isInterface from "common/util/isInterface";
 
 const container = document.getElementById(`keys`);
 
