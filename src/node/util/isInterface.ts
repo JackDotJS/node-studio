@@ -6,6 +6,10 @@
  * @param obj Object to check
  * @param property Property that exists on T
  */
- export default function isInterface<T>(obj: any, property: keyof T): obj is T {
+export default function isInterface<T>(obj: any, property: keyof T, log = false): obj is T {
+  if (log)
+    console.log(`[IS INTERFACE] OBJ:`, obj,
+    `PROPERTY:`, property,
+    `PROPERTY IN OBJ:`, property in obj);
   return property in obj;
 }
