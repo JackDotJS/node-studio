@@ -1,3 +1,5 @@
+import isInterface from "../util/isInterface";
+
 const editor = document.querySelector(`#nodeEditor`);
 if (!editor) {
   throw new Error(`Node editor not found`);
