@@ -1,4 +1,4 @@
-import { DataBlock } from "./datablock.mjs";
+import { DataBlock } from "./datablock.js";
 
 interface PatternOptions extends DataBlock {
   name?: string,

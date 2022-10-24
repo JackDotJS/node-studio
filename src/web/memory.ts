@@ -1,5 +1,5 @@
-import Node from "./classes/nodes.mjs";
-import NodeStudioProject from "./classes/project.mjs";
+import Node from "./classes/nodes.js";
+import NodeStudioProject from "./classes/project.js";
 
 export interface IInstrument {
   name: string,

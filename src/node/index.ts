@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { app, BrowserWindow, nativeImage, shell } from 'electron';
 import * as drpc from './util/drpc';
-import isInterface from './util/isInterface';
+import isInterface from './util/isInterface.js';
 
 interface IConfig {
   window?: {
@@ -71,7 +71,7 @@ app.whenReady().then(() => {
     show: false,
     autoHideMenuBar: true,
     webPreferences: {
-      preload: path.resolve(__dirname, `../../src/node/bridge.js`),
+      preload: path.resolve(__dirname, `../../build/node/bridge.js`),
       contextIsolation: true,
       nodeIntegration: false // this should be false by default, but better safe than sorry
     },

@@ -1,4 +1,4 @@
-import isInterface from "../util/isInterface";
+import isInterface from "../util/isInterface.js";
 
 function closeCM() {
   const cm: HTMLElement | null = document.querySelector(`#context`);

@@ -1,8 +1,9 @@
-import memory from "./memory.mjs";
+import memory from "./memory.js";
+import isInterface from './util/isInterface.js';
 
-import './ui/slider.mjs';
-import './ui/contextMenu.mjs';
-import './ui/node_editor.mjs';
+import './ui/slider.js';
+import './ui/contextMenu.js';
+import './ui/node_editor.js';
 
 console.warn(`reminder: cursor changes don't work with the console open!!!`);
 
@@ -37,10 +38,10 @@ if (!pTitle) {
 
 setProjectTitle(pTitle.value || pTitle.placeholder);
 
-import('./ui/piano.mjs');
-import('./ui/graphs.mjs');
-import('./ui/mem_usage.mjs');
-import('./classes/project.mjs');
+import('./ui/piano.js');
+import('./ui/graphs.js');
+import('./ui/mem_usage.js');
+import('./classes/project.js');
 
 window.addEventListener(`keydown`, (e: KeyboardEvent) => {
   if (e.key != `Enter` && e.key != `Escape`) return;

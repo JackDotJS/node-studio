@@ -1,6 +1,6 @@
-import { NodeGroup } from "./nodes.mjs";
-import Track from "./tracks.mjs";
-import Pattern from "./patterns.mjs";
+import { NodeGroup } from "./nodes.js";
+import Track from "./tracks.js";
+import Pattern from "./patterns.js";
 
 interface NodeStudioProjectOptions {
   format?: number,

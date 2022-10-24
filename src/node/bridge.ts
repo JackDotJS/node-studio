@@ -1,7 +1,7 @@
 import { contextBridge, ipcRenderer } from 'electron';
 import pkg from '../../package.json';
 import * as drpc from './util/drpc.js';
-import isInterface from './util/isInterface';
+import isInterface from './util/isInterface.js';
 
 const appVersion = `Node Studio ${pkg.version}`;
 

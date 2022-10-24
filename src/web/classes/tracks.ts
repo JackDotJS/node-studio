@@ -1,6 +1,6 @@
-import { DataBlock } from "./datablock.mjs";
-import { NodeGroup } from "./nodes.mjs";
-import Pattern from "./patterns.mjs";
+import { DataBlock } from "./datablock.js";
+import { NodeGroup } from "./nodes.js";
+import Pattern from "./patterns.js";
 
 interface TrackOptions extends DataBlock {
   solo: boolean,
