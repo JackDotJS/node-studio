@@ -10,11 +10,12 @@
     "type": "git",
     "url": "https://github.com/JackDotJS/node-studio"
   },
-  "main": "build/src/node/index.js",
+  "main": "build/node/index.js",
   "scripts": {
     "start": "electron .",
-    "build": "tsc -b",
-    "dist": "npx electron-packager . --out=./build --icon=./assets/node-studio.ico"
+    "build": "babel --extensions .ts,.mts,.cts src/ -d build",
+    "clean": "rimraf ./build ./dist",
+    "dist": "npx electron-packager . --out=./dist --icon=./assets/node-studio.ico"
   },
   "dependencies": {
     "adm-zip": "^0.4.13",
@@ -25,11 +26,17 @@
     "string-similarity": "^3.0.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.19.3",
+    "@babel/core": "^7.19.3",
+    "@babel/plugin-transform-typescript": "^7.19.3",
+    "@babel/preset-env": "^7.19.4",
+    "@babel/preset-typescript": "^7.18.6",
     "@types/discord-rpc": "^4.0.3",
     "@typescript-eslint/eslint-plugin": "^5.30.7",
     "@typescript-eslint/parser": "^5.30.7",
     "electron-packager": "^15.4.0",
     "eslint": "^7.27.0",
+    "rimraf": "^3.0.2",
     "typescript": "^4.7.4"
   }
 }
