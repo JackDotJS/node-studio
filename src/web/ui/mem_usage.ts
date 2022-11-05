@@ -1,4 +1,4 @@
-function formatBytes(bytes) {
+export default function formatBytes(bytes: number): string {
   if (bytes === 0) return `0 Bytes`;
 
   const k = 1024;
@@ -11,8 +11,12 @@ function formatBytes(bytes) {
 
 const readout = document.querySelector(`#memUsage`);
 
+if (!readout) {
+  throw new Error(`memUsage element not found`);
+}
+
 setInterval(() => {
-  const mem = window.memUsage().rss;
+  const mem = memUsage().rss;
 
   readout.innerHTML = `MEM: ${formatBytes(mem)}`;
 }, 2500);

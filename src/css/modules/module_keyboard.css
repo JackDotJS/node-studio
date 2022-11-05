@@ -115,7 +115,7 @@
 #keys .black {
   height: 55%;
   /*
-  width is calculated by piano.mjs
+  width is calculated by piano.js
   */
   border-width: 2px;
   z-index: 1;

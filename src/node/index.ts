@@ -1,9 +1,16 @@
-const fs = require(`fs`);
-const path = require(`path`);
-const { app, BrowserWindow, nativeImage, shell } = require(`electron`);
-const drpc = require(`./util/drpc`);
+import * as fs from 'fs';
+import * as path from 'path';
+import { app, BrowserWindow, nativeImage, shell } from 'electron';
+import * as drpc from './util/drpc';
+import isInterface from './util/isInterface.js';
 
-let config = {};
+interface IConfig {
+  window?: {
+    pos: number[],
+    size: number[]
+  }
+}
+let config: IConfig = {};
 
 // fix color reproduction
 app.commandLine.appendSwitch(`force-color-profile`, `srgb`);
@@ -21,13 +28,18 @@ for (const item of mkdirs) {
   }
 }
 
+interface ErrorWithCode extends Error {
+  code?: string;
+}
 try {
   // try making file if it does not exist
-  fs.writeFileSync(`./userdata/config.json`, JSON.stringify(config), { encoding: `utf8`, flag: `ax` });
+  fs.writeFileSync('./userdata/config.json', JSON.stringify(config), { encoding: `utf8`, flag: `ax` });
 } catch (e) {
-  if (e.code !== `EEXIST`) throw e;
+  if (isInterface<ErrorWithCode>(e, `code`)) {
+    if (e.code !== `EEXIST`) throw e;
+  }
 
-  config = require(`../userdata/config.json`);
+  config = require(`../../userdata/config.json`);
   console.log(config);
 }
 
@@ -59,9 +71,8 @@ app.whenReady().then(() => {
     show: false,
     autoHideMenuBar: true,
     webPreferences: {
-      preload: path.join(__dirname, `../src/bridge.js`),
+      preload: path.resolve(__dirname, `../../build/node/bridge.js`),
       contextIsolation: true,
-      enableRemoteModule: false,
       nodeIntegration: false // this should be false by default, but better safe than sorry
     },
     icon: nativeImage.createFromPath(path.join(__dirname, `../assets/node-studio.ico`))
@@ -76,7 +87,7 @@ app.whenReady().then(() => {
       size: window.getSize()
     }
   }
-  
+
   window.loadFile(`./src/editor.html`);
 
   window.once(`ready-to-show`, () => {
@@ -93,10 +104,18 @@ app.whenReady().then(() => {
   });
 
   window.on(`move`, () => {
+    if (!config.window) {
+      throw new Error(`You should not have gotten this error.`);
+    }
+
     config.window.pos = window.getPosition();
   });
 
   window.on(`resize`, () => {
+    if (!config.window) {
+      throw new Error(`You should not have gotten this error.`);
+    }
+
     config.window.size = window.getSize();
   });
 });

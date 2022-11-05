@@ -1,39 +1,39 @@
-const DiscordRPC = require(`discord-rpc`);
-const pkg = require(`../../package.json`);
+import { Client } from 'discord-rpc';
+import pkg from '../../../package.json';
 
 // https://discord.com/developers
 const clientId = `998040133829922817`;
 
-let client = null;
+let client: Client | null = null;
 
 let projectTimestamp = new Date();
 let projectDetails = `Loading...`;
 
-module.exports._test = () => {
+export function _test () {
   console.log(projectDetails);
 };
 
-module.exports.setDetails = text => {
+export function setDetails(text: string) {
   projectDetails = text;
 
   if (client == null) setup();
   else setActivity();
 };
 
-module.exports.resetTime = () => {
+export function resetTime() {
   projectTimestamp = new Date();
 
   if (client == null) setup();
   else setActivity();
 };
 
-module.exports.destroy = () => {
+export function destroy() {
   if (client == null) return;
   client.destroy();
 };
 
 function setup() {
-  client = new DiscordRPC.Client({ transport: `ipc` });
+  client = new Client({ transport: `ipc` });
 
   client.on(`ready`, () => {
     setActivity();
