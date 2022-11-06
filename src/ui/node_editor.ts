@@ -76,7 +76,7 @@ window.addEventListener(`mousemove`, (e) => {
   if (active != null) moveNode();
 });
 
-wrapper.addEventListener(`scroll`, (e) => {
+wrapper.addEventListener(`scroll`, () => {
   if (active == null) return;
   moveNode();
 });
