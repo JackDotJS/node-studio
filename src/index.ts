@@ -1,9 +1,10 @@
-import memory from "./memory.js";
-import isInterface from './util/isInterface.js';
+import memory from "./memory";
+import setProjectTitle from './util/setProjectTitle';
+import isInterface from './util/isInterface';
 
-import './ui/slider.js';
-import './ui/contextMenu.js';
-import './ui/node_editor.js';
+import './ui/slider';
+import './ui/contextMenu';
+import './ui/node_editor';
 
 console.warn(`reminder: cursor changes don't work with the console open!!!`);
 
@@ -34,7 +35,7 @@ const pTitle: HTMLInputElement | null = document.querySelector(`#projectTitle`);
 
 if (!pTitle) {
   throw new Error(`projectTitle element not found`);
-}
+}6
 
 setProjectTitle(pTitle.value || pTitle.placeholder);
 

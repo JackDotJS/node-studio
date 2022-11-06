@@ -1,3 +1,3 @@
 @echo off
-call npm run build
+call npm run tauri build
 pause

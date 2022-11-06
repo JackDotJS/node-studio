@@ -68,8 +68,7 @@ function getKeyIndex(x: number, y: number): number | undefined {
     }
 
     if (!nIndexTest.previousElementSibling) {
-      throw new Error(`nIndexTest.previousElementSibling is null`);
-      // FIXME: this should probably just exit the loop at this point
+      break;
     }
 
     nIndexTest = nIndexTest.previousElementSibling as HTMLElement;
@@ -202,9 +201,11 @@ new ResizeObserver(() => {
    * it's still significantly more performant than modifying the style attributes
    * for each individual element.
    */
-  for (const sheet of document.styleSheets) {
+  for (let i = 0; i < document.styleSheets.length; i++) {
+    const sheet = document.styleSheets[i];
     (function searchRuleList(sheet): void {
-      for (const ruleList of sheet.cssRules) {
+      for (let i2 = 0; i2 < sheet.cssRules.length; i2++) {
+        const ruleList = sheet.cssRules[i2]
         if (ruleList instanceof CSSImportRule) {
           return searchRuleList(ruleList.styleSheet);
         } else if (ruleList instanceof CSSStyleRule && ruleList.selectorText === `#keys .black`) {

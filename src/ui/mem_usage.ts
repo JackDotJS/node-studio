@@ -15,8 +15,10 @@ if (!readout) {
   throw new Error(`memUsage element not found`);
 }
 
-setInterval(() => {
-  const mem = memUsage().rss;
+// FIXME: we need a new way to measure memory usage
 
-  readout.innerHTML = `MEM: ${formatBytes(mem)}`;
-}, 2500);
+// setInterval(() => {
+//   const mem = window.performance.memory.totalJSHeapSize;
+
+//   readout.innerHTML = `MEM: ${formatBytes(mem)}`;
+// }, 2500);
