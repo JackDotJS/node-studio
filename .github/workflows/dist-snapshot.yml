@@ -14,9 +14,7 @@ jobs:
         run: echo "SHA_SHORT=$(git rev-parse --short HEAD) >> $GITHUB_OUTPUT"
       
       - name: Install Rust
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
+        uses: dtolnay/rust-toolchain@stable
 
       - name: Set up Node.JS environment
         uses: actions/setup-node@master
@@ -28,9 +26,6 @@ jobs:
 
       - name: Begin Compiling
         run: npm run tauri build
-      - uses: tauri-apps/tauri-action@v0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Upload Snapshot
         uses: actions/upload-artifact@v3
