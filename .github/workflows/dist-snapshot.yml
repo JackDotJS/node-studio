@@ -11,7 +11,7 @@ jobs:
       - name: Get revision hash
         id: getrev
         #run: echo "::set-output name=SHA_SHORT::$(git rev-parse --short HEAD)"
-        run: echo "SHA_SHORT=$(git rev-parse --short HEAD) >> $GITHUB_OUTPUT"
+        run: echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
       
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
