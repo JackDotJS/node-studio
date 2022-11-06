@@ -35,5 +35,5 @@ jobs:
       - name: Upload Snapshot
         uses: actions/upload-artifact@v3
         with:
-          name: SNAPSHOT-${{ process.env.SHA_SHORT }}-node-studio-windows-x64
+          name: SNAPSHOT-${{ steps.getrev.outputs.SHA_SHORT }}-node-studio-windows-x64
           path: src-tauri/target/release/bundle/msi
