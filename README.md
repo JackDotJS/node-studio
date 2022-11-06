@@ -1,7 +1,7 @@
 <div align="center">
   <img src="https://raw.githubusercontent.com/JackDotJS/node-studio/main/assets/node-studio.png" width="128px">
   <h3>Node Studio</h3>
-  <p>Node-based music production tool, built with Electron.</p>
+  <p>Node-based music production tool, built with Tauri.</p>
 
   <p align="center">
   <a href="https://discord.gg/s5nQBxFPp2"><img src="https://img.shields.io/discord/803584639541313577?label=Chat&color=%235865F2&logo=discord&logoColor=%23ffffff&style=for-the-badge" alt="Discord" /></a>
