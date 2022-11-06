@@ -7,7 +7,7 @@
     "withGlobalTauri": true
   },
   "package": {
-    "productName": "Node Studio",
+    "productName": "node-studio",
     "version": "0.1.0"
   },
   "tauri": {
@@ -60,7 +60,6 @@
     },
     "windows": [
       {
-        "url": "src/index.html",
         "fullscreen": false,
         "width": 1000,
         "height": 800,
