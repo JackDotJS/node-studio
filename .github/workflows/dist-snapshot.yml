@@ -11,24 +11,27 @@ jobs:
       - name: Get revision hash
         id: getrev
         #run: echo "::set-output name=SHA_SHORT::$(git rev-parse --short HEAD)"
-        run: echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+        run: |
+          echo "Hello world! What is github env?";
+          echo $GITHUB_ENV;
+          echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_ENV;
       
-      - name: Install Rust
-        uses: dtolnay/rust-toolchain@stable
+      #- name: Install Rust
+      #  uses: dtolnay/rust-toolchain@stable
 
-      - name: Set up Node.JS environment
-        uses: actions/setup-node@master
-        with:
-          node-version: 17
+      #- name: Set up Node.JS environment
+      #  uses: actions/setup-node@master
+      #  with:
+      #    node-version: 17
 
-      - name: Install Dependencies
-        run: npm install
+      #- name: Install Dependencies
+      #  run: npm install
 
-      - name: Begin Compiling
-        run: npm run tauri build
+      #- name: Begin Compiling
+      #  run: npm run tauri build
       
       - name: Upload Snapshot
         uses: actions/upload-artifact@v3
         with:
-          name: SNAPSHOT-${{ env.SHA_SHORT }}-node-studio-windows-x64
-          path: src-tauri/target/release/bundle/msi
+          name: NOT-A-SNAPSHOT-${{ env.SHA_SHORT }}-node-studio-windows-x64
+          path: README.md
