@@ -5,18 +5,16 @@ jobs:
   build-snapshot:
     runs-on: windows-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v3
       
-      - name: Get revision hash
-        id: getrev
-        #run: echo "::set-output name=SHA_SHORT::$(git rev-parse --short HEAD)"
-        run: $SHA = (git rev-parse --short HEAD)
+      - name: Get Revision Hash (WINDOWS)
+        run: $env:SHA_SHORT = git rev-parse --short HEAD
       
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
 
-      - name: Set up Node.JS environment
+      - name: Set Up Node.JS Environment
         uses: actions/setup-node@master
         with:
           node-version: 17
@@ -30,5 +28,5 @@ jobs:
       - name: Upload Snapshot
         uses: actions/upload-artifact@v3
         with:
-          name: SNAPSHOT-${{ $SHA }}-node-studio-windows-x64
+          name: SNAPSHOT-${{ env.SHA_SHORT }}-node-studio-windows-x64
           path: src-tauri/target/release/bundle/msi
