@@ -3,32 +3,42 @@ on: [push]
 
 jobs:
   build-snapshot:
-    runs-on: windows-latest
+    strategy:
+      matrix:
+        # TODO: add linux later
+        os: [windows-latest]
+
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
+
+      - name: Get Revision Hash (Linux/Bash)
+        if: matrix.os == 'ubuntu-latest'
+        run: echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
       
-      - name: Get Revision Hash (WINDOWS)
+      - name: Get Revision Hash (Windows/Powershell)
+        if: matrix.os == 'windows-latest'
         run: echo "SHA_SHORT=$(git rev-parse --short HEAD)" | Add-Content -Path $env:GITHUB_ENV
       
-      # - name: Install Rust
-      #   uses: dtolnay/rust-toolchain@stable
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
 
-      # - name: Set Up Node.JS Environment
-      #   uses: actions/setup-node@master
-      #   with:
-      #     node-version: 17
+      - name: Set Up Node.JS Environment
+        uses: actions/setup-node@master
+        with:
+          node-version: 17
 
-      # - name: Install Dependencies
-      #   run: npm install
+      - name: Install Dependencies
+        run: npm install
 
-      # - name: Compile Application
-      #   run: npm run tauri build
+      - name: Compile Application
+        run: npm run tauri build
       
       - name: Upload Snapshot
         uses: actions/upload-artifact@v3
         with:
-          # name: SNAPSHOT-${{ env.SHA_SHORT }}-node-studio-windows-x64
-          # path: src-tauri/target/release/bundle/msi
-          name: WORKFLOW-DEBUG-${{ env.SHA_SHORT }}-asdf
-          path: src
+          name: SNAPSHOT-${{ env.SHA_SHORT }}-node-studio-windows-x64
+          path: src-tauri/target/release/bundle/msi
+          # name: WORKFLOW-DEBUG-${{ env.SHA_SHORT }}-asdf
+          # path: src
