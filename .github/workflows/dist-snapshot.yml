@@ -4,8 +4,6 @@ on: [push]
 jobs:
   build-snapshot:
     runs-on: windows-latest
-    outputs:
-      sha-short: ${{ steps.getrev.outputs.sha }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -13,7 +11,7 @@ jobs:
       - name: Get revision hash
         id: getrev
         #run: echo "::set-output name=SHA_SHORT::$(git rev-parse --short HEAD)"
-        run: echo "sha=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+        run: echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
       
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
@@ -32,5 +30,5 @@ jobs:
       - name: Upload Snapshot
         uses: actions/upload-artifact@v3
         with:
-          name: SNAPSHOT-${{ steps.getrev.outputs.sha-short }}-node-studio-windows-x64
+          name: SNAPSHOT-${{ env.SHA_SHORT }}-node-studio-windows-x64
           path: src-tauri/target/release/bundle/msi
