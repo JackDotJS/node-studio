@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/JackDotJS/node-studio/main/assets/node-studio.png" width="128px">
+  <img src="https://raw.githubusercontent.com/JackDotJS/node-studio/tauri/src-tauri/icons/icon.png" width="128px">
   <h3>Node Studio</h3>
   <h1>Contributing Guidelines</h1>
 </div>
@@ -30,9 +30,9 @@
   <li>
     <b>Avoid adding third-party dependencies to the project.</b>
     <br><br>
-    Dependencies add a potential point of failure, and a somewhat unknown variable to the project's stability and security. Certain dependencies may also needlessly bloat the project size, which is very undesirable for end-users (especially since Electron apps already start at around 200MB!). This is why Node Studio uses as little dependencies as possible. 
+    Dependencies add a potential point of failure, and a somewhat unknown variable to the project's stability and security. Certain dependencies may also needlessly bloat the project size, which is very undesirable for end-users. This is why Node Studio uses as little dependencies as possible. 
     <br><br> 
-    If your contribution requires adding a new dependency, please make sure you do your research before proposing it in a pull request. Ask yourself these questions:
+    If your contribution requires adding a new dependency, please make sure you do your research before proposing it in a pull request. Ask yourself questions like:
     <br><br>
     <ul>
       <li>
@@ -45,7 +45,7 @@
         Does the dependency provide functionality for more than one or two parts of our code?
       </li>
       <li>
-        Can vanilla JS or Node.JS provide similar functionality?
+        Can vanilla JS features or Rust provide similar functionality?
       </li>
     </ul>
     <br>
