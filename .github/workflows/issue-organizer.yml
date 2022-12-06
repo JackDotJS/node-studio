@@ -12,10 +12,10 @@ jobs:
         uses: actions/add-to-project@v0.4.0
         with:
           project-url: https://github.com/users/JackDotJS/projects/1
-          github-token: ${{ secrets.ISSUE_ORGANIZATION }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Add Triage Label
         uses: github/issue-labeler@v2.5
         with:
           configuration-path: .github/labeler.yml
-          repo-token: ${{ secrets.ISSUE_ORGANIZATION }}
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
           enable-versioned-regex: 0
