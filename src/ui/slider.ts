@@ -1,4 +1,4 @@
-import isInterface from '../util/isInterface.js';
+import isInterface from '../util/is-interface.js';
 
 document.querySelectorAll(`.slider`).forEach((slider) => {
   // there's probably a better way to do all this
