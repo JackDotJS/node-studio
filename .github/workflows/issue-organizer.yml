@@ -5,7 +5,7 @@ on:
       - opened
 
 jobs:
-  add-to-project:
+  assign-label-and-project:
     runs-on: [ubuntu-latest]
     steps:
       - name: Assign to Project
@@ -13,10 +13,9 @@ jobs:
         with:
           project-url: https://github.com/users/JackDotJS/projects/1
           github-token: ${{ secrets.ISSUE_ORGANIZATION }}
-
       - name: Add Triage Label
         uses: github/issue-labeler@v2.5
         with:
-          project-url: https://github.com/users/JackDotJS/projects/1
           configuration-path: .github/labeler.yml
           repo-token: ${{ secrets.ISSUE_ORGANIZATION }}
+          enable-versioned-regex: 0
