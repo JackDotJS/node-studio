@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/JackDotJS/node-studio/main/assets/node-studio.png" width="128px">
+  <img src="https://raw.githubusercontent.com/JackDotJS/node-studio/tauri/src-tauri/icons/icon.png" width="128px">
   <h3>Node Studio</h3>
   <p>Node-based music production tool, built with Tauri.</p>
 
