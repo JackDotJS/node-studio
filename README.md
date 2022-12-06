@@ -41,7 +41,7 @@ Coming soon!
 Coming soon!
 
 <div align="center">
-  <h1>Contributing</h1>
+  <h1>Suggestions & Contributions</h1>
 </div>
 
 **Suggestions are always welcome!** Even if you aren't really a developer, feel free to use the [issues page](../../issues) to submit your ideas.
