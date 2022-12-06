@@ -1,10 +1,10 @@
 import memory from "./memory";
-import setProjectTitle from './util/setProjectTitle';
-import isInterface from './util/isInterface';
+import setProjectTitle from './util/set-project-title';
+import isInterface from './util/is-interface';
 
 import './ui/slider';
-import './ui/contextMenu';
-import './ui/node_editor';
+import './ui/context-menu';
+import './ui/node-editor';
 
 console.warn(`reminder: cursor changes don't work with the console open!!!`);
 
@@ -41,7 +41,7 @@ setProjectTitle(pTitle.value || pTitle.placeholder);
 
 import('./ui/piano.js');
 import('./ui/graphs.js');
-import('./ui/mem_usage.js');
+import('./ui/memory-usage.js');
 import('./classes/project.js');
 
 window.addEventListener(`keydown`, (e: KeyboardEvent) => {
