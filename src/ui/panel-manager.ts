@@ -56,43 +56,47 @@ window.addEventListener(`mousemove`, (e) => {
   if (target == null || target.nextElementSibling == null) return;
 
   const sib = target.nextElementSibling;
+  const parent = sib.parentElement;
 
   if (!isInterface<HTMLElement>(target, `offsetWidth`)) return;
   if (!isInterface<HTMLElement>(sib, `offsetWidth`)) return;
   if (!isInterface<HTMLElement>(target, `offsetHeight`)) return;
   if (!isInterface<HTMLElement>(sib, `offsetHeight`)) return;
+  if (!isInterface<HTMLElement>(parent, `offsetWidth`)) return;
   
   let divSize = Math.floor(divSizeX);
   let leftRect = target.getBoundingClientRect();
   let rightRect = sib.getBoundingClientRect();
   let sumSize = (leftRect.width + rightRect.width);
-  let isLast = (sib.parentElement?.lastElementChild === sib);
+  let isLast = (parent?.lastElementChild === sib);
   let endLimit = isLast ? sumSize : sumSize - divSize;
 
-  if (target.parentElement?.classList.contains(`resize-v`)) {
+  if (parent?.classList.contains(`resize-v`)) {
     sumSize = (leftRect.height + rightRect.height);
     divSize = Math.floor(divSizeY);
     endLimit = isLast ? sumSize : sumSize - divSize;
 
     const clamped = Math.min(Math.max((e.clientY + (divSize / 2)) - leftRect.top, divSize), endLimit)
 
-    target.style.flexGrow = `0`;
-    target.style.minHeight = `${clamped}px`;
-    target.style.maxHeight = `${clamped}px`;
+    target.style.flex = `none`;
+    target.style.minHeight = `${divSize}px`;
+    target.style.height = `${(clamped / parent?.offsetHeight) * 100}%`;
 
-    sib.style.flexGrow = `0`;
-    sib.style.minHeight = `${sumSize - clamped}px`;
-    sib.style.maxHeight = `${sumSize - clamped}px`;
+    sib.style.flex = `none`;
+    sib.style.minHeight = `${divSize}px`;
+    sib.style.height = `${((sumSize - clamped) / parent?.offsetHeight) * 100}%`;
+
+    console.log(sumSize - clamped, parent?.offsetHeight, (sumSize - clamped) / parent?.offsetHeight)
   } else {
     const clamped = Math.min(Math.max((e.clientX + (divSize / 2)) - leftRect.left, divSize), endLimit)
 
-    target.style.flexGrow = `0`;
-    target.style.minWidth = `${clamped}px`;
-    target.style.maxWidth = `${clamped}px`;
+    target.style.flex = `none`;
+    target.style.minWidth = `${divSize}px`;
+    target.style.width = `${(clamped / parent?.offsetWidth) * 100}%`;
 
-    sib.style.flexGrow = `0`;
-    sib.style.minWidth = `${sumSize - clamped}px`;
-    sib.style.maxWidth = `${sumSize - clamped}px`;
+    sib.style.flex = `none`;
+    sib.style.minWidth = `${divSize}px`;
+    sib.style.width = `${((sumSize - clamped) / parent?.offsetWidth) * 100}%`;
   }
 });
 
