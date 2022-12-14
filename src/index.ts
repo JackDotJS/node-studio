@@ -2,10 +2,6 @@ import memory from "./memory";
 import setProjectTitle from './util/set-project-title';
 import isInterface from './util/is-interface';
 
-import './ui/slider';
-import './ui/context-menu';
-import './ui/node-editor';
-
 console.warn(`reminder: cursor changes don't work with the console open!!!`);
 
 memory.masterVolume = memory.audioCTX.createGain();
@@ -39,6 +35,10 @@ if (!pTitle) {
 
 setProjectTitle(pTitle.value || pTitle.placeholder);
 
+import('./ui/panel-manager.js');
+import('./ui/slider');
+import('./ui/context-menu');
+import('./ui/node-editor');
 import('./ui/piano.js');
 import('./ui/graphs.js');
 import('./ui/memory-usage.js');
