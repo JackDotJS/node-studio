@@ -8,6 +8,8 @@ if (!container) {
 }
 
 let target: Element | null = null;
+let sumSize: number | null = null;
+let totalPanels = 1;
 let divSizeX = 0;
 let divSizeY = 0;
 
@@ -50,13 +52,17 @@ container.addEventListener(`mousedown`, (e) => {
 
   console.log(`start resizing`)
   target = elem;
+  totalPanels = elem.parentElement.childElementCount;
+
+  console.log(totalPanels);
 });
 
 window.addEventListener(`mousemove`, (e) => {
   if (target == null || target.nextElementSibling == null) return;
 
   const sib = target.nextElementSibling;
-  const parent = sib.parentElement;
+  const parent = target.parentElement;
+  const isVertical = parent?.classList.contains(`resize-v`);
 
   if (!isInterface<HTMLElement>(target, `offsetWidth`)) return;
   if (!isInterface<HTMLElement>(sib, `offsetWidth`)) return;
@@ -67,36 +73,52 @@ window.addEventListener(`mousemove`, (e) => {
   let divSize = Math.floor(divSizeX);
   let leftRect = target.getBoundingClientRect();
   let rightRect = sib.getBoundingClientRect();
-  let sumSize = (leftRect.width + rightRect.width);
   let isLast = (parent?.lastElementChild === sib);
+
+  if (sumSize == null) {
+    if (isVertical) {
+      sumSize = leftRect.height + rightRect.height;
+    } else {
+      sumSize = leftRect.width + rightRect.width;
+    }
+  }
+
   let endLimit = isLast ? sumSize : sumSize - divSize;
 
-  if (parent?.classList.contains(`resize-v`)) {
-    sumSize = (leftRect.height + rightRect.height);
+  target.style.flex = `none`;
+  sib.style.flex = `none`;
+
+  // there's probably a better way to do this
+  // *pings @bdotsamir 100000000000000000000000 times*
+  if (isVertical) {
     divSize = Math.floor(divSizeY);
     endLimit = isLast ? sumSize : sumSize - divSize;
 
-    const clamped = Math.min(Math.max((e.clientY + (divSize / 2)) - leftRect.top, divSize), endLimit)
-
-    target.style.flex = `none`;
+    const sizePixels = (e.clientY + (divSize / 2)) - leftRect.top;
+    const sizeClamped = Math.min(Math.max(sizePixels, divSize), endLimit);
+    const sizePercent = (sizeClamped / parent?.offsetHeight) * 100;
+    const nextSize = ((sumSize - sizeClamped) / parent?.offsetHeight) * 100;
+    
     target.style.minHeight = `${divSize}px`;
-    target.style.height = `${(clamped / parent?.offsetHeight) * 100}%`;
-
-    sib.style.flex = `none`;
-    sib.style.minHeight = `${divSize}px`;
-    sib.style.height = `${((sumSize - clamped) / parent?.offsetHeight) * 100}%`;
-
-    console.log(sumSize - clamped, parent?.offsetHeight, (sumSize - clamped) / parent?.offsetHeight)
+    target.style.height = `${sizePercent}%`;
+    target.style.maxHeight = `calc(100% - ${divSize * (totalPanels - 2)}px)`;
+    
+    if (!isLast) sib.style.minHeight = `${divSize}px`;
+    sib.style.height = `${nextSize}%`;
+    sib.style.maxHeight = `calc(100% - ${divSize * (totalPanels - 2)}px)`;
   } else {
-    const clamped = Math.min(Math.max((e.clientX + (divSize / 2)) - leftRect.left, divSize), endLimit)
+    const sizePixels = (e.clientX + (divSize / 2)) - leftRect.left;
+    const sizeClamped = Math.min(Math.max(sizePixels, divSize), endLimit);
+    const sizePercent = (sizeClamped / parent?.offsetWidth) * 100;
+    const nextSize = ((sumSize - sizeClamped) / parent?.offsetWidth) * 100;
 
-    target.style.flex = `none`;
     target.style.minWidth = `${divSize}px`;
-    target.style.width = `${(clamped / parent?.offsetWidth) * 100}%`;
+    target.style.width = `${sizePercent}%`;
+    target.style.maxWidth = `calc(100% - ${divSize * (totalPanels - 2)}px)`;
 
-    sib.style.flex = `none`;
-    sib.style.minWidth = `${divSize}px`;
-    sib.style.width = `${((sumSize - clamped) / parent?.offsetWidth) * 100}%`;
+    if (!isLast) sib.style.minWidth = `${divSize}px`;
+    sib.style.width = `${nextSize}%`;
+    sib.style.maxWidth = `calc(100% - ${divSize * (totalPanels - 2)}px)`;
   }
 });
 
@@ -104,6 +126,7 @@ const finish = () => {
   if (target == null) return;
   console.log(`stop resizing`)
   target = null;
+  sumSize = null;
 }
 
 window.addEventListener(`mouseup`, finish);
