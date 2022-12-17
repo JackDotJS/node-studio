@@ -2,6 +2,9 @@ import memory from "./memory";
 import setProjectTitle from './util/set-project-title';
 import isInterface from './util/is-interface';
 
+import { invoke } from "@tauri-apps/api";
+import { getVersion } from "@tauri-apps/api/app";
+
 console.warn(`reminder: cursor changes don't work with the console open!!!`);
 
 memory.masterVolume = memory.audioCTX.createGain();
@@ -31,9 +34,11 @@ const pTitle: HTMLInputElement | null = document.querySelector(`#projectTitle`);
 
 if (!pTitle) {
   throw new Error(`projectTitle element not found`);
-}6
+}
 
-setProjectTitle(pTitle.value || pTitle.placeholder);
+setProjectTitle("APP TITLE TESTING");
+
+invoke("enable_drpc", { nsVersion: await getVersion(), projectName: "TEST PROJECT NAME" });
 
 import('./ui/panel-manager.js');
 import('./ui/slider');
@@ -50,7 +55,7 @@ window.addEventListener(`keydown`, (e: KeyboardEvent) => {
   if (isInterface<HTMLInputElement>(e.target, `type`)) {
     if (e.target.type !== `text` && e.target.type !== `number`) return;
 
-    e.target.blur();
+    e.target.blur(); // blur unfocuses the element
   }
 
   if (isInterface<HTMLTextAreaElement>(e.target, `id`)) {
