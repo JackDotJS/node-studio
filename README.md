@@ -6,7 +6,7 @@
   <p align="center">
   <a href="https://discord.gg/s5nQBxFPp2"><img src="https://img.shields.io/discord/803584639541313577?label=Chat&color=%235865F2&logo=discord&logoColor=%23ffffff&style=for-the-badge" alt="Discord" /></a>
   <a href="../../releases"><img src="https://img.shields.io/github/downloads/JackDotJS/node-studio/total?style=for-the-badge" alt="Downloads" /></a>
-  <a href="../../actions/workflows/dist-snapshot.yml"><img src="https://img.shields.io/github/workflow/status/JackDotJS/node-studio/Snapshot%20Builds?label=SNAPSHOT%20BUILDS&style=for-the-badge" alt="Snapshots" /></a>
+  <a href="../../actions/workflows/dist-snapshot.yml"><img src="https://img.shields.io/github/actions/workflow/status/JackDotJS/node-studio/dist-snapshot.yml?branch=main&label=SNAPSHOT%20BUILDS&style=for-the-badge" alt="Snapshots" /></a>
 
 </p>
 </div>
