@@ -38,7 +38,9 @@ if (!pTitle) {
 
 setProjectTitle("APP TITLE TESTING");
 
-invoke("enable_drpc", { nsVersion: await getVersion(), projectName: "TEST PROJECT NAME" });
+getVersion().then((appVersion) => {
+  invoke("enable_drpc", { nsVersion: appVersion, projectName: "TEST PROJECT NAME" });
+});
 
 import('./ui/panel-manager.js');
 import('./ui/slider');
