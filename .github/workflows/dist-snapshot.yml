@@ -17,12 +17,18 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Get Revision Hash (Linux/Bash)
-        if: matrix.os == 'ubuntu-latest'
+        if: matrix.os == 'ubuntu-20.04'
         run: echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
       
       - name: Get Revision Hash (Windows/Powershell)
         if: matrix.os == 'windows-latest'
         run: echo "SHA_SHORT=$(git rev-parse --short HEAD)" | Add-Content -Path $env:GITHUB_ENV
+
+      - name: Install Tauri Dependencies (Linux)
+        if: matrix.platform == 'ubuntu-20.04'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgtk-3-dev libwebkit2gtk-4.0-dev librsvg2-dev
       
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
@@ -38,16 +44,24 @@ jobs:
           node-version: 17
           cache: 'npm'
 
-      - name: Install Dependencies
+      - name: Install NPM Dependencies
         run: npm install
 
       - name: Compile Application
         run: npm run tauri build
       
-      - name: Upload Snapshot
+      - name: Upload Snapshot (Windows)
+        if: matrix.os == 'windows-latest'
         uses: actions/upload-artifact@v3
         with:
           name: SNAPSHOT-${{ env.SHA_SHORT }}-node-studio-windows-x64
           path: src-tauri/target/release/bundle/msi
-          # name: WORKFLOW-DEBUG-${{ env.SHA_SHORT }}-asdf
-          # path: src
+      
+      - name: Upload Snapshot (Linux)
+        if: matrix.os == 'ubuntu-20.04'
+        uses: actions/upload-artifact@v3
+        with:
+          # TODO: i honestly have no idea if this is the correct path
+          # consider this a placeholder more than anything else
+          name: SNAPSHOT-${{ env.SHA_SHORT }}-node-studio-linux-x64
+          path: src-tauri/target/release/bundle/deb
