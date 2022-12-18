@@ -27,10 +27,16 @@ jobs:
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
 
+      - name: Rust Cache
+        uses: swatinem/rust-cache@v2
+        with:
+          workspaces: './src-tauri -> target'
+
       - name: Set Up Node.JS Environment
         uses: actions/setup-node@master
         with:
           node-version: 17
+          cache: 'npm'
 
       - name: Install Dependencies
         run: npm install
