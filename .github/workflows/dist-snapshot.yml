@@ -1,5 +1,8 @@
 name: Snapshot Builds
-on: [push]
+on: 
+  push:
+    branches:
+      - tauri
 
 jobs:
   build-snapshot:
