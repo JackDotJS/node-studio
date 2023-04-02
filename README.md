@@ -20,7 +20,11 @@
 </div>
 
 
-**Node Studio** is a powerful, free, and fully open-source desktop music production app, designed with the goal of making music creation simple and intuitive.
+> (Originally posted to Discord on March 13, 2022)
+>
+> A few months ago, I discovered a web API that allows you to synthesize audio via JavaScript, and it got me thinking of this crazy idea to try making a full-fledged, digital audio workstation with it. I originally wanted to make a self-contained website out of this idea, but I'm too pea-brained to work around browser restrictions. I'm now attempting to build a desktop application using Tauri.
+
+**Node Studio** is a powerful, free, and fully open-source desktop music production app, designed to makE music creation simple and intuitive.
 
 The major goals of this project include:
 - Extensive customization options (including themes and plugin support)
