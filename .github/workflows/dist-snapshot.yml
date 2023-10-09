@@ -37,18 +37,23 @@ jobs:
         uses: swatinem/rust-cache@v2
         with:
           workspaces: './src-tauri -> target'
+      
+      - name: Set Up PNPM
+        uses: pnpm/action-setup@latest
+        with:
+          version: ^8.9.0
 
       - name: Set Up Node.JS Environment
         uses: actions/setup-node@master
         with:
           node-version: 17
-          cache: 'npm'
+          cache: 'pnpm'
 
-      - name: Install NPM Dependencies
-        run: npm install
+      - name: Install Dependencies from NPM
+        run: pnpm i
 
       - name: Compile Application
-        run: npm run tauri build
+        run: pnpm run tauri build
       
       - name: Upload Snapshot (Windows)
         if: matrix.os == 'windows-latest'
