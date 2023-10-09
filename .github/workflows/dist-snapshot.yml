@@ -39,12 +39,12 @@ jobs:
           workspaces: './src-tauri -> target'
       
       - name: Set Up PNPM
-        uses: pnpm/action-setup@latest
+        uses: pnpm/action-setup@v2
         with:
           version: ^8.9.0
 
       - name: Set Up Node.JS Environment
-        uses: actions/setup-node@master
+        uses: actions/setup-node@v3
         with:
           node-version: 17
           cache: 'pnpm'
