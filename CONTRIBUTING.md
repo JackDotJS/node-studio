@@ -1,8 +1,23 @@
 <div align="center">
   <img src="https://raw.githubusercontent.com/JackDotJS/node-studio/tauri/src-tauri/icons/icon.png" width="128px">
   <h3>Node Studio</h3>
-  <h1>Contributing Guidelines</h1>
+  <h1>Information for Contributors</h1>
 </div>
+
+
+### Setting Up Your Dev Environment
+
+You will need 3 things to get started:
+
+- [Node.JS](https://nodejs.org/), v18 or newer
+- [Rust](https://www.rust-lang.org/)
+- [Any additional platform-specific prerequisites listed for Tauri](https://tauri.app/v1/guides/getting-started/prerequisites).
+
+Once Node.JS is installed, you may then set up PNPM, our package manager of choice. [You can find instructions for that here](https://pnpm.io/installation#using-corepack).
+
+Finally, you can download the project's dependencies by running `pnpm i` (or just running `./ez_setup.sh`) in the project directory. Now you're ready to code!
+
+### Contributing Guidelines
 
 <ol>
   <li>
@@ -30,7 +45,7 @@
   <li>
     <b>Avoid adding third-party dependencies to the project.</b>
     <br><br>
-    Dependencies add a potential point of failure, and a somewhat unknown variable to the project's stability and security. Certain dependencies may also needlessly bloat the project size, which is very undesirable for end-users. This is why Node Studio uses as little dependencies as possible. 
+    Dependencies add a potential point of failure, and a somewhat unknown variable to the project's stability and security. Certain dependencies may also needlessly bloat the project size, which is very undesirable for end-users. This is why Node Studio tries to use as little dependencies as possible. 
     <br><br> 
     If your contribution requires adding a new dependency, please make sure you do your research before proposing it in a pull request. Ask yourself questions like:
     <br><br>
@@ -45,7 +60,7 @@
         Does the dependency provide functionality for more than one or two parts of our code?
       </li>
       <li>
-        Can vanilla JS features or Rust provide similar functionality?
+        Can vanilla JS/TS features or Rust provide similar functionality?
       </li>
     </ul>
     <br>
