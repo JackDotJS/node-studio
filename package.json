@@ -10,7 +10,9 @@
     "tauri": "tauri"
   },
   "dependencies": {
-    "@tauri-apps/api": "^1.5.0"
+    "@tauri-apps/api": "^1.5.0",
+    "solid-js": "^1.7.12",
+    "solid-styled-components": "^0.28.5"
   },
   "devDependencies": {
     "@tauri-apps/cli": "^1.5.2",
