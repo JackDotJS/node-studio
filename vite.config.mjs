@@ -1,4 +1,5 @@
 import { defineConfig } from "vite";
+import solidPLugin from 'vite-plugin-solid';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -21,4 +22,7 @@ export default defineConfig({
     // produce sourcemaps for debug builds
     sourcemap: !!process.env.TAURI_DEBUG,
   },
+  plugins: [
+    solidPLugin()
+  ]
 });
