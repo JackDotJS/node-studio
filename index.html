@@ -10,61 +10,11 @@
   <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
 
   <title>Node Studio</title>
-
-  <!-- stylesheets -->
-
-  <link rel="stylesheet" href="src/css/index.css" />
-
-  <!-- scripts -->
-
-  <script type="module" src="src/index.ts"></script>
 </head>
 
 <body>
-  <div id="menubar" class="bar">
-    <div>
-      <input type="button" id="mbFile" value="File">
-      <input type="button" id="mbEdit" value="Edit">
-      <input type="button" id="mbView" value="View">
-      <input type="button" id="mbNodes" value="Nodes">
-      <input type="button" id="mbTrack" value="Track">
-      <input type="button" id="mbHelp" value="Help">
-    </div>
+  <noscript>You must enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
 
-    <div>
-      <input type="text" id="projectTitle" placeholder="Untitled Project">
-    </div>
-
-    <div>
-      <canvas id="spectrum"></canvas>
-      <canvas id="waveform"></canvas>
-    </div>
-  </div>
-
-  <div id="context" class="cmhide"></div>
-
-  <div id="editor-space" class="panel-container resize-v">
-    <div class="panel-container resize-h">
-      <div class="panel">panel A</div>
-      <div class="panel-container resize-v">
-        <div class="panel">panel B</div>
-        <div class="panel">panel C</div>
-        <div class="panel">panel D</div>
-      </div>
-    </div>
-    <div class="panel-container resize-h">
-      <div class="panel">panel E</div>
-      <div class="panel">panel F</div>
-      <div class="panel">panel G</div>
-      <div class="panel">panel H</div>
-    </div>
-  </div>
-
-  <div id="statusbar" class="bar">
-    <a href="https://github.com/JackDotJS/node-studio" id="version" target="_blank">Node Studio</a>
-    <div class="spacer"></div>
-    <span id="sounds">SND: 0</span>
-    <span id="latency">LAT: ...</span>
-    <span id="memUsage">MEM: ...</span>
-  </div>
+  <script src="/src/index.tsx" type="module"></script>
 </body>
