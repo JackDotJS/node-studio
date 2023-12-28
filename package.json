@@ -15,7 +15,7 @@
     "solid-styled-components": "^0.28.5"
   },
   "devDependencies": {
-    "@tauri-apps/cli": "^1.5.2",
+    "@tauri-apps/cli": "^1.5.6",
     "@typescript-eslint/eslint-plugin": "^5.46.1",
     "@typescript-eslint/parser": "^5.46.1",
     "eslint": "^8.29.0",
