@@ -1,5 +1,5 @@
-import memory from "../memory.js";
-import isInterface from "../util/is-interface.js";
+import memory from "../../memory.js";
+import isInterface from "../../util/is-interface.js";
 
 const container = document.getElementById(`keys`);
 
@@ -207,7 +207,7 @@ new ResizeObserver(() => {
       for (let i2 = 0; i2 < sheet.cssRules.length; i2++) {
         const ruleList = sheet.cssRules[i2]
         if (ruleList instanceof CSSImportRule) {
-          return searchRuleList(ruleList.styleSheet);
+          return searchRuleList(ruleList.styleSheet!);
         } else if (ruleList instanceof CSSStyleRule && ruleList.selectorText === `#keys .black`) {
           const width = Math.round(wkey.offsetWidth * 0.7);
 

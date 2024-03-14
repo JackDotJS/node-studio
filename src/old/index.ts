@@ -1,4 +1,4 @@
-import memory from "./memory";
+import memory from "../memory.js";
 import setProjectTitle from './util/set-project-title';
 import isInterface from './util/is-interface';
 
@@ -49,7 +49,7 @@ import('./ui/node-editor');
 import('./ui/piano.js');
 import('./ui/graphs.js');
 import('./ui/memory-usage.js');
-import('./classes/project.js');
+import('../classes/project.js');
 
 window.addEventListener(`keydown`, (e: KeyboardEvent) => {
   if (e.key != `Enter` && e.key != `Escape`) return;
