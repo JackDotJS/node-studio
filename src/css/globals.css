@@ -5,7 +5,7 @@
 @import "ui/toolbars.css";
 @import "ui/context-menu.css";
 @import "ui/control-panel.css"; */
-@import "themes/default-dark.css"; 
+@import "default-dark.css"; 
 
 html, body {
   scroll-behavior: smooth;
