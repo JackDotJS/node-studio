@@ -1,11 +1,11 @@
-@import "modules/module-generic.css";
+/* @import "modules/module-generic.css";
 @import "modules/module-track-editor.css";
 @import "modules/module-node-editor.css";
 @import "modules/module-keyboard.css";
 @import "ui/toolbars.css";
 @import "ui/context-menu.css";
-@import "ui/control-panel.css";
-@import "themes/default-dark.css";
+@import "ui/control-panel.css"; */
+@import "default-dark.css"; 
 
 html, body {
   scroll-behavior: smooth;

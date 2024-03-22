@@ -1,29 +1,29 @@
-#controlPanel {
+.controlPanel {
   display: flex;
   justify-content: space-between;
   margin: 0.5rem;
 }
 
-#controlPanel input[type=button] {
+.controlPanel input[type=button] {
   background-color: var(--cp-button);
   color: var(--cp-button-text);
 }
 
-#controlPanel input[type=button]:hover {
+.controlPanel input[type=button]:hover {
   background-color: var(--cp-button-hover);
 }
 
-#controlPanel input[type=button]:active {
+.controlPanel input[type=button]:active {
   background-color: var(--cp-button-active);
 }
 
-#controlPanel > div {
+.controlPanel > div {
   width: 100%;
   max-width: 20rem;
   background: transparent;
 }
 
-#controlPanel > *:not(:first-child) {
+.controlPanel > *:not(:first-child) {
   margin-left: 1rem;
 }
 

@@ -1,0 +1,8 @@
+
+.waveform {
+  width: 10rem;
+  height: 2rem;
+  color: var(--mb-graph);
+  border: 2px solid var(--mb-graph-border);
+  border-radius: 0.25rem;
+}
