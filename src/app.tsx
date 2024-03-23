@@ -1,14 +1,22 @@
-import { type Component } from 'solid-js';
+import { createSignal, type Component } from 'solid-js';
 import "./css/globals.css";
 import Header from './components/Header';
 import { MemoryProvider } from './MemoryContext';
+import Panel from './components/Panel';
 
 const App: Component = () => {
 
+  const [value, setValue] = createSignal(5);
+
   return (
     <MemoryProvider>
+
+
       <Header />
-      Sample Text
+      <Panel>
+
+      </Panel>
+
     </MemoryProvider>
   );
 };
