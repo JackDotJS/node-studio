@@ -1,5 +1,6 @@
 import { onMount, useContext } from "solid-js";
 import { MemoryContext } from "../MemoryContext";
+import styles from "../css/Graphs.module.css";
 
 export default function SpectrumGraph() {
   let spectrumRef!: HTMLCanvasElement;
@@ -59,6 +60,9 @@ export default function SpectrumGraph() {
   onMount(() => drawSpectrumGraph());
 
   return (
-    <canvas ref={spectrumRef} />
+    <canvas
+      ref={spectrumRef}
+      class={styles.waveform}
+    />
   )
 }
