@@ -1,10 +1,12 @@
-/* @import "modules/module-generic.css";
+/* 
+@import "modules/module-generic.css";
 @import "modules/module-track-editor.css";
 @import "modules/module-node-editor.css";
 @import "modules/module-keyboard.css";
 @import "ui/toolbars.css";
 @import "ui/context-menu.css";
-@import "ui/control-panel.css"; */
+@import "ui/control-panel.css"; 
+*/
 @import "default-dark.css"; 
 
 html, body {
@@ -23,7 +25,7 @@ body {
 }
 
 * {
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -78,19 +80,7 @@ a:active {
   color: var(--generic-link-active);
 }
 
-input[type=button].large {
-  min-width: 3rem;
-  min-height: 3rem;
-  font-size: 1.5rem;
-}
-
-input[type=button].small {
-  width: 2rem;
-  height: 2rem;
-  font-size: 1rem;
-}
-
-input[type=button] {
+button {
   width: 3.5rem;
   height: 2rem;
   background-color: var(--generic-button);
@@ -101,12 +91,24 @@ input[type=button] {
   padding: 0;
 }
 
-input[type=button]:hover {
+button.large {
+  min-width: 3rem;
+  min-height: 3rem;
+  font-size: 1.5rem;
+}
+
+button.small {
+  width: 2rem;
+  height: 2rem;
+  font-size: 1rem;
+}
+
+button:hover {
   background-color: var(--generic-button-hover);
   cursor: pointer;
 }
 
-input[type=button]:active {
+button:active {
   background-color: var(--generic-button-active);
 }
 
@@ -144,6 +146,11 @@ input[type=text]:focus, input[type=number]:focus {
   border-color: var(--generic-textinput-underline-active);
   outline: none;
   color: var(--generic-textinput-text-active);
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
 }
 
 .slider {
