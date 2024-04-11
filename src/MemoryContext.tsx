@@ -1,5 +1,6 @@
-import { JSX, createContext } from "solid-js";
+import { JSX, createContext, useContext } from "solid-js";
 import NodeStudioProject from "./classes/project";
+import Panel from "./components/Panel";
 
 export interface IInstrument {
   name: string,
@@ -22,10 +23,23 @@ export interface IMemory {
   [x: string]: any // TODO: **REMOVE THIS LINE WHEN PROJECT IS DONE!**
 }
 
-export const MemoryContext = createContext<{
+type PanelType = typeof Panel; // FIXME:
+
+const MemoryContext = createContext<{
   masterAnalyser: AnalyserNode,
-  audioContext: AudioContext
+  audioContext: AudioContext,
+
+  panels: ReturnType<typeof Panel>[],
+  addPanel(NewPanel: PanelType): void,
+  removePanel(P: PanelType): void,
 }>();
+
+export function useMemoryContext() {
+  const context = useContext(MemoryContext);
+  if (!context) throw new Error(`useMemoryContext: MemoryContext is undefined!`);
+  
+  return context;
+}
 
 export function MemoryProvider(props: { children: JSX.Element }) {
   const audioContext = new window.AudioContext();
@@ -33,7 +47,15 @@ export function MemoryProvider(props: { children: JSX.Element }) {
 
   const memory = {
     audioContext,
-    masterAnalyser
+    masterAnalyser,
+
+    panels: [<Panel />, <Panel />], // One panel by default
+    addPanel(NewPanel: PanelType) {
+      memory.panels.push(<NewPanel />);
+    },
+    removePanel(P: PanelType) {
+      memory.panels = memory.panels.filter((p) => p !== <P />);
+    }
   }
 
   return (

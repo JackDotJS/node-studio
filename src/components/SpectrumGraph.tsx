@@ -1,11 +1,11 @@
-import { onMount, useContext } from "solid-js";
-import { MemoryContext } from "../MemoryContext";
+import { onMount } from "solid-js";
+import { useMemoryContext } from "../MemoryContext";
 import styles from "../css/Graphs.module.css";
 
 export default function SpectrumGraph() {
   let spectrumRef!: HTMLCanvasElement;
 
-  const ctx = useContext(MemoryContext);
+  const ctx = useMemoryContext();
   if (!ctx?.masterAnalyser) throw new Error("Missing context master analyser");
 
   const size = ctx.masterAnalyser.fftSize;

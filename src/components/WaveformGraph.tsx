@@ -1,11 +1,11 @@
-import { onMount, useContext } from "solid-js";
-import { MemoryContext } from "../MemoryContext";
+import { onMount } from "solid-js";
+import { useMemoryContext } from "../MemoryContext";
 import styles from "../css/Graphs.module.css";
 
 export default function WaveformGraph() {
   let waveformRef!: HTMLCanvasElement;
 
-  const ctx = useContext(MemoryContext);
+  const ctx = useMemoryContext();
   console.log(ctx);
   if (!ctx?.masterAnalyser) throw new Error(">> Memory master analyser is undefined")
 
