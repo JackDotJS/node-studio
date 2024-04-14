@@ -10,12 +10,14 @@
     "tauri": "tauri"
   },
   "dependencies": {
+    "@solid-primitives/mouse": "^2.0.19",
     "@tauri-apps/api": "^1.5.3",
     "clsx": "^2.1.0",
     "solid-js": "^1.8.16",
     "solid-styled-components": "^0.28.5"
   },
   "devDependencies": {
+    "@solid-devtools/overlay": "^0.30.1",
     "@tauri-apps/cli": "^1.5.11",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",

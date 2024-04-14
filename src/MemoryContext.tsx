@@ -1,7 +1,7 @@
 import { JSX, createContext, useContext } from "solid-js";
 import { createStore } from "solid-js/store";
 import NodeStudioProject from "./classes/project";
-import Panel from "./components/Panel";
+import { MousePosition, useMousePosition } from "./util/mousePosition";
 
 export interface IInstrument {
   name: string,
@@ -24,13 +24,15 @@ export interface IMemory {
   [x: string]: any // TODO: **REMOVE THIS LINE WHEN PROJECT IS DONE!**
 }
 
-const MemoryContext = createContext<{
+export const MemoryContext = createContext<{
   masterAnalyser: AnalyserNode,
   audioContext: AudioContext,
 
   panels: JSX.Element[],
   addPanel(NewPanel: JSX.Element): void,
   removePanel(OldPanel: JSX.Element): void,
+
+  mousePosition: MousePosition
 }>();
 
 export function useMemoryContext() {
@@ -45,7 +47,7 @@ export function MemoryProvider(props: { children: JSX.Element }) {
   const masterAnalyser = audioContext.createAnalyser();
 
   const [panelsStore, setPanelsStore] = createStore(
-    [<Panel />] as JSX.Element[]
+    [] as JSX.Element[]
   );
 
   const memory = {
@@ -60,7 +62,9 @@ export function MemoryProvider(props: { children: JSX.Element }) {
     removePanel(OldPanel: JSX.Element) {
       console.log("Removing a panel...");
       return setPanelsStore(panelsStore.filter((panel) => panel !== OldPanel));
-    }
+    },
+
+    mousePosition: useMousePosition()
   }
 
   return (
