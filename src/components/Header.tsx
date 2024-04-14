@@ -17,7 +17,7 @@ export default function Header() {
       <button>Track</button>
       <button>Help</button>
       <button onClick={() => {
-        memoryContext.addPanel(<Panel />);
+        memoryContext.addPanel(() => <Panel />);
         // memoryContext.setPanels([...memoryContext.panels, <Panel />]);
         console.log(memoryContext.panels);
       }}>+ Panel</button>

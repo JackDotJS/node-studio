@@ -18,7 +18,7 @@ export default function PanelHandler() {
       "display": "flex"
     }}>
       <For each={panels}>
-        {(P) => P}
+        {(P) => P()}
       </For>
     </div>
   )

@@ -24,13 +24,15 @@ export interface IMemory {
   [x: string]: any // TODO: **REMOVE THIS LINE WHEN PROJECT IS DONE!**
 }
 
+type PanelFunction = () => JSX.Element;
+
 export const MemoryContext = createContext<{
   masterAnalyser: AnalyserNode,
   audioContext: AudioContext,
 
-  panels: JSX.Element[],
-  addPanel(NewPanel: JSX.Element): void,
-  removePanel(OldPanel: JSX.Element): void,
+  panels: (PanelFunction)[],
+  addPanel(NewPanel: PanelFunction): void,
+  removePanel(OldPanel: PanelFunction): void,
 
   mousePosition: MousePosition
 }>();
@@ -47,7 +49,7 @@ export function MemoryProvider(props: { children: JSX.Element }) {
   const masterAnalyser = audioContext.createAnalyser();
 
   const [panelsStore, setPanelsStore] = createStore(
-    [] as JSX.Element[]
+    [] as PanelFunction[]
   );
 
   const memory = {
@@ -55,11 +57,11 @@ export function MemoryProvider(props: { children: JSX.Element }) {
     masterAnalyser,
 
     panels: panelsStore,
-    addPanel(NewPanel: JSX.Element) {
+    addPanel(NewPanel: PanelFunction) {
       console.log("Adding a panel...");
       return setPanelsStore([...panelsStore, NewPanel]);
     },
-    removePanel(OldPanel: JSX.Element) {
+    removePanel(OldPanel: PanelFunction) {
       console.log("Removing a panel...");
       return setPanelsStore(panelsStore.filter((panel) => panel !== OldPanel));
     },
