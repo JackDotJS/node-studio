@@ -17,9 +17,9 @@ export default function Header() {
       <button>Track</button>
       <button>Help</button>
       <button onClick={() => {
-        // FIXME: not currently adding panels.
-        memoryContext.addPanel(Panel);
-        console.log("Adding a panel!");
+        memoryContext.addPanel(<Panel />);
+        // memoryContext.setPanels([...memoryContext.panels, <Panel />]);
+        console.log(memoryContext.panels);
       }}>+ Panel</button>
 
       <input

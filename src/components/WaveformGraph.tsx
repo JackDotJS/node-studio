@@ -6,7 +6,6 @@ export default function WaveformGraph() {
   let waveformRef!: HTMLCanvasElement;
 
   const ctx = useMemoryContext();
-  console.log(ctx);
   if (!ctx?.masterAnalyser) throw new Error(">> Memory master analyser is undefined")
 
   const size = ctx.masterAnalyser.frequencyBinCount;

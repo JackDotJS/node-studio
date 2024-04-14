@@ -1,11 +1,12 @@
 import { JSX, createContext, useContext } from "solid-js";
+import { createStore } from "solid-js/store";
 import NodeStudioProject from "./classes/project";
 import Panel from "./components/Panel";
 
 export interface IInstrument {
   name: string,
   type: `sine` | `square` | `sawtooth` | `triangle` | `custom`,
-  node: Node | OscillatorNode | null, // FIXME: can we reduce OscillatorNode to Node?
+  node: Node | OscillatorNode | null, // TODO: can we reduce OscillatorNode to Node?
   attack: number,
   decay: number,
   sustain: number,
@@ -23,15 +24,13 @@ export interface IMemory {
   [x: string]: any // TODO: **REMOVE THIS LINE WHEN PROJECT IS DONE!**
 }
 
-type PanelType = typeof Panel; // FIXME:
-
 const MemoryContext = createContext<{
   masterAnalyser: AnalyserNode,
   audioContext: AudioContext,
 
-  panels: ReturnType<typeof Panel>[],
-  addPanel(NewPanel: PanelType): void,
-  removePanel(P: PanelType): void,
+  panels: JSX.Element[],
+  addPanel(NewPanel: JSX.Element): void,
+  removePanel(OldPanel: JSX.Element): void,
 }>();
 
 export function useMemoryContext() {
@@ -45,16 +44,22 @@ export function MemoryProvider(props: { children: JSX.Element }) {
   const audioContext = new window.AudioContext();
   const masterAnalyser = audioContext.createAnalyser();
 
+  const [panelsStore, setPanelsStore] = createStore(
+    [<Panel />] as JSX.Element[]
+  );
+
   const memory = {
     audioContext,
     masterAnalyser,
 
-    panels: [<Panel />, <Panel />], // One panel by default
-    addPanel(NewPanel: PanelType) {
-      memory.panels.push(<NewPanel />);
+    panels: panelsStore,
+    addPanel(NewPanel: JSX.Element) {
+      console.log("Adding a panel...");
+      return setPanelsStore([...panelsStore, NewPanel]);
     },
-    removePanel(P: PanelType) {
-      memory.panels = memory.panels.filter((p) => p !== <P />);
+    removePanel(OldPanel: JSX.Element) {
+      console.log("Removing a panel...");
+      return setPanelsStore(panelsStore.filter((panel) => panel !== OldPanel));
     }
   }
 
