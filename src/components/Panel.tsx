@@ -1,7 +1,8 @@
-import { JSX, createEffect } from "solid-js";
+import { JSX, Show, createEffect } from "solid-js";
 import panelStyles from "../css/Panel.module.css";
 import clsx from "clsx";
-import { useMousePosition, getPositionToElement } from "@solid-primitives/mouse";
+import { getPositionToElement } from "@solid-primitives/mouse";
+import { useMemoryContext } from "../MemoryContext";
 
 type PanelProps = {
   // height?: number,
@@ -11,10 +12,9 @@ type PanelProps = {
 }
 export default function Panel(props: PanelProps) {
 
-  // const { mousePosition } = useMemoryContext();
+  const { mousePosition } = useMemoryContext();
 
   let ref!: HTMLDivElement;
-  const mousePosition = useMousePosition();
 
   createEffect(() => {
     const relative = getPositionToElement(mousePosition.x, mousePosition.y, ref);
@@ -39,18 +39,18 @@ export default function Panel(props: PanelProps) {
     }
   });
 
-  if (!props.children) {
-    return (
-      <div ref={ref} class={clsx(panelStyles.panel, panelStyles.centeredContent)}>
-        <h2>Select a panel</h2>
-        <button>+ Panel</button>
-      </div>
-    )
-  }
-
   return (
-    <div ref={ref}>
-      {props.children}
-    </div>
-  )
+    <Show when={props.children} fallback={<FallbackComponent ref={ref} />}>
+      <div ref={ref}>
+        {props.children}
+      </div>
+    </Show>
+  );
+}
+
+function FallbackComponent(props: { ref: HTMLDivElement }) {
+  return <div ref={props.ref} class={clsx(panelStyles.panel, panelStyles.centeredContent)}>
+    <h2>Select a panel</h2>
+    <button>+ Panel</button>
+  </div>;
 }
