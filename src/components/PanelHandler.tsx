@@ -11,10 +11,8 @@ export default function PanelHandler() {
 
   createEffect(() => {
     if (memoryContext.isEditingPanels) {
-      console.log("Editing panels...");
       ref.style.cursor = "copy";
     } else {
-      console.log("Not editing panels...");
       ref.style.cursor = "auto";
     }
   });

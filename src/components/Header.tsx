@@ -1,9 +1,9 @@
-import clsx from "clsx";
 import { useMemoryContext } from "../MemoryContext";
 import styles from "../css/Header.module.css";
 import Panel from "./Panel";
 import SpectrumGraph from "./SpectrumGraph";
 import WaveformGraph from "./WaveformGraph";
+import Splitable from "./Splitable";
 
 export default function Header() {
 
@@ -18,18 +18,15 @@ export default function Header() {
       <button>Track</button>
       <button>Help</button>
       <button onClick={() => {
-        memoryContext.addPanel(() => <Panel />);
+        memoryContext.addPanel(() => (
+          <Splitable type="horizontal">
+            <Panel />
+            <Panel />
+          </Splitable>
+        ));
         // memoryContext.setPanels([...memoryContext.panels, <Panel />]);
         console.log(memoryContext.panels);
       }}>+ Panel</button>
-      <button
-        class={clsx(memoryContext.isEditingPanels && styles.editButtonActive)}
-        onClick={() => {
-          memoryContext.toggleEditingPanels();
-        }}
-      >
-        ✏️
-      </button>
 
       <input
         style={{ flex: 1 }}
