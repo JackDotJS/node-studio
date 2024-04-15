@@ -3,7 +3,7 @@ import { attachDevtoolsOverlay } from "@solid-devtools/overlay";
 
 attachDevtoolsOverlay({
   defaultOpen: false
-})
+});
 
 import App from './app';
 

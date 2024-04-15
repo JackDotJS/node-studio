@@ -8,7 +8,7 @@ export default function PanelHandler() {
     console.log("PanelHandler mounted!");
     // Add a default panel
     // addPanel(<Panel />)
-  })
+  });
 
   /* https://docs.solidjs.com/concepts/control-flow/list-rendering#index-vs-for */
   return (
@@ -21,5 +21,5 @@ export default function PanelHandler() {
         {(P) => P()}
       </For>
     </div>
-  )
+  );
 }
