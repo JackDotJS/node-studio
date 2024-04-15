@@ -1,7 +1,8 @@
 import { JSX, createContext, useContext } from "solid-js";
 import { createStore } from "solid-js/store";
 import NodeStudioProject from "./classes/project";
-import { MousePosition, useMousePosition } from "./util/mousePosition";
+// import { MousePosition, useMousePosition } from "./util/mousePosition"; // Broken
+import { useMousePosition, MousePositionInside } from "@solid-primitives/mouse";
 
 export interface IInstrument {
   name: string,
@@ -34,7 +35,7 @@ export const MemoryContext = createContext<{
   addPanel(NewPanel: PanelFunction): void,
   removePanel(OldPanel: PanelFunction): void,
 
-  mousePosition: MousePosition
+  mousePosition: MousePositionInside
 }>();
 
 export function useMemoryContext() {
