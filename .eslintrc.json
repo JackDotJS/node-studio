@@ -1,6 +1,9 @@
 {
   "parserOptions": {
-    "ecmaVersion": 2020
+    "ecmaVersion": 2020,
+    "ecmaFeatures": {
+      "jsx": true
+    }
   },
   "overrides": [
     {
@@ -10,6 +13,7 @@
       }
     }
   ],
+  "parser": "@typescript-eslint/parser",
   "plugins": [
     "@typescript-eslint",
     "solid"
@@ -32,10 +36,6 @@
         "SwitchCase": 1
       }
     ],
-    "quotes": [
-      "warn",
-      "backtick"
-    ],
     "semi": [
       "warn",
       "always"
@@ -55,8 +55,8 @@
         "ignoreReadBeforeAssign": false
       }
     ],
-    "no-unused-vars": "error",
-    "@typescript-eslint/no-unused-vars": [ "error" ],
+    "no-unused-vars": "warn",
+    "@typescript-eslint/no-unused-vars": "warn",
     "no-var": "warn",
     "require-atomic-updates": "off",
     "no-empty": "off",
