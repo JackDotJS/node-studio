@@ -31,9 +31,12 @@ export const MemoryContext = createContext<{
   masterAnalyser: AnalyserNode,
   audioContext: AudioContext,
 
-  panels: (PanelFunction)[],
-  addPanel(NewPanel: PanelFunction): void,
-  removePanel(OldPanel: PanelFunction): void,
+  readonly panels: (PanelFunction)[],
+  addPanel(NewPanel: PanelFunction): void, // eslint-disable-line no-unused-vars
+  removePanel(OldPanel: PanelFunction): void, // eslint-disable-line no-unused-vars
+
+  readonly isEditingPanels: boolean,
+  toggleEditingPanels(): void,
 
   mousePosition: MousePositionInside
 }>();
@@ -41,7 +44,7 @@ export const MemoryContext = createContext<{
 export function useMemoryContext() {
   const context = useContext(MemoryContext);
   if (!context) throw new Error(`useMemoryContext: MemoryContext is undefined!`);
-  
+
   return context;
 }
 
@@ -49,30 +52,35 @@ export function MemoryProvider(props: { children: JSX.Element }) {
   const audioContext = new window.AudioContext();
   const masterAnalyser = audioContext.createAnalyser();
 
-  const [panelsStore, setPanelsStore] = createStore(
-    [] as PanelFunction[]
-  );
+  const [panelsStore, setPanelsStore] = createStore({
+    panels: [] as PanelFunction[],
+    isEditingPanels: false
+  });
 
   const memory = {
     audioContext,
     masterAnalyser,
 
-    panels: panelsStore,
+    get panels() { return panelsStore.panels; },
     addPanel(NewPanel: PanelFunction) {
       console.log("Adding a panel...");
-      return setPanelsStore([...panelsStore, NewPanel]);
+      return setPanelsStore("panels", panelsStore.panels.length, () => NewPanel);
     },
     removePanel(OldPanel: PanelFunction) {
       console.log("Removing a panel...");
-      return setPanelsStore(panelsStore.filter((panel) => panel !== OldPanel));
+      return setPanelsStore("panels", panelsStore.panels.filter((panel) => panel !== OldPanel));
+    },
+    get isEditingPanels() { return panelsStore.isEditingPanels; },
+    toggleEditingPanels() {
+      setPanelsStore("isEditingPanels", (e) => !e);
     },
 
     mousePosition: useMousePosition()
-  }
+  };
 
   return (
     <MemoryContext.Provider value={memory}>
       {props.children}
     </MemoryContext.Provider>
-  )
+  );
 }

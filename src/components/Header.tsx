@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { useMemoryContext } from "../MemoryContext";
 import styles from "../css/Header.module.css";
 import Panel from "./Panel";
@@ -21,6 +22,14 @@ export default function Header() {
         // memoryContext.setPanels([...memoryContext.panels, <Panel />]);
         console.log(memoryContext.panels);
       }}>+ Panel</button>
+      <button
+        class={clsx(memoryContext.isEditingPanels && styles.editButtonActive)}
+        onClick={() => {
+          memoryContext.toggleEditingPanels();
+        }}
+      >
+        ✏️
+      </button>
 
       <input
         style={{ flex: 1 }}

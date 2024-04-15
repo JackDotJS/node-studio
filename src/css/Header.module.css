@@ -5,3 +5,8 @@
   margin: 1rem;
   /* height: 1rem; */
 }
+
+.editButtonActive {
+  background-color: #4CAF50;
+  color: white;
+}
