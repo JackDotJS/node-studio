@@ -11,7 +11,7 @@
 
 html, body {
   scroll-behavior: smooth;
-  height: 100%;
+  height: 100vh;
   user-select: none;
 }
 

@@ -18,15 +18,20 @@ export default function Header() {
       <button>Track</button>
       <button>Help</button>
       <button onClick={() => {
-        memoryContext.addPanel(() => (
-          <Splitable type="horizontal">
-            <Panel />
-            <Panel />
-          </Splitable>
-        ));
+        memoryContext.addPanel(() => {
+          return (
+            <Splitable type="horizontal">
+              <Panel />
+              <Splitable type="vertical">
+                <Panel />
+                <Panel />
+              </Splitable>
+            </Splitable>
+          );
+        });
         // memoryContext.setPanels([...memoryContext.panels, <Panel />]);
         console.log(memoryContext.panels);
-      }}>+ Panel</button>
+      }}>+ 🍌</button>
 
       <input
         style={{ flex: 1 }}

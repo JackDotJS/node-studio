@@ -22,9 +22,10 @@ export default function PanelHandler() {
     <div
       ref={ref}
       style={{
-        "flex": 1,
+        "flex": "1",
         "flex-direction": "row",
-        "display": "flex"
+        "display": "flex",
+        "align-items": "center"
       }}
     >
       <For each={memoryContext.panels}>

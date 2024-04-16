@@ -64,5 +64,5 @@ export default function SpectrumGraph() {
       ref={spectrumRef}
       class={styles.waveform}
     />
-  )
+  );
 }

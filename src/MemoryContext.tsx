@@ -25,15 +25,15 @@ export interface IMemory {
   [x: string]: any // TODO: **REMOVE THIS LINE WHEN PROJECT IS DONE!**
 }
 
-type PanelFunction = () => JSX.Element;
+type SplitableFunction = () => JSX.Element;
 
 export const MemoryContext = createContext<{
   masterAnalyser: AnalyserNode,
   audioContext: AudioContext,
 
-  readonly panels: (PanelFunction)[],
-  addPanel(NewPanel: PanelFunction): void, // eslint-disable-line no-unused-vars
-  removePanel(OldPanel: PanelFunction): void, // eslint-disable-line no-unused-vars
+  readonly panels: (SplitableFunction)[],
+  addPanel(NewPanel: SplitableFunction): void, // eslint-disable-line no-unused-vars
+  removePanel(OldPanel: SplitableFunction): void, // eslint-disable-line no-unused-vars
 
   readonly isEditingPanels: boolean,
   toggleEditingPanels(): void,
@@ -52,8 +52,8 @@ export function MemoryProvider(props: { children: JSX.Element }) {
   const audioContext = new window.AudioContext();
   const masterAnalyser = audioContext.createAnalyser();
 
-  const [panelsStore, setPanelsStore] = createStore({
-    panels: [] as PanelFunction[],
+  const [memoryStore, setMemoryStore] = createStore({
+    panels: [] as SplitableFunction[],
     isEditingPanels: false
   });
 
@@ -61,18 +61,18 @@ export function MemoryProvider(props: { children: JSX.Element }) {
     audioContext,
     masterAnalyser,
 
-    get panels() { return panelsStore.panels; },
-    addPanel(NewPanel: PanelFunction) {
+    get panels() { return memoryStore.panels; },
+    addPanel(NewPanel: SplitableFunction) {
       console.log("Adding a panel...");
-      return setPanelsStore("panels", panelsStore.panels.length, () => NewPanel);
+      return setMemoryStore("panels", memoryStore.panels.length, () => NewPanel);
     },
-    removePanel(OldPanel: PanelFunction) {
+    removePanel(OldPanel: SplitableFunction) {
       console.log("Removing a panel...");
-      return setPanelsStore("panels", panelsStore.panels.filter((panel) => panel !== OldPanel));
+      return setMemoryStore("panels", memoryStore.panels.filter((panel) => panel !== OldPanel));
     },
-    get isEditingPanels() { return panelsStore.isEditingPanels; },
+    get isEditingPanels() { return memoryStore.isEditingPanels; },
     toggleEditingPanels() {
-      setPanelsStore("isEditingPanels", (e) => !e);
+      setMemoryStore("isEditingPanels", (e) => !e);
     },
 
     mousePosition: useMousePosition()

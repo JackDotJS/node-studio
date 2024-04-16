@@ -1,5 +1,6 @@
-import { JSX, Match, Switch, createContext, createSignal, useContext } from "solid-js";
-import SplitLine from "./SplitLine";
+import { JSX, Match, Switch, createContext, createSignal, onMount, useContext } from "solid-js";
+
+import styles from "../css/Splitable.module.css";
 
 export const SplitableContext = createContext<{
   elementOne: HTMLDivElement,
@@ -7,6 +8,8 @@ export const SplitableContext = createContext<{
 
   setElementOne: (element: HTMLDivElement) => void, // eslint-disable-line no-unused-vars
   setElementTwo: (element: HTMLDivElement) => void, // eslint-disable-line no-unused-vars
+
+  splitDirection: "horizontal" | "vertical"
 }>();
 
 export function useSplitableContext() {
@@ -31,25 +34,97 @@ export default function Splitable(props: SplitableProps) {
   const [elementOne, setElementOne] = createSignal<HTMLDivElement>();
   const [elementTwo, setElementTwo] = createSignal<HTMLDivElement>();
 
+  let splitline!: HTMLDivElement;
+  let splitlineWidth: number = 0;
+  
+  let isDragging = false;
+
+  const startDrag = () => {
+    isDragging = true;
+  };
+
+  const drag = (e: PointerEvent) => {
+    const e1 = elementOne();
+
+    if (e1 == null) return;
+
+    if (props.type === `horizontal`) {
+      const relativePosition = (e.clientX - e1.getBoundingClientRect().left) - (splitlineWidth / 2);
+      e1.style.width = `${relativePosition}px`;
+      e1.style.flex = `unset`;
+    } else {
+      const relativePosition = (e.clientY - e1.getBoundingClientRect().top) - (splitlineWidth / 2);
+      e1.style.height = `${relativePosition}px`;
+      e1.style.flex = `unset`;
+    }
+  };
+
+  const stopDrag = () => {
+    isDragging = false;
+  };
+
+  onMount(() => {
+    if (props.type === `horizontal`) {
+      splitlineWidth = splitline.getBoundingClientRect().width;
+    } else {
+      splitlineWidth = splitline.getBoundingClientRect().height;
+    }
+
+    splitline.addEventListener(`pointerdown`, () => {
+      console.debug(`start drag`);
+      startDrag();
+    });
+
+    window.addEventListener(`pointermove`, (e) => {
+      if (isDragging) {
+        drag(e);
+      }
+    });
+
+    window.addEventListener(`pointerup`, stopDrag);
+    window.addEventListener(`pointercancel`, stopDrag);
+  });
+
   return (
     <SplitableContext.Provider value={{
       get elementOne() { return elementOne()!; },
       get elementTwo() { return elementTwo()!; },
       setElementOne,
-      setElementTwo
+      setElementTwo,
+      get splitDirection() { return props.type; }
     }}>
       <Switch fallback={<FallbackComponent />}>
         <Match when={props.type === "vertical"}>
-          <div style={{ display: "flex", "flex-direction": "column", flex: 1 }}>
+          <div style={{
+            display: "flex",
+            "flex-direction": "column",
+            "flex": "1",
+            "height": "100%"
+          }}>
             {props.children[0]}
-            <SplitLine type="vertical" />
+            {/* <SplitLine type="vertical" /> */}
+            <div
+              data-split-line="true"
+              ref={splitline}
+              class={`${styles.vertical} ${styles.splitLine}`}
+            />
             {props.children[1]}
           </div>
         </Match>
         <Match when={props.type === "horizontal"}>
-          <div style={{ display: "flex", "flex-direction": "row", flex: 1 }}>
+          <div style={{
+            display: "flex",
+            "flex-direction": "row",
+            "flex": "1",
+            "height": "100%"
+          }}>
             {props.children[0]}
-            <SplitLine type="horizontal" />
+            {/* <SplitLine type="horizontal" /> */}
+            <div
+              data-split-line="true"
+              ref={splitline}
+              class={`${styles.horizontal} ${styles.splitLine}`}
+            />
             {props.children[1]}
           </div>
         </Match>
