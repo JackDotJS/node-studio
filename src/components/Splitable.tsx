@@ -20,16 +20,21 @@ type SplitableProps = {
 }
 
 /**
- * Render two elements that can be split horizontally or vertically.
+ * Render two or more elements that can be split horizontally or vertically.
  * @param props If the type is "horizontal", the children will be rendered side by side. If the type is "vertical", the children will be rendered one on top of the other.
  * @returns {JSX.Element}
  */
 export default function Splitable(props: SplitableProps) {
 
+  // used to provide a ref for resizing if this component is inside another splitable
   let container!: HTMLDivElement;
+
+  // FIXME: these could have problems when adding/removing panels!!!
   const panelRefs: HTMLDivElement[] = [];
   const splitlines: HTMLDivElement[] = [];
-  const splitlineWidth: number = rem(1); // TODO: would be better to get the actual css value somehow
+
+  // TODO: would be better to get the actual css value somehow
+  const splitlineWidth: number = rem(1);
   
   let dragIndex = 0;
   let isDragging = false;
@@ -108,6 +113,7 @@ export default function Splitable(props: SplitableProps) {
         "flex": "1",
         "height": "100%"
       }}>
+        {/* adds split lines between each panel */}
         <For each={props.children}>
           {(item, index) => {
             // eslint-disable-next-line solid/reactivity
@@ -118,6 +124,7 @@ export default function Splitable(props: SplitableProps) {
                 <>
                   <div
                     data-split-line="true"
+                    // FIXME: this could be a problem when adding/removing panels!!!
                     ref={el => splitlines.push(el)}
                     onPointerDown={() => startDrag(index())}
                     class={`${props.type === `horizontal` ? styles.horizontal : styles.vertical} ${styles.splitLine}`}
