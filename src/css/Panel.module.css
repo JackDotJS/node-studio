@@ -9,7 +9,8 @@
 .panel {
   flex: 1;
   border-radius: 0.25rem;
-  background-color: var(--dark3);
+  background-color: var(--dark0);
+  overflow: hidden;
   /* padding: 1rem; */
   /* margin: 0.5rem; */
 }

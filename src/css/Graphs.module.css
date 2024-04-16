@@ -4,4 +4,5 @@
   color: var(--mid1);
   border: 2px solid var(--mid1);
   border-radius: 0.25rem;
+  box-sizing: border-box;
 }

@@ -25,7 +25,8 @@ export default function PanelHandler() {
         "flex": "1",
         "flex-direction": "row",
         "display": "flex",
-        "align-items": "center"
+        "align-items": "center",
+        "padding": "0 1rem 1rem"
       }}
     >
       <For each={memoryContext.panels}>
