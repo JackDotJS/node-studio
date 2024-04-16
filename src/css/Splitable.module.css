@@ -12,6 +12,7 @@
 
 .splitLine:hover, .splitLine:active {
   color: currentColor;
+  transition: color 80ms;
 }
 
 .vertical {
