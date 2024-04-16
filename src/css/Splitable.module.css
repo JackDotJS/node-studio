@@ -1,8 +1,17 @@
 .splitLine {
   --gap: 0.25rem;
-  --lowerWidth: 45%;
-  --upperWidth: 55%;
+  --lowerWidth: min(45%, calc(50% - 1rem));
+  --upperWidth: max(55%, calc(50% + 1rem));
   position: relative;
+  color: transparent;
+}
+
+.splitLine:not(:hover) {
+  transition: color 200ms;
+}
+
+.splitLine:hover, .splitLine:active {
+  color: currentColor;
 }
 
 .vertical {
