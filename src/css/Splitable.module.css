@@ -1,5 +1,8 @@
 .splitLine {
   --gap: 0.25rem;
+  --seamWidth: 1rem;
+  --lineWidth: 2px;
+  --gripWidth: 6px;
   --lowerWidth: min(45%, calc(50% - 1rem));
   --upperWidth: max(55%, calc(50% + 1rem));
   position: relative;
@@ -16,16 +19,16 @@
 }
 
 .vertical {
-  height: 1rem;
+  height: var(--seamWidth);
   cursor: ns-resize;
 }
 
 .horizontal {
-  width: 1rem;
+  width: var(--seamWidth);
   cursor: ew-resize;
 }
 
-.vertical:after, .vertical:before {
+.vertical:before, .vertical:after {
   content: '';
   display: block;
   position: absolute;
@@ -35,14 +38,14 @@
 }
 
 .vertical:before {
-  height: 6px;
+  height: var(--gripWidth);
   width: 100%;
   border: 2px dotted currentColor;
   mask-image: linear-gradient(to right, transparent calc(var(--lowerWidth) + var(--gap)), #FFF calc(var(--lowerWidth) + var(--gap)), #FFF calc(var(--upperWidth) - var(--gap)), transparent calc(var(--upperWidth) - var(--gap)));
 }
 
 .vertical:after {
-  height: 2px;
+  height: var(--lineWidth);
   width: calc(100% - 2rem);
   left: 50%;
   transform: translate(-50%, -50%);
@@ -50,7 +53,7 @@
   mask-image: linear-gradient(to right, #FFF calc(var(--lowerWidth) - var(--gap)), transparent calc(var(--lowerWidth) - var(--gap)), transparent calc(var(--upperWidth) + var(--gap)), #FFF calc(var(--upperWidth) + var(--gap)));
 }
 
-.horizontal:after, .horizontal:before {
+.horizontal:before, .horizontal:after {
   content: '';
   display: block;
   position: absolute;
@@ -60,14 +63,14 @@
 }
 
 .horizontal:before {
-  width: 6px;
+  width: var(--gripWidth);
   height: 100%;
   border: 2px dotted currentColor;
   mask-image: linear-gradient(to bottom, transparent calc(var(--lowerWidth) + var(--gap)), #FFF calc(var(--lowerWidth) + var(--gap)), #FFF calc(var(--upperWidth) - var(--gap)), transparent calc(var(--upperWidth) - var(--gap)));
 }
 
 .horizontal:after {
-  width: 2px;
+  width: var(--lineWidth);
   height: calc(100% - 2rem);
   top: 50%;
   transform: translate(-50%, -50%);
