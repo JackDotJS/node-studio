@@ -1,15 +1,10 @@
-import { JSX, Match, Switch, createContext, createSignal, onMount, useContext } from "solid-js";
+import { For, JSX, createContext, onMount, useContext } from "solid-js";
+import { rem } from '../util/sizing';
 
 import styles from "../css/Splitable.module.css";
 
 export const SplitableContext = createContext<{
-  elementOne: HTMLDivElement,
-  elementTwo: HTMLDivElement,
-
-  setElementOne: (element: HTMLDivElement) => void, // eslint-disable-line no-unused-vars
-  setElementTwo: (element: HTMLDivElement) => void, // eslint-disable-line no-unused-vars
-
-  splitDirection: "horizontal" | "vertical"
+  panelRefs: HTMLDivElement[]
 }>();
 
 export function useSplitableContext() {
@@ -21,7 +16,7 @@ export function useSplitableContext() {
 
 type SplitableProps = {
   type: "horizontal" | "vertical",
-  children: [JSX.Element, JSX.Element]
+  children: JSX.Element[]
 }
 
 /**
@@ -31,31 +26,44 @@ type SplitableProps = {
  */
 export default function Splitable(props: SplitableProps) {
 
-  const [elementOne, setElementOne] = createSignal<HTMLDivElement>();
-  const [elementTwo, setElementTwo] = createSignal<HTMLDivElement>();
-
-  let splitline!: HTMLDivElement;
-  let splitlineWidth: number = 0;
+  let container!: HTMLDivElement;
+  const panelRefs: HTMLDivElement[] = [];
+  const splitlines: HTMLDivElement[] = [];
+  const splitlineWidth: number = rem(1); // TODO: would be better to get the actual css value somehow
   
+  let dragIndex = 0;
   let isDragging = false;
+  let oldEl2Width = 0;
 
-  const startDrag = () => {
+  const startDrag = (index: number) => {
+    console.debug(`start drag`);
+    dragIndex = index;
     isDragging = true;
+
+    const el2 = panelRefs[dragIndex];
+    oldEl2Width = el2.getBoundingClientRect().right;
+
+    console.debug(splitlines, panelRefs, dragIndex);
   };
 
+  // TODO: needs limits!!!
+  // TODO: use percentage of container so resizing window doesnt fuck everything up
   const drag = (e: PointerEvent) => {
-    const e1 = elementOne();
-
-    if (e1 == null) return;
+    const el1 = panelRefs[dragIndex-1];
+    const el2 = panelRefs[dragIndex];
 
     if (props.type === `horizontal`) {
-      const relativePosition = (e.clientX - e1.getBoundingClientRect().left) - (splitlineWidth / 2);
-      e1.style.width = `${relativePosition}px`;
-      e1.style.flex = `unset`;
+      const el1Width = Math.max(0, Math.abs(e.clientX - el1.getBoundingClientRect().left) - (splitlineWidth / 2));
+      el1.style.width = `${el1Width}px`;
+      el1.style.flex = `unset`;
+
+      const el2Width = Math.max(0, Math.abs(e.clientX - oldEl2Width) - (splitlineWidth / 2));
+      el2.style.width = `${el2Width}px`;
+      el2.style.flex = `unset`;
     } else {
-      const relativePosition = (e.clientY - e1.getBoundingClientRect().top) - (splitlineWidth / 2);
-      e1.style.height = `${relativePosition}px`;
-      e1.style.flex = `unset`;
+      const relativePosition = (e.clientY - el1.getBoundingClientRect().top) - (splitlineWidth / 2);
+      el1.style.height = `${relativePosition}px`;
+      el1.style.flex = `unset`;
     }
   };
 
@@ -64,16 +72,15 @@ export default function Splitable(props: SplitableProps) {
   };
 
   onMount(() => {
-    if (props.type === `horizontal`) {
-      splitlineWidth = splitline.getBoundingClientRect().width;
-    } else {
-      splitlineWidth = splitline.getBoundingClientRect().height;
+    try {
+      //
+      const ctx = useSplitableContext();
+      ctx.panelRefs.push(container);
     }
-
-    splitline.addEventListener(`pointerdown`, () => {
-      console.debug(`start drag`);
-      startDrag();
-    });
+    catch(err) {
+      // TODO: probably need a better handler for this
+      // this try...catch just stops top-level splitables from breaking
+    }
 
     window.addEventListener(`pointermove`, (e) => {
       if (isDragging) {
@@ -86,58 +93,34 @@ export default function Splitable(props: SplitableProps) {
   });
 
   return (
-    <SplitableContext.Provider value={{
-      get elementOne() { return elementOne()!; },
-      get elementTwo() { return elementTwo()!; },
-      setElementOne,
-      setElementTwo,
-      get splitDirection() { return props.type; }
-    }}>
-      <Switch fallback={<FallbackComponent />}>
-        <Match when={props.type === "vertical"}>
-          <div style={{
-            display: "flex",
-            "flex-direction": "column",
-            "flex": "1",
-            "height": "100%"
-          }}>
-            {props.children[0]}
-            {/* <SplitLine type="vertical" /> */}
-            <div
-              data-split-line="true"
-              ref={splitline}
-              class={`${styles.vertical} ${styles.splitLine}`}
-            />
-            {props.children[1]}
-          </div>
-        </Match>
-        <Match when={props.type === "horizontal"}>
-          <div style={{
-            display: "flex",
-            "flex-direction": "row",
-            "flex": "1",
-            "height": "100%"
-          }}>
-            {props.children[0]}
-            {/* <SplitLine type="horizontal" /> */}
-            <div
-              data-split-line="true"
-              ref={splitline}
-              class={`${styles.horizontal} ${styles.splitLine}`}
-            />
-            {props.children[1]}
-          </div>
-        </Match>
-      </Switch>
+    <SplitableContext.Provider value={{ panelRefs }}>
+      <div ref={container} style={{
+        display: "flex",
+        "flex-direction": props.type === `horizontal` ? "row" : "column",
+        "flex": "1",
+        "height": "100%"
+      }}>
+        <For each={props.children}>
+          {(item, index) => {
+            // eslint-disable-next-line solid/reactivity
+            if (index() === 0) {
+              return item;
+            } else {
+              return (
+                <>
+                  <div
+                    data-split-line="true"
+                    ref={el => splitlines.push(el)}
+                    onPointerDown={() => startDrag(index())}
+                    class={`${props.type === `horizontal` ? styles.horizontal : styles.vertical} ${styles.splitLine}`}
+                  />
+                  {item}
+                </>
+              );
+            }
+          }}
+        </For>
+      </div>
     </SplitableContext.Provider>
-  );
-}
-
-function FallbackComponent() {
-  return (
-    <div>
-      <h1>Error</h1>
-      <p>You should not see this component</p>
-    </div>
   );
 }

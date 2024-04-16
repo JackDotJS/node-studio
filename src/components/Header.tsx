@@ -20,12 +20,15 @@ export default function Header() {
       <button onClick={() => {
         memoryContext.addPanel(() => {
           return (
+            // TEMPORARY
             <Splitable type="horizontal">
               <Panel />
               <Splitable type="vertical">
                 <Panel />
                 <Panel />
               </Splitable>
+              <Panel />
+              <Panel />
             </Splitable>
           );
         });
