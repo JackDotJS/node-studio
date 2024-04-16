@@ -33,7 +33,7 @@ export default function Splitable(props: SplitableProps) {
   
   let dragIndex = 0;
   let isDragging = false;
-  let oldEl2Width = 0;
+  let oldEl2EndPos = 0;
 
   const startDrag = (index: number) => {
     console.debug(`start drag`);
@@ -41,13 +41,17 @@ export default function Splitable(props: SplitableProps) {
     isDragging = true;
 
     const el2 = panelRefs[dragIndex];
-    oldEl2Width = el2.getBoundingClientRect().right;
+    if (props.type === `horizontal`) {
+      oldEl2EndPos = el2.getBoundingClientRect().right;
+    } else {
+      oldEl2EndPos = el2.getBoundingClientRect().bottom;
+    }
 
     console.debug(splitlines, panelRefs, dragIndex);
   };
 
   // TODO: needs limits!!!
-  // TODO: use percentage of container so resizing window doesnt fuck everything up
+  // TODO: use percentage of container so resizing app window doesnt fuck everything up
   const drag = (e: PointerEvent) => {
     const el1 = panelRefs[dragIndex-1];
     const el2 = panelRefs[dragIndex];
@@ -57,13 +61,17 @@ export default function Splitable(props: SplitableProps) {
       el1.style.width = `${el1Width}px`;
       el1.style.flex = `unset`;
 
-      const el2Width = Math.max(0, Math.abs(e.clientX - oldEl2Width) - (splitlineWidth / 2));
+      const el2Width = Math.max(0, Math.abs(e.clientX - oldEl2EndPos) - (splitlineWidth / 2));
       el2.style.width = `${el2Width}px`;
       el2.style.flex = `unset`;
     } else {
-      const relativePosition = (e.clientY - el1.getBoundingClientRect().top) - (splitlineWidth / 2);
-      el1.style.height = `${relativePosition}px`;
+      const el1Height = Math.max(0, Math.abs(e.clientY - el1.getBoundingClientRect().top) - (splitlineWidth / 2));
+      el1.style.height = `${el1Height}px`;
       el1.style.flex = `unset`;
+
+      const el2Height = Math.max(0, Math.abs(e.clientY - oldEl2EndPos) - (splitlineWidth / 2));
+      el2.style.height = `${el2Height}px`;
+      el2.style.flex = `unset`;
     }
   };
 

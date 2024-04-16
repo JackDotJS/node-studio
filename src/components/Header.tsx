@@ -21,9 +21,9 @@ export default function Header() {
         memoryContext.addPanel(() => {
           return (
             // TEMPORARY
-            <Splitable type="horizontal">
+            <Splitable type="vertical">
               <Panel />
-              <Splitable type="vertical">
+              <Splitable type="horizontal">
                 <Panel />
                 <Panel />
               </Splitable>
