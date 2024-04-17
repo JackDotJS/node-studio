@@ -20,7 +20,7 @@ body {
   padding: 0;
   margin: 0;
   flex-direction: column;
-  background-color: var(--dark0);
+  background-color: var(--dark1);
   color: var(--mid1);
 }
 
